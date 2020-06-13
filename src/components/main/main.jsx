@@ -99,18 +99,16 @@ const Main = (props) => {
           </ul>
 
           <div className="catalog__movies-list">
-            {moviesTitles.map((movieTitle, index) => {
-              return (
-                <article className="small-movie-card catalog__movies-card" key={index}>
-                  <div className="small-movie-card__image">
-                    <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt={movieTitle} width="280" height="175" />
-                  </div>
-                  <h3 className="small-movie-card__title">
-                    <a className="small-movie-card__link" href="movie-page.html">{movieTitle}</a>
-                  </h3>
-                </article>
-              );
-            })}
+            {moviesTitles.map((movieTitle, index) => (
+              <article className="small-movie-card catalog__movies-card" key={movieTitle + index}>
+                <div className="small-movie-card__image">
+                  <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt={movieTitle} width="280" height="175" />
+                </div>
+                <h3 className="small-movie-card__title">
+                  <a className="small-movie-card__link" href="movie-page.html">{movieTitle}</a>
+                </h3>
+              </article>
+            ))}
           </div>
 
           <div className="catalog__more">
