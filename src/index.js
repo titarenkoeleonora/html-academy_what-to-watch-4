@@ -1,14 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
-
-const MOVIES_TITLES = [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`];
-
-const Movie = {
-  TITLE: `The Grand Budapest Hotel`,
-  GENRE: `Drama`,
-  DATE: 2014,
-};
+import {MOVIES_TITLES, Movie} from "./constants.js";
 
 ReactDOM.render(
     <App
@@ -19,4 +12,3 @@ ReactDOM.render(
     />,
     document.querySelector(`#root`)
 );
-
