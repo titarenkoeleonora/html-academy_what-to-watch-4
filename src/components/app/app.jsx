@@ -6,14 +6,14 @@ import Main from "../main/main.jsx";
 const movieTitleHandler = () => {};
 
 const App = (props) => {
-  const {title, genre, date, moviesTitles} = props;
+  const {title, genre, date, movies} = props;
 
   return (
     <Main
       title={title}
       genre={genre}
       date={date}
-      moviesTitles={moviesTitles}
+      movies={movies}
       onMovieTitleClick={movieTitleHandler}
     />
   );
@@ -23,7 +23,12 @@ App.propTypes = {
   title: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
   date: PropTypes.number.isRequired,
-  moviesTitles: PropTypes.arrayOf(PropTypes.string.isRequired),
+  movies: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+      }).isRequired
+  ).isRequired,
 };
 
 export default App;

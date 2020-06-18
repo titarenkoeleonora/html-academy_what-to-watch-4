@@ -1,14 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
-import {MOVIES_TITLES, Movie} from "./constants.js";
+import {Movie} from "./constants.js";
+import {movies} from "./mocks/movies.js";
 
 ReactDOM.render(
     <App
       title={Movie.TITLE}
       genre={Movie.GENRE}
       date={Movie.DATE}
-      moviesTitles={MOVIES_TITLES}
+      movies={movies}
     />,
     document.querySelector(`#root`)
 );
