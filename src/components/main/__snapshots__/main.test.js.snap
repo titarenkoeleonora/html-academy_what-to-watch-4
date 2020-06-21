@@ -9,7 +9,7 @@ Array [
       className="movie-card__bg"
     >
       <img
-        alt="The Grand Budapest Hotel"
+        alt="Movie title"
         src="img/bg-the-grand-budapest-hotel.jpg"
       />
     </div>
@@ -69,7 +69,7 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="The Grand Budapest Hotel"
+            alt="Movie title"
             height="327"
             src="img/the-grand-budapest-hotel-poster.jpg"
             width="218"
@@ -81,7 +81,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            The Grand Budapest Hotel
+            Movie title
           </h2>
           <p
             className="movie-card__meta"
@@ -89,12 +89,12 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Drama
+              Genre
             </span>
             <span
               className="movie-card__year"
             >
-              2014
+              2020
             </span>
           </p>
           <div
@@ -259,14 +259,16 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
             <img
-              alt="Fantastic Beasts"
+              alt="movie title"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="image"
               width="280"
             />
           </div>
@@ -278,20 +280,22 @@ Array [
               href="movie-page.html"
               onClick={[Function]}
             >
-              Fantastic Beasts
+              movie title
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
             <img
-              alt="Bohemian Rhapsody"
+              alt="movie title"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="image"
               width="280"
             />
           </div>
@@ -303,20 +307,22 @@ Array [
               href="movie-page.html"
               onClick={[Function]}
             >
-              Bohemian Rhapsody
+              movie title
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
             <img
-              alt="Macbeth"
+              alt="movie title"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="image"
               width="280"
             />
           </div>
@@ -328,7 +334,142 @@ Array [
               href="movie-page.html"
               onClick={[Function]}
             >
-              Macbeth
+              movie title
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+          >
+            <img
+              alt="movie title"
+              height="175"
+              src="image"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+              onClick={[Function]}
+            >
+              movie title
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+          >
+            <img
+              alt="movie title"
+              height="175"
+              src="image"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+              onClick={[Function]}
+            >
+              movie title
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+          >
+            <img
+              alt="movie title"
+              height="175"
+              src="image"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+              onClick={[Function]}
+            >
+              movie title
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+          >
+            <img
+              alt="movie title"
+              height="175"
+              src="image"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+              onClick={[Function]}
+            >
+              movie title
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+          >
+            <img
+              alt="movie title"
+              height="175"
+              src="image"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+              onClick={[Function]}
+            >
+              movie title
             </a>
           </h3>
         </article>

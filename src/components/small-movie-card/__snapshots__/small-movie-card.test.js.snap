@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Small movie card correctly render 1`] = `
+<article
+  className="small-movie-card catalog__movies-card"
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+>
+  <div
+    className="small-movie-card__image"
+  >
+    <img
+      alt="movie title"
+      height="175"
+      src="image"
+      width="280"
+    />
+  </div>
+  <h3
+    className="small-movie-card__title"
+  >
+    <a
+      className="small-movie-card__link"
+      href="movie-page.html"
+      onClick={[Function]}
+    >
+      movie title
+    </a>
+  </h3>
+</article>
+`;
