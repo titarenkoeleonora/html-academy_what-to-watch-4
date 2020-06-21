@@ -9,6 +9,21 @@ export default class MoviesList extends PureComponent {
     this.state = {
       hoveredMovie: null,
     };
+
+    this.onMovieCardHover = this.onMovieCardHover.bind(this);
+    this.onMouseOut = this.onMouseOut.bind(this);
+  }
+
+  onMovieCardHover(movie) {
+    this.setState({
+      hoveredMovie: movie,
+    });
+  }
+
+  onMouseOut() {
+    this.setState({
+      hoveredMovie: null,
+    });
   }
 
   render() {
@@ -21,11 +36,8 @@ export default class MoviesList extends PureComponent {
             key={movie.id}
             movie={movie}
             onMovieTitleClick={onMovieTitleClick}
-            onMovieCardHover={() => {
-              this.setState({
-                hoveredMovie: movie,
-              });
-            }}
+            onMovieCardHover={this.onMovieCardHover}
+            onMouseOut = {this.onMouseOut}
           />
         ))}
       </div>
