@@ -13,7 +13,7 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Should movie card covered`, () => {
+it(`Should movie card hovered`, () => {
   const onMovieCardHover = jest.fn();
 
   const smallMovieCard = shallow(
@@ -24,9 +24,12 @@ it(`Should movie card covered`, () => {
       />
   );
 
-  const movieCard = smallMovieCard.find(`.small-movie-card`);
+  const movieCards = smallMovieCard.find(`.small-movie-card`);
 
-  movieCard.simulate(`mouseover`);
+  movieCards.forEach((movieCard) => {
+    movieCard.simulate(`mouseover`, testMovie);
+  });
 
   expect(onMovieCardHover).toHaveBeenCalledTimes(1);
+  expect(onMovieCardHover.mock.calls[0][0]).toMatchObject(testMovie);
 });

@@ -57,7 +57,7 @@ Enzyme.configure({
 });
 
 it(`Should movie title pressed`, () => {
-  const onMovieTitleClick = jest.fn();
+  const handleTitleClick = jest.fn();
 
   const main = mount(
       <Main
@@ -65,7 +65,7 @@ it(`Should movie title pressed`, () => {
         genre={testMovie.GENRE}
         date={testMovie.DATE}
         movies={testMovies}
-        onMovieTitleClick={onMovieTitleClick}
+        onMovieTitleClick={handleTitleClick}
       />
   );
 
@@ -73,5 +73,5 @@ it(`Should movie title pressed`, () => {
 
   movieTitles.forEach((movieTitle) => movieTitle.simulate(`click`));
 
-  expect(onMovieTitleClick).toHaveBeenCalledTimes(testMovies.length);
+  expect(handleTitleClick).toHaveBeenCalledTimes(testMovies.length);
 });
