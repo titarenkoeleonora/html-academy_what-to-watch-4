@@ -8,7 +8,6 @@ import MoviePage from "../movie-page/movie-page.jsx";
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    console.log(this.props.movie);
 
     this.state = {
       activeCard: this.props.movie
@@ -18,7 +17,6 @@ class App extends PureComponent {
   }
 
   _handleTitleClick(movie) {
-    console.log(movie);
     this.setState({
       activeCard: movie,
     });
@@ -31,7 +29,7 @@ class App extends PureComponent {
       <Main
         movie={movie}
         movies={movies}
-        onMovieTitleClick={this._handleTitleClick}
+        onMovieCardClick={this._handleTitleClick}
       />
     );
   }
@@ -44,7 +42,7 @@ class App extends PureComponent {
       <MoviePage
         movie={activeCard}
         movies={movies}
-        onMovieTitleClick={this._handleTitleClick}
+        onMovieCardClick={this._handleTitleClick}
       />
     );
   }

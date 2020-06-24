@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import MoviesList from "../movies-list/movies-list.jsx";
 
-const MoviePage = ({movie, movies, onMovieTitleClick}) => {
+const MoviePage = ({movie, movies, onMovieCardClick}) => {
   return (
     <>
       <section className="movie-card movie-card--full">
@@ -103,7 +103,7 @@ const MoviePage = ({movie, movies, onMovieTitleClick}) => {
           <h2 className="catalog__title">More like this</h2>
           <MoviesList
             movies={movies}
-            onMovieTitleClick={onMovieTitleClick}
+            onMovieCardClick={onMovieCardClick}
           />
         </section>
         <footer className="page-footer">
@@ -137,7 +137,7 @@ MoviePage.propTypes = {
         image: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
-  onMovieTitleClick: PropTypes.func.isRequired,
+  onMovieCardClick: PropTypes.func.isRequired,
 };
 
 export default MoviePage;

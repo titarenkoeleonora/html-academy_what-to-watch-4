@@ -23,7 +23,7 @@ describe(`test SmallMovieCard e2e`, () => {
     const smallMovieCard = shallow(
         <SmallMovieCard
           movie={testMovie}
-          onMovieTitleClick={() => {}}
+          onMovieCardClick={() => {}}
           onMovieCardHover={onMovieCardHover}
           onMouseOut={() => {}}
         />
@@ -55,7 +55,7 @@ describe(`test SmallMovieCard e2e`, () => {
     const smallMovieCard = shallow(
         <SmallMovieCard
           movie={testMovie}
-          onMovieTitleClick={() => {}}
+          onMovieCardClick={() => {}}
           onMovieCardHover={onMovieCardHover}
           onMouseOut={onMouseOut}
         />
@@ -70,5 +70,29 @@ describe(`test SmallMovieCard e2e`, () => {
 
     expect(onMouseOut).toHaveBeenCalledTimes(1);
     expect(hoveredMovie).toBeNull();
+  });
+
+  it(`Should click on movie card`, () => {
+    const onMovieCardClick = jest.fn();
+
+    const smallMovieCard = shallow(
+        <SmallMovieCard
+          movie={testMovie}
+          onMovieCardClick={onMovieCardClick}
+          onMovieCardHover={() => {}}
+          onMouseOut={() => {}}
+        />
+    );
+
+    const movieCards = smallMovieCard.find(`.small-movie-card`);
+    const openMoviePage = jest.fn();
+
+    movieCards.forEach((movieCard) => {
+      movieCard.simulate(`click`, {
+        preventDefault: openMoviePage
+      });
+    });
+
+    expect(onMovieCardClick).toHaveBeenCalledTimes(1);
   });
 });

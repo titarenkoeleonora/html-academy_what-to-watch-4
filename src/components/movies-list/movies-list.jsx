@@ -27,7 +27,7 @@ export default class MoviesList extends PureComponent {
   }
 
   render() {
-    const {movies, onMovieTitleClick} = this.props;
+    const {movies, onMovieCardClick} = this.props;
 
     return (
       <div className="catalog__movies-list">
@@ -35,7 +35,7 @@ export default class MoviesList extends PureComponent {
           <SmallMovieCard
             key={movie.id}
             movie={movie}
-            onMovieTitleClick={onMovieTitleClick}
+            onMovieCardClick={onMovieCardClick}
             onMovieCardHover={this.onMovieCardHover}
             onMouseOut = {this.onMouseOut}
           />
@@ -53,5 +53,5 @@ MoviesList.propTypes = {
         image: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
-  onMovieTitleClick: PropTypes.func.isRequired,
+  onMovieCardClick: PropTypes.func.isRequired,
 };

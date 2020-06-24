@@ -4,9 +4,9 @@ import Adapter from "enzyme-adapter-react-16";
 import Main from "./main";
 
 const testMovie = {
-  TITLE: `Movie title`,
-  GENRE: `Genre`,
-  DATE: 2020,
+  title: `Movie title`,
+  genre: `Genre`,
+  date: 2020,
 };
 
 const testMovies = [
@@ -57,15 +57,13 @@ Enzyme.configure({
 });
 
 it(`Should movie title pressed`, () => {
-  const handleTitleClick = jest.fn();
+  const handleMovieCardClick = jest.fn();
 
   const main = mount(
       <Main
-        title={testMovie.TITLE}
-        genre={testMovie.GENRE}
-        date={testMovie.DATE}
+        movie={testMovie}
         movies={testMovies}
-        onMovieTitleClick={handleTitleClick}
+        onMovieCardClick={handleMovieCardClick}
       />
   );
 
@@ -73,5 +71,5 @@ it(`Should movie title pressed`, () => {
 
   movieTitles.forEach((movieTitle) => movieTitle.simulate(`click`));
 
-  expect(handleTitleClick).toHaveBeenCalledTimes(testMovies.length);
+  expect(handleMovieCardClick).toHaveBeenCalledTimes(testMovies.length);
 });

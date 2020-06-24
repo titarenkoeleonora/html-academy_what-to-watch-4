@@ -49,7 +49,7 @@ it(`MoviesList should render correctly`, () => {
   const tree = renderer
       .create(<MoviesList
         movies={testMovies}
-        onMovieTitleClick={() => {}}
+        onMovieCardClick={() => {}}
       />).toJSON();
 
   expect(tree).toMatchSnapshot();

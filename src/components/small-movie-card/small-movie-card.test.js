@@ -15,7 +15,7 @@ it(`Small movie card correctly render`, () => {
           movie={testMovie}
           onMovieCardHover={() => {}}
           onMouseOut={() => {}}
-          onMovieTitleClick={() => {}}
+          onMovieCardClick={() => {}}
         />
     ).toJSON();
 

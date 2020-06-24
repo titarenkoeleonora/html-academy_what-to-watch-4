@@ -3,9 +3,9 @@ import renderer from "react-test-renderer";
 import Main from "./main.jsx";
 
 const testMovie = {
-  TITLE: `Movie title`,
-  GENRE: `Genre`,
-  DATE: 2020,
+  title: `Movie title`,
+  genre: `Genre`,
+  date: 2020,
 };
 
 const testMovies = [
@@ -55,11 +55,9 @@ it(`Main correctly render`, () => {
   const tree = renderer
     .create(
         <Main
-          title={testMovie.TITLE}
-          genre={testMovie.GENRE}
-          date={testMovie.DATE}
+          movie={testMovie}
           movies={testMovies}
-          onMovieTitleClick={() => {}}
+          onMovieCardClick={() => {}}
         />
     ).toJSON();
 

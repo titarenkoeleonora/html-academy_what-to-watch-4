@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import MoviesList from "../movies-list/movies-list.jsx";
 
 const Main = (props) => {
-  const {movie, movies, onMovieTitleClick} = props;
+  const {movie, movies, onMovieCardClick} = props;
 
   return (
     <>
@@ -101,7 +101,7 @@ const Main = (props) => {
 
           <MoviesList
             movies={movies}
-            onMovieTitleClick={onMovieTitleClick}
+            onMovieCardClick={onMovieCardClick}
           />
 
           <div className="catalog__more">
@@ -139,7 +139,7 @@ Main.propTypes = {
         image: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
-  onMovieTitleClick: PropTypes.func.isRequired,
+  onMovieCardClick: PropTypes.func.isRequired,
 };
 
 export default Main;
