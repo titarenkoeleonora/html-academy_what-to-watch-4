@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import MoviesList from "../movies-list/movies-list.jsx";
 
 const Main = (props) => {
-  const {title, genre, date, movies, onMovieTitleClick} = props;
+  const {movie, movies, onMovieCardClick} = props;
 
   return (
     <>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={title} />
+          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={movie.title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -33,14 +33,14 @@ const Main = (props) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt={title} width="218" height="327" />
+              <img src="img/the-grand-budapest-hotel-poster.jpg" alt={movie.title} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{title}</h2>
+              <h2 className="movie-card__title">{movie.title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{genre}</span>
-                <span className="movie-card__year">{date}</span>
+                <span className="movie-card__genre">{movie.genre}</span>
+                <span className="movie-card__year">{movie.date}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -101,7 +101,7 @@ const Main = (props) => {
 
           <MoviesList
             movies={movies}
-            onMovieTitleClick={onMovieTitleClick}
+            onMovieCardClick={onMovieCardClick}
           />
 
           <div className="catalog__more">
@@ -128,16 +128,18 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  title: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  date: PropTypes.number.isRequired,
+  movie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    date: PropTypes.number.isRequired,
+  }).isRequired,
   movies: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
-  onMovieTitleClick: PropTypes.func.isRequired,
+  onMovieCardClick: PropTypes.func.isRequired,
 };
 
 export default Main;

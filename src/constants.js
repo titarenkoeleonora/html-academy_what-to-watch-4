@@ -1,7 +1,9 @@
 const Movie = {
-  TITLE: `The Grand Budapest Hotel`,
-  GENRE: `Drama`,
-  DATE: 2014,
+  title: `The Grand Budapest Hotel`,
+  genre: `Drama`,
+  date: 2014,
+  image: `img/the-grand-budapest-hotel-poster.jpg`,
+  bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
 };
 
 export {Movie};

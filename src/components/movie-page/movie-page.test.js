@@ -1,13 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import MoviePage from "./movie-page";
 
 const testMovie = {
   title: `Movie title`,
   genre: `Genre`,
   date: 2020,
   image: `image`,
-  bgImage: `bgImage`,
+  bgImage: `bg-image`
 };
 
 const testMovies = [
@@ -53,12 +53,13 @@ const testMovies = [
   }
 ];
 
-it(`Render App`, () => {
+it(`Should MoviePage correctly render`, () => {
   const tree = renderer
     .create(
-        <App
+        <MoviePage
           movie={testMovie}
           movies={testMovies}
+          onMovieCardClick={() => {}}
         />
     ).toJSON();
 
