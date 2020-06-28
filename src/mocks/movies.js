@@ -6,6 +6,7 @@ const movies = [
     date: 2014,
     image: `img/the-grand-budapest-hotel-poster.jpg`,
     bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
+    previewSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
     id: `Fantastic Beasts: The Crimes of Grindelwald1`,
@@ -14,6 +15,7 @@ const movies = [
     date: 2018,
     image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
+    previewSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
     id: `Bohemian Rhapsody2`,
@@ -22,6 +24,7 @@ const movies = [
     date: 2019,
     image: `img/bohemian-rhapsody.jpg`,
     bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
+    previewSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
     id: `Macbeth3`,
@@ -30,6 +33,7 @@ const movies = [
     date: 2015,
     image: `img/macbeth.jpg`,
     bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
+    previewSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
     id: `Aviator4`,
@@ -38,6 +42,7 @@ const movies = [
     date: 2004,
     image: `img/aviator.jpg`,
     bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
+    previewSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
     id: `Seven Years in Tibet5`,
@@ -46,6 +51,7 @@ const movies = [
     date: 1997,
     image: `img/seven-years-in-tibet.jpg`,
     bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
+    previewSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
     id: `Shutter Island6`,
@@ -54,6 +60,7 @@ const movies = [
     date: 2010,
     image: `img/shutter-island.jpg`,
     bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
+    previewSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
     id: `Pulp Fiction7`,
@@ -62,6 +69,7 @@ const movies = [
     date: 1994,
     image: `img/pulp-fiction.jpg`,
     bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
+    previewSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
 ];
 
