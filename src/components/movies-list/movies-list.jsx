@@ -50,7 +50,7 @@ MoviesList.propTypes = {
       PropTypes.shape({
         id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
+        poster: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
   onMovieCardClick: PropTypes.func.isRequired,

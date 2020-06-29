@@ -78,14 +78,14 @@ App.propTypes = {
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     date: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
     bgImage: PropTypes.string.isRequired,
   }).isRequired,
   movies: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
+        poster: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
 };

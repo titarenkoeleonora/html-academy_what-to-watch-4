@@ -59,7 +59,7 @@ const MoviePage = ({movie, movies, onMovieCardClick}) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src={movie.image} alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={movie.poster} alt="The Grand Budapest Hotel poster" width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
@@ -128,13 +128,13 @@ MoviePage.propTypes = {
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     date: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
     bgImage: PropTypes.string.isRequired,
   }).isRequired,
   movies: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
+        poster: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
