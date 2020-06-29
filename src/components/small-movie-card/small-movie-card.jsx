@@ -14,8 +14,8 @@ export default class SmallMovieCard extends PureComponent {
     };
 
     this._handleMovieTitleClick = this._handleMovieTitleClick.bind(this);
-    this._onMouseOver = this._onMouseOver.bind(this);
-    this._onMouseOut = this._onMouseOut.bind(this);
+    this._handleMouseOver = this._handleMouseOver.bind(this);
+    this._handleMouseOut = this._handleMouseOut.bind(this);
   }
 
   _handleMovieTitleClick(evt) {
@@ -24,13 +24,13 @@ export default class SmallMovieCard extends PureComponent {
     this._onMovieCardClick(this._movie);
   }
 
-  _onMouseOver() {
+  _handleMouseOver() {
     this.setState({
       isPlaying: true,
     });
   }
 
-  _onMouseOut() {
+  _handleMouseOut() {
     this.setState({
       isPlaying: false,
     });
@@ -40,15 +40,15 @@ export default class SmallMovieCard extends PureComponent {
     return (
       <article
         className="small-movie-card catalog__movies-card"
-        onMouseOver={this._onMouseOver}
-        onMouseOut={this._onMouseOut}
+        onMouseOver={this._handleMouseOver}
+        onMouseOut={this._handleMouseOut}
         onClick={this._handleMovieTitleClick}
       >
         <div className="small-movie-card__image">
           <VideoPlayer
             isPlaying={this.state.isPlaying}
-            source={this._movie.src}
-            poster={this._movie.poster}
+            movie={this._movie}
+            muted
           />
         </div>
         <h3 className="small-movie-card__title">
@@ -68,7 +68,7 @@ SmallMovieCard.propTypes = {
     poster: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
   }).isRequired,
-  onMovieCardHover: PropTypes.func.isRequired,
+  onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
 };

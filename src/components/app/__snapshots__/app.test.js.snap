@@ -266,10 +266,10 @@ Array [
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="movie title"
+            <video
               height="175"
-              src="image"
+              poster="image"
+              src=""
               width="280"
             />
           </div>
@@ -293,10 +293,10 @@ Array [
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="movie title"
+            <video
               height="175"
-              src="image"
+              poster="image"
+              src=""
               width="280"
             />
           </div>
@@ -320,10 +320,10 @@ Array [
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="movie title"
+            <video
               height="175"
-              src="image"
+              poster="image"
+              src=""
               width="280"
             />
           </div>
@@ -347,10 +347,10 @@ Array [
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="movie title"
+            <video
               height="175"
-              src="image"
+              poster="image"
+              src=""
               width="280"
             />
           </div>
@@ -374,10 +374,10 @@ Array [
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="movie title"
+            <video
               height="175"
-              src="image"
+              poster="image"
+              src=""
               width="280"
             />
           </div>
@@ -401,10 +401,10 @@ Array [
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="movie title"
+            <video
               height="175"
-              src="image"
+              poster="image"
+              src=""
               width="280"
             />
           </div>
@@ -428,10 +428,10 @@ Array [
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="movie title"
+            <video
               height="175"
-              src="image"
+              poster="image"
+              src=""
               width="280"
             />
           </div>
@@ -455,10 +455,10 @@ Array [
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="movie title"
+            <video
               height="175"
-              src="image"
+              poster="image"
+              src=""
               width="280"
             />
           </div>

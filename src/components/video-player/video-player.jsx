@@ -9,12 +9,13 @@ export default class VideoPlayer extends PureComponent {
   }
 
   componentDidMount() {
-    const {poster, source} = this.props;
+    const {movie, muted} = this.props;
     const video = this._videoRef.current;
 
     if (video) {
-      video.src = source;
-      video.image = poster;
+      video.src = movie.src;
+      video.image = movie.poster;
+      video.muted = muted;
     }
   }
 
@@ -24,8 +25,24 @@ export default class VideoPlayer extends PureComponent {
     if (video) {
       video.src = ``;
       video.image = ``;
-      clearTimeout(this._playTimeout);
+      video.muted = null;
     }
+  }
+
+  render() {
+    const {movie} = this.props;
+
+    return (
+      <>
+        <video
+          width="280"
+          height="175"
+          ref={this._videoRef}
+          src={movie.src}
+          poster={movie.poster}
+        />
+      </>
+    );
   }
 
   componentDidUpdate() {
@@ -37,27 +54,13 @@ export default class VideoPlayer extends PureComponent {
       video.load();
     }
   }
-
-  render() {
-    const {poster, source} = this.props;
-
-    return (
-      <>
-        <video
-          width="100%"
-          height="100%"
-          ref={this._videoRef}
-          src={source}
-          poster={poster}
-          muted
-        />
-      </>
-    );
-  }
 }
 
 VideoPlayer.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
-  source: PropTypes.string.isRequired,
-  poster: PropTypes.string.isRequired,
+  muted: PropTypes.bool.isRequired,
+  movie: PropTypes.shape({
+    poster: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired
+  }).isRequired,
 };

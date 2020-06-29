@@ -5,7 +5,8 @@ import SmallMovieCard from "./small-movie-card";
 const testMovie = {
   id: `0`,
   title: `movie title`,
-  image: `image`,
+  poster: `image`,
+  src: ``,
 };
 
 it(`Small movie card correctly render`, () => {
@@ -13,7 +14,7 @@ it(`Small movie card correctly render`, () => {
     .create(
         <SmallMovieCard
           movie={testMovie}
-          onMovieCardHover={() => {}}
+          onMouseOver={() => {}}
           onMouseOut={() => {}}
           onMovieCardClick={() => {}}
         />
