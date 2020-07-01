@@ -31,7 +31,6 @@ export default class VideoPlayer extends PureComponent {
 
   render() {
     const {movie} = this.props;
-
     return (
       <>
         <video
