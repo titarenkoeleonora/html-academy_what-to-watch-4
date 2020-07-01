@@ -16,64 +16,24 @@ Enzyme.configure({
 
 describe(`test SmallMovieCard e2e`, () => {
   it(`Should movie card hovered`, () => {
-    let isPlaying = false;
-
-    const handleMouseOver = jest.fn(() => {
-      isPlaying = false;
-      return isPlaying;
-    });
-
     const smallMovieCard = shallow(
         <SmallMovieCard
           movie={testMovie}
           isPlaying={false}
           onMovieCardClick={() => {}}
-          onMouseOver={handleMouseOver}
+          onMouseOver={() => {}}
           onMouseOut={() => {}}
         />
     );
 
-    const movieCards = smallMovieCard.find(`.small-movie-card`);
+    expect(smallMovieCard.state().isPlaying).toBe(false);
 
-    movieCards.forEach((movieCard) => {
-      movieCard.simulate(`mouseover`, testMovie);
-    });
+    smallMovieCard.simulate(`mouseover`);
 
-    expect(handleMouseOver).toHaveBeenCalledTimes(1);
     expect(smallMovieCard.state().isPlaying).toBe(true);
-  });
 
-  it(`Should remove mouse from card`, () => {
-    let isPlaying = false;
+    smallMovieCard.simulate(`mouseout`);
 
-    const handleMouseOver = () => {
-      isPlaying = true;
-      return isPlaying;
-    };
-
-    const handleMouseOut = jest.fn(() => {
-      isPlaying = false;
-      return isPlaying;
-    });
-
-    const smallMovieCard = shallow(
-        <SmallMovieCard
-          movie={testMovie}
-          isPlaying={false}
-          onMovieCardClick={() => {}}
-          onMouseOver={handleMouseOver}
-          onMouseOut={handleMouseOut}
-        />
-    );
-
-    const movieCards = smallMovieCard.find(`.small-movie-card`);
-
-    movieCards.forEach((movieCard) => {
-      movieCard.simulate(`mouseover`, testMovie);
-      movieCard.simulate(`mouseout`, testMovie);
-    });
-
-    expect(handleMouseOut).toHaveBeenCalledTimes(1);
     expect(smallMovieCard.state().isPlaying).toBe(false);
   });
 
@@ -90,10 +50,9 @@ describe(`test SmallMovieCard e2e`, () => {
         />
     );
 
-    const movieCards = smallMovieCard.find(`.small-movie-card`);
     const openMoviePage = jest.fn();
 
-    movieCards.forEach((movieCard) => {
+    smallMovieCard.forEach((movieCard) => {
       movieCard.simulate(`click`, {
         preventDefault: openMoviePage
       });
