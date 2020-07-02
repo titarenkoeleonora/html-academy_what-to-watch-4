@@ -6,7 +6,8 @@ import SmallMovieCard from './small-movie-card';
 const testMovie = {
   id: `0`,
   title: `movie title`,
-  image: `image`,
+  poster: `image`,
+  src: ``,
 };
 
 Enzyme.configure({
@@ -15,61 +16,25 @@ Enzyme.configure({
 
 describe(`test SmallMovieCard e2e`, () => {
   it(`Should movie card hovered`, () => {
-    const onMovieCardHover = jest.fn((evt) => {
-      const hoveredMovie = evt.target;
-      return hoveredMovie;
-    });
-
     const smallMovieCard = shallow(
         <SmallMovieCard
           movie={testMovie}
+          isPlaying={false}
           onMovieCardClick={() => {}}
-          onMovieCardHover={onMovieCardHover}
+          onMouseOver={() => {}}
           onMouseOut={() => {}}
         />
     );
 
-    const movieCards = smallMovieCard.find(`.small-movie-card`);
+    expect(smallMovieCard.state().isPlaying).toBe(false);
 
-    movieCards.forEach((movieCard) => {
-      movieCard.simulate(`mouseover`, testMovie);
-    });
+    smallMovieCard.simulate(`mouseover`);
 
-    expect(onMovieCardHover).toHaveBeenCalledTimes(1);
-    expect(onMovieCardHover.mock.calls[0][0]).toMatchObject(testMovie);
-  });
+    expect(smallMovieCard.state().isPlaying).toBe(true);
 
-  it(`Should remove mouse from card`, () => {
-    let hoveredMovie = null;
+    smallMovieCard.simulate(`mouseout`);
 
-    const onMovieCardHover = (evt) => {
-      hoveredMovie = evt.target;
-      return hoveredMovie;
-    };
-
-    const onMouseOut = jest.fn(() => {
-      hoveredMovie = null;
-      return hoveredMovie;
-    });
-
-    const smallMovieCard = shallow(
-        <SmallMovieCard
-          movie={testMovie}
-          onMovieCardClick={() => {}}
-          onMovieCardHover={onMovieCardHover}
-          onMouseOut={onMouseOut}
-        />
-    );
-
-    const movieCards = smallMovieCard.find(`.small-movie-card`);
-
-    movieCards.forEach((movieCard) => {
-      movieCard.simulate(`mouseover`, testMovie);
-      movieCard.simulate(`mouseout`, testMovie);
-    });
-
-    expect(onMouseOut).toHaveBeenCalledTimes(1);
-    expect(hoveredMovie).toBeNull();
+    expect(smallMovieCard.state().isPlaying).toBe(false);
   });
 
   it(`Should click on movie card`, () => {
@@ -78,16 +43,16 @@ describe(`test SmallMovieCard e2e`, () => {
     const smallMovieCard = shallow(
         <SmallMovieCard
           movie={testMovie}
+          isPlaying={false}
           onMovieCardClick={onMovieCardClick}
-          onMovieCardHover={() => {}}
+          onMouseOver={() => {}}
           onMouseOut={() => {}}
         />
     );
 
-    const movieCards = smallMovieCard.find(`.small-movie-card`);
     const openMoviePage = jest.fn();
 
-    movieCards.forEach((movieCard) => {
+    smallMovieCard.forEach((movieCard) => {
       movieCard.simulate(`click`, {
         preventDefault: openMoviePage
       });

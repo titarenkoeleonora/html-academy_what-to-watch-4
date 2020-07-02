@@ -1,43 +1,76 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
+import VideoPlayer from "../video-player/video-player.jsx";
 
-const SmallMovieCard = (props) => {
-  const {movie, onMovieCardHover, onMouseOut, onMovieCardClick} = props;
+export default class SmallMovieCard extends PureComponent {
+  constructor(props) {
+    super(props);
 
-  const handleMovieTitleClick = (evt) => {
+    this._onMovieCardClick = this.props.onMovieCardClick;
+
+    this.state = {
+      isPlaying: false,
+    };
+
+    this._handleMovieTitleClick = this._handleMovieTitleClick.bind(this);
+    this._handleMouseOver = this._handleMouseOver.bind(this);
+    this._handleMouseOut = this._handleMouseOut.bind(this);
+  }
+
+  _handleMovieTitleClick(evt) {
     evt.preventDefault();
 
-    onMovieCardClick(movie);
-  };
+    this._movie = this.props.movie;
+    this._onMovieCardClick(this._movie);
+  }
 
-  return (
-    <article
-      className="small-movie-card catalog__movies-card"
-      onMouseOver={onMovieCardHover}
-      onMouseOut={onMouseOut}
-      onClick={handleMovieTitleClick}
-    >
-      <div className="small-movie-card__image">
-        <img src={movie.image} alt={movie.title} width="280" height="175" />
-      </div>
-      <h3 className="small-movie-card__title">
-        <a
-          className="small-movie-card__link" href="movie-page.html"
-        >{movie.title}</a>
-      </h3>
-    </article>
-  );
-};
+  _handleMouseOver() {
+    this.setState({
+      isPlaying: true,
+    });
+  }
+
+  _handleMouseOut() {
+    this.setState({
+      isPlaying: false,
+    });
+  }
+
+  render() {
+    this._movie = this.props.movie;
+
+    return (
+      <article
+        className="small-movie-card catalog__movies-card"
+        onMouseOver={this._handleMouseOver}
+        onMouseOut={this._handleMouseOut}
+        onClick={this._handleMovieTitleClick}
+      >
+        <div className="small-movie-card__image">
+          <VideoPlayer
+            isPlaying={this.state.isPlaying}
+            movie={this._movie}
+            muted
+          />
+        </div>
+        <h3 className="small-movie-card__title">
+          <a
+            className="small-movie-card__link" href="movie-page.html"
+          >{this._movie.title}</a>
+        </h3>
+      </article>
+    );
+  }
+}
 
 SmallMovieCard.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
   }).isRequired,
-  onMovieCardHover: PropTypes.func.isRequired,
+  onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
 };
-
-export default SmallMovieCard;

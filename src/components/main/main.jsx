@@ -136,7 +136,7 @@ Main.propTypes = {
   movies: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
+        poster: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
   onMovieCardClick: PropTypes.func.isRequired,

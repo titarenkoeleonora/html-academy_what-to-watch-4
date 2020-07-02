@@ -2,7 +2,7 @@ const Movie = {
   title: `The Grand Budapest Hotel`,
   genre: `Drama`,
   date: 2014,
-  image: `img/the-grand-budapest-hotel-poster.jpg`,
+  poster: `img/the-grand-budapest-hotel-poster.jpg`,
   bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
 };
 
