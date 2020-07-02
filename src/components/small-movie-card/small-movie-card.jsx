@@ -6,7 +6,6 @@ export default class SmallMovieCard extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._movie = this.props.movie;
     this._onMovieCardClick = this.props.onMovieCardClick;
 
     this.state = {
@@ -21,6 +20,7 @@ export default class SmallMovieCard extends PureComponent {
   _handleMovieTitleClick(evt) {
     evt.preventDefault();
 
+    this._movie = this.props.movie;
     this._onMovieCardClick(this._movie);
   }
 
@@ -37,6 +37,8 @@ export default class SmallMovieCard extends PureComponent {
   }
 
   render() {
+    this._movie = this.props.movie;
+
     return (
       <article
         className="small-movie-card catalog__movies-card"

@@ -29,6 +29,16 @@ export default class VideoPlayer extends PureComponent {
     }
   }
 
+  componentDidUpdate() {
+    const video = this._videoRef.current;
+
+    if (this.props.isPlaying) {
+      video.play();
+    } else {
+      video.load();
+    }
+  }
+
   render() {
     const {movie} = this.props;
     return (
@@ -42,16 +52,6 @@ export default class VideoPlayer extends PureComponent {
         />
       </>
     );
-  }
-
-  componentDidUpdate() {
-    const video = this._videoRef.current;
-
-    if (this.props.isPlaying) {
-      video.play();
-    } else {
-      video.load();
-    }
   }
 }
 
