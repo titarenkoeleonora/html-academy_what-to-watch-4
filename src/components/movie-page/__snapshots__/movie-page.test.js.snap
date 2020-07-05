@@ -13,7 +13,7 @@ Array [
       >
         <img
           alt="The Grand Budapest Hotel"
-          src="bg-image"
+          src="bgImage"
         />
       </div>
       <h1
@@ -166,26 +166,29 @@ Array [
                 <a
                   className="movie-nav__link"
                   href="#"
+                  onClick={[Function]}
                 >
                   Overview
                 </a>
               </li>
               <li
-                className="movie-nav__item"
+                className="movie-nav__item "
               >
                 <a
                   className="movie-nav__link"
                   href="#"
+                  onClick={[Function]}
                 >
                   Details
                 </a>
               </li>
               <li
-                className="movie-nav__item"
+                className="movie-nav__item "
               >
                 <a
                   className="movie-nav__link"
                   href="#"
+                  onClick={[Function]}
                 >
                   Reviews
                 </a>
@@ -211,7 +214,8 @@ Array [
               <span
                 className="movie-rating__count"
               >
-                240 ratings
+                240
+                 ratings
               </span>
             </p>
           </div>
@@ -228,14 +232,17 @@ Array [
               className="movie-card__director"
             >
               <strong>
-                Director: Wes Andreson
+                Director: 
+                Wes Andreson
               </strong>
             </p>
             <p
               className="movie-card__starring"
             >
               <strong>
-                Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other
+                Starring: 
+                Bill Murray, Edward Norton, Jude Law, Willem Dafoe, Saoirse Ronan, Tony Revoloru, Tilda Swinton, Tom Wilkinson, Owen Wilkinson, Adrien Brody, Ralph Fiennes, Jeff Goldblum
+                 and other
               </strong>
             </p>
           </div>
@@ -256,224 +263,7 @@ Array [
       </h2>
       <div
         className="catalog__movies-list"
-      >
-        <article
-          className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <video
-              height="175"
-              poster="image"
-              src=""
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              movie title
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <video
-              height="175"
-              poster="image"
-              src=""
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              movie title
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <video
-              height="175"
-              poster="image"
-              src=""
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              movie title
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <video
-              height="175"
-              poster="image"
-              src=""
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              movie title
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <video
-              height="175"
-              poster="image"
-              src=""
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              movie title
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <video
-              height="175"
-              poster="image"
-              src=""
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              movie title
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <video
-              height="175"
-              poster="image"
-              src=""
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              movie title
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <video
-              height="175"
-              poster="image"
-              src=""
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              movie title
-            </a>
-          </h3>
-        </article>
-      </div>
+      />
     </section>
     <footer
       className="page-footer"
