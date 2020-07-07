@@ -3,17 +3,19 @@ import MoviesList from "../movies-list/movies-list.jsx";
 import PropTypes from 'prop-types';
 
 const getRelatedMovies = (movies, currentMovie) => {
-  const relatedMovies = movies.filter((movie) => {
+  const filteredMovies = movies.filter((movie) => {
     return movie.genre === currentMovie.genre;
   });
 
-  return relatedMovies;
+  return filteredMovies;
 };
 
 const RelatedMovies = ({currentMovie, movies, onMovieCardClick}) => {
+  const relatedMovies = getRelatedMovies(movies, currentMovie);
+
   return (
     <MoviesList
-      movies={getRelatedMovies(movies, currentMovie)}
+      movies={relatedMovies}
       onMovieCardClick={onMovieCardClick}
     />
   );
