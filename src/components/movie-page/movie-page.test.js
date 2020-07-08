@@ -7,8 +7,14 @@ const testMovie = {
   genre: `Genre`,
   date: 2020,
   poster: `image`,
-  bgImage: `bg-image`,
+  bgImage: `bgImage`,
   src: ``,
+  rating: `8,9`,
+  ratingDescription: `Very good`,
+  votes: 240,
+  director: `Wes Andreson`,
+  starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Tom Wilkinson`, `Owen Wilkinson`, `Adrien Brody`, `Ralph Fiennes`, `Jeff Goldblum`],
+  runTime: `1h 39m`,
 };
 
 const testMovies = [
@@ -62,12 +68,30 @@ const testMovies = [
   }
 ];
 
+const testReviews = [
+  {
+    id: `1`,
+    author: `Kate Muir`,
+    date: `December 24, 2016`,
+    rating: `8.9`,
+    text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years`,
+  },
+  {
+    id: `2`,
+    author: `Bill Goodykoontz`,
+    date: `November 18, 2015`,
+    rating: `8.0`,
+    text: `Anderson's films are too precious for some, but for those of us willing to lose ourselves in them, they're a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.`,
+  },
+];
+
 it(`Should MoviePage correctly render`, () => {
   const tree = renderer
     .create(
         <MoviePage
           movie={testMovie}
           movies={testMovies}
+          reviews={testReviews}
           onMovieCardClick={() => {}}
         />
     ).toJSON();

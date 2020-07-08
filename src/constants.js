@@ -6,4 +6,10 @@ const Movie = {
   bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
 };
 
-export {Movie};
+const MovieTabs = {
+  OVERVIEW: `Overview`,
+  DETAILS: `Details`,
+  REVIEWS: `Reviews`,
+};
+
+export {Movie, MovieTabs};
