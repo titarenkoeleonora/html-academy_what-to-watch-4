@@ -1,5 +1,4 @@
 import {reducer, ActionCreator, ActionType} from "./reducer.js";
-import {getGenresList} from "./utils";
 
 const testMovies = [
   {
