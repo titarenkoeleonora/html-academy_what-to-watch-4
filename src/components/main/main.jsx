@@ -5,9 +5,12 @@ import {GenresList} from "../genres-list/genres-list.jsx";
 import {ActionCreator} from "../../reducer.js";
 import {connect} from "react-redux";
 import {getGenresList} from "../../utils.js";
+import {moviesMock} from "../../mocks/movies.js";
+
+const genresList = getGenresList(moviesMock);
 
 const Main = (props) => {
-  const {movie, movies, activeGenre, moviesByGenre, onGenreTabClick, onMovieCardClick} = props;
+  const {movie, movies, activeGenre, onGenreTabClick, onMovieCardClick} = props;
 
   return (
     <>
@@ -71,13 +74,13 @@ const Main = (props) => {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <GenresList
-            genres={getGenresList(movies)}
+            genres={genresList}
             activeGenre={activeGenre}
             onGenreTabClick={onGenreTabClick}
           />
 
           <MoviesList
-            movies={moviesByGenre}
+            movies={movies}
             onMovieCardClick={onMovieCardClick}
           />
 
@@ -116,12 +119,6 @@ Main.propTypes = {
         poster: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
-  moviesByGenre: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        poster: PropTypes.string.isRequired,
-      }).isRequired
-  ).isRequired,
   activeGenre: PropTypes.string.isRequired,
   onGenreTabClick: PropTypes.func.isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
@@ -129,7 +126,7 @@ Main.propTypes = {
 
 const mapStateToProps = (state) => ({
   activeGenre: state.activeGenre,
-  moviesByGenre: state.moviesByGenre,
+  movies: state.movies,
 });
 
 const mapDispatchToProps = (dispatch) => ({

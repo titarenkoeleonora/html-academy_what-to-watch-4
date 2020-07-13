@@ -1,7 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {GenresList} from "./genres-list.jsx";
-import {getGenresList} from "../../utils.js";
 
 const testMovies = [
   {
@@ -62,7 +61,7 @@ const testMovies = [
   }
 ];
 
-const genres = getGenresList(testMovies);
+const genresList = [`All genres`, `Drama`, `Comedy`, `Thriller`];
 
 it(`render GenresList`, () => {
   const tree = renderer
@@ -71,7 +70,7 @@ it(`render GenresList`, () => {
           activeGenre={`All genres`}
           onGenreTabClick={()=>{}}
           movies={testMovies}
-          genres={genres}
+          genres={genresList}
         />)
     .toJSON();
   expect(tree).toMatchSnapshot();

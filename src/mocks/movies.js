@@ -1,4 +1,4 @@
-const movies = [
+const moviesMock = [
   {
     id: `The Grand Budapest Hotel0`,
     title: `The Grand Budapest Hotel`,
@@ -121,4 +121,4 @@ const movies = [
   },
 ];
 
-export {movies};
+export {moviesMock};

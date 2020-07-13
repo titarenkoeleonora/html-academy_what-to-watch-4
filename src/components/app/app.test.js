@@ -1,6 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import App from "./app.jsx";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
+
+const mockStore = configureStore([]);
 
 const testMovie = {
   title: `Movie title`,
@@ -88,13 +92,20 @@ const testReviews = [
 ];
 
 it(`Render App`, () => {
+  const store = mockStore({
+    activeGenre: `All genres`,
+    movies: testMovies,
+  });
+
   const tree = renderer
     .create(
-        <App
-          movie={testMovie}
-          movies={testMovies}
-          reviews={testReviews}
-        />
+        <Provider store={store}>
+          <App
+            movie={testMovie}
+            movies={testMovies}
+            reviews={testReviews}
+          />
+        </Provider>
     ).toJSON();
 
   expect(tree).toMatchSnapshot();

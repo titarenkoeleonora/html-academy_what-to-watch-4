@@ -1,9 +1,9 @@
 import {extend} from "./utils";
-import {movies} from "./mocks/movies";
+import {moviesMock} from "./mocks/movies";
 
 const initialState = {
   activeGenre: `All genres`,
-  moviesByGenre: movies,
+  movies: moviesMock,
 };
 
 const ActionType = {
@@ -28,7 +28,7 @@ const ActionCreator = {
 };
 
 const filterMovies = (activeGenre) => {
-  const allMovies = initialState.moviesByGenre;
+  const allMovies = initialState.movies;
 
   if (activeGenre === `All genres`) {
     return allMovies;
@@ -47,7 +47,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.GET_MOVIES_BY_GENRE:
       return extend(state, {
-        moviesByGenre: action.payload,
+        movies: action.payload,
       });
   }
 
