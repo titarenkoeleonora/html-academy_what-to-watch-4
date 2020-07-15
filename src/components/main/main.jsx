@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import MoviesList from "../movies-list/movies-list.jsx";
-import {GenresList} from "../genres-list/genres-list.jsx";
-import {ActionCreator} from "../../reducer.js";
 import {connect} from "react-redux";
 import {getGenresList} from "../../utils.js";
 import {moviesMock} from "../../mocks/movies.js";
+import GenresList from "../genres-list/genres-list.jsx";
+import {ActionCreator} from "../../reducer/action-creators.js";
 
 const genresList = getGenresList(moviesMock);
 
@@ -124,15 +124,16 @@ Main.propTypes = {
   onMovieCardClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  activeGenre: state.activeGenre,
-  movies: state.movies,
-});
+const mapStateToProps = (state) => {
+  return {
+    activeGenre: state.activeGenre,
+    movies: state.activeGenre === `All genres` ? state.movies : state.movies.filter((movie) => movie.genre === state.activeGenre),
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreTabClick(genre) {
     dispatch(ActionCreator.getActiveGenre(genre));
-    dispatch(ActionCreator.getMoviesByGenre(genre));
   },
 });
 

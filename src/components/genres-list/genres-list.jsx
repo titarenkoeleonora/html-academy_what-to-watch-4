@@ -1,7 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {ActionCreator} from "../../reducer";
-import {connect} from "react-redux";
 
 const GenresList = ({genres, activeGenre, onGenreTabClick}) => {
 
@@ -32,16 +30,4 @@ GenresList.propTypes = {
   onGenreTabClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  activeGenre: state.activeGenre,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onGenreTabClick(activeGenre) {
-    dispatch(ActionCreator.activeGenre(activeGenre));
-    dispatch(ActionCreator.getMoviesByGenre(activeGenre));
-  }
-});
-
-export {GenresList};
-export default connect(mapStateToProps, mapDispatchToProps)(GenresList);
+export default GenresList;

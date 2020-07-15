@@ -1,4 +1,6 @@
-import {reducer, ActionCreator, ActionType} from "./reducer.js";
+import {ActionType} from "./action-types.js";
+import {ActionCreator} from "./action-creators.js";
+import {reducer} from "./reducer.js";
 
 const testMovies = [
   {
