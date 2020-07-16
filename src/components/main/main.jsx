@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import MoviesList from "../movies-list/movies-list.jsx";
 import {connect} from "react-redux";
-import {getGenresList} from "../../utils.js";
+import {getGenresList, fiterMoviesByGenre} from "../../utils.js";
 import {moviesMock} from "../../mocks/movies.js";
 import GenresList from "../genres-list/genres-list.jsx";
 import {ActionCreator} from "../../reducer/action-creators.js";
@@ -127,7 +127,7 @@ Main.propTypes = {
 const mapStateToProps = (state) => {
   return {
     activeGenre: state.activeGenre,
-    movies: state.activeGenre === `All genres` ? state.movies : state.movies.filter((movie) => movie.genre === state.activeGenre),
+    movies: fiterMoviesByGenre(state.activeGenre, state.movies),
   };
 };
 
