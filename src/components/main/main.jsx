@@ -6,11 +6,14 @@ import {getGenresList, fiterMoviesByGenre} from "../../utils.js";
 import {moviesMock} from "../../mocks/movies.js";
 import GenresList from "../genres-list/genres-list.jsx";
 import {ActionCreator} from "../../reducer/action-creators.js";
+import PageFooter from "../page-footer/page-footer.jsx";
+import ShowMoreButton from "../show-more-button/show-more-button.jsx";
 
 const genresList = getGenresList(moviesMock);
 
 const Main = (props) => {
-  const {movie, movies, activeGenre, onGenreTabClick, onMovieCardClick} = props;
+  const {movie, movies, activeGenre, shownMoviesCount, onGenreTabClick, onMovieCardClick, onShowMoreButtonClick} = props;
+  const shownMovies = movies.slice(0, shownMoviesCount);
 
   return (
     <>
@@ -80,33 +83,21 @@ const Main = (props) => {
           />
 
           <MoviesList
-            movies={movies}
+            movies={shownMovies}
             onMovieCardClick={onMovieCardClick}
           />
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {shownMovies.length < movies.length &&
+            <ShowMoreButton
+              onShowMoreButtonClick={onShowMoreButtonClick}
+            />
+          }
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <PageFooter />
       </div>
     </>
   );
 };
-
 Main.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -120,22 +111,25 @@ Main.propTypes = {
       }).isRequired
   ).isRequired,
   activeGenre: PropTypes.string.isRequired,
+  shownMoviesCount: PropTypes.number.isRequired,
   onGenreTabClick: PropTypes.func.isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
+  onShowMoreButtonClick: PropTypes.func.isRequired,
 };
-
 const mapStateToProps = (state) => {
   return {
     activeGenre: state.activeGenre,
     movies: fiterMoviesByGenre(state.activeGenre, state.movies),
+    shownMoviesCount: state.shownMoviesCount,
   };
 };
-
 const mapDispatchToProps = (dispatch) => ({
   onGenreTabClick(genre) {
     dispatch(ActionCreator.getActiveGenre(genre));
   },
+  onShowMoreButtonClick() {
+    dispatch(ActionCreator.showMoreMovies());
+  },
 });
-
 export {Main};
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

@@ -13,10 +13,10 @@ class App extends PureComponent {
       activeCard: this.props.movie
     };
 
-    this._handleTitleClick = this._handleTitleClick.bind(this);
+    this.handleTitleClick = this.handleTitleClick.bind(this);
   }
 
-  _handleTitleClick(movie) {
+  handleTitleClick(movie) {
     this.setState({
       activeCard: movie,
     });
@@ -29,7 +29,7 @@ class App extends PureComponent {
       <Main
         movie={movie}
         movies={movies}
-        onMovieCardClick={this._handleTitleClick}
+        onMovieCardClick={this.handleTitleClick}
       />
     );
   }
@@ -43,7 +43,7 @@ class App extends PureComponent {
         movie={activeCard}
         movies={movies}
         reviews={reviews}
-        onMovieCardClick={this._handleTitleClick}
+        onMovieCardClick={this.handleTitleClick}
       />
     );
   }

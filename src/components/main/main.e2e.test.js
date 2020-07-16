@@ -4,6 +4,7 @@ import Adapter from "enzyme-adapter-react-16";
 import Main from "./main";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+import {MAX_SHOWN_MOVIES} from "../../constants";
 
 const mockStore = configureStore([]);
 
@@ -81,6 +82,7 @@ it(`Should movie title pressed`, () => {
   const store = mockStore({
     activeGenre: `All genres`,
     movies: testMovies,
+    shownMoviesCount: MAX_SHOWN_MOVIES,
   });
 
   const handleMovieCardClick = jest.fn();

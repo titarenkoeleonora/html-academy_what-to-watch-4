@@ -1,10 +1,12 @@
 import {extend} from "../utils";
 import {moviesMock} from "../mocks/movies";
 import {ActionType} from "./action-types";
+import {MAX_SHOWN_MOVIES} from "../constants";
 
 const initialState = {
   activeGenre: `All genres`,
   movies: moviesMock,
+  shownMoviesCount: MAX_SHOWN_MOVIES,
 };
 
 const reducer = (state = initialState, action) => {
@@ -12,6 +14,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.ACTIVE_GENRE:
       return extend(state, {
         activeGenre: action.payload,
+      });
+    case ActionType.SHOW_MORE_MOVIES:
+      return extend(state, {
+        shownMoviesCount: state.shownMoviesCount + action.payload,
       });
   }
 

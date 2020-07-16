@@ -17,7 +17,7 @@ const testMovie = {
   runTime: `1h 39m`,
 };
 
-it(`Correctlt render`, () => {
+it(`Correctly render`, () => {
   const tree = renderer
     .create(
         <MovieDetails
