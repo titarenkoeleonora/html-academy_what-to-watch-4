@@ -4,8 +4,6 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/action-creators.js";
 
 class App extends PureComponent {
   constructor(props) {
@@ -25,14 +23,12 @@ class App extends PureComponent {
   }
 
   _renderMain() {
-    const {movie, movies, activeGenre, onGenreTabClick} = this.props;
+    const {movie, movies} = this.props;
 
     return (
       <Main
         movie={movie}
         movies={movies}
-        activeGenre={activeGenre}
-        onGenreTabClick={onGenreTabClick}
         onMovieCardClick={this._handleTitleClick}
       />
     );
@@ -102,19 +98,7 @@ App.propTypes = {
         id: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
-  activeGenre: PropTypes.string.isRequired,
-  onGenreTabClick: PropTypes.func.isRequired,
+
 };
 
-const mapStateToProps = (state) => ({
-  activeGenre: state.activeGenre,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onGenreTabClick(activeGenre) {
-    dispatch(ActionCreator.getActiveGenre(activeGenre));
-    dispatch(ActionCreator.getMoviesByGenre(activeGenre));
-  }
-});
-export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
