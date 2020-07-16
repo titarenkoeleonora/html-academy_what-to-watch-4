@@ -1,4 +1,8 @@
-const moviesMock = [
+import {ActionType} from "./action-types.js";
+import {ActionCreator} from "./action-creators.js";
+import {reducer} from "./reducer.js";
+
+const testMovies = [
   {
     id: `The Grand Budapest Hotel0`,
     title: `The Grand Budapest Hotel`,
@@ -121,4 +125,31 @@ const moviesMock = [
   },
 ];
 
-export {moviesMock};
+it(`Returns initial state at application start`, ()=>{
+  expect(reducer(undefined, {})).toEqual({
+    activeGenre: `All genres`,
+    movies: testMovies,
+  });
+});
+
+it(`Change genre`, ()=>{
+  expect(reducer({
+    activeGenre: `All genres`,
+    movies: testMovies,
+  }, {
+    type: ActionType.ACTIVE_GENRE,
+    payload: `All genres`,
+  })).toEqual({
+    activeGenre: `All genres`,
+    movies: testMovies,
+  });
+});
+
+describe(`Action creators work correctly`, () => {
+  it(`Action creators change genre`, () => {
+    expect(ActionCreator.getActiveGenre(`Drama`)).toEqual({
+      type: ActionType.ACTIVE_GENRE,
+      payload: `Drama`,
+    });
+  });
+});
