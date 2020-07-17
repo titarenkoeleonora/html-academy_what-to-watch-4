@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import MoviesList from "../movies-list/movies-list.jsx";
 import {connect} from "react-redux";
 import {getGenresList, fiterMoviesByGenre} from "../../utils.js";
 import {moviesMock} from "../../mocks/movies.js";
-import GenresList from "../genres-list/genres-list.jsx";
+import MoviesList from "../../components/movies-list/movies-list.jsx";
+import GenresList from "../../components/genres-list/genres-list.jsx";
+import ShowMoreButton from "../../components/show-more-button/show-more-button.jsx";
+import PageFooter from "../../components/page-footer/page-footer.jsx";
 import {ActionCreator} from "../../reducer/action-creators.js";
-import PageFooter from "../page-footer/page-footer.jsx";
-import ShowMoreButton from "../show-more-button/show-more-button.jsx";
 
 const genresList = getGenresList(moviesMock);
 
@@ -98,6 +98,7 @@ const Main = (props) => {
     </>
   );
 };
+
 Main.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -116,6 +117,7 @@ Main.propTypes = {
   onMovieCardClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
 };
+
 const mapStateToProps = (state) => {
   return {
     activeGenre: state.activeGenre,
@@ -123,6 +125,7 @@ const mapStateToProps = (state) => {
     shownMoviesCount: state.shownMoviesCount,
   };
 };
+
 const mapDispatchToProps = (dispatch) => ({
   onGenreTabClick(genre) {
     dispatch(ActionCreator.getActiveGenre(genre));
@@ -131,5 +134,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.showMoreMovies());
   },
 });
+
 export {Main};
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
