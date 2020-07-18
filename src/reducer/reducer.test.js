@@ -1,6 +1,7 @@
 import {ActionType} from "./action-types.js";
 import {ActionCreator} from "./action-creators.js";
 import {reducer} from "./reducer.js";
+import {MAX_SHOWN_MOVIES} from "../constants.js";
 
 const testMovies = [
   {
@@ -123,12 +124,43 @@ const testMovies = [
     starring: [`Rami Malek`, `Lucy Boynton`, `Gwilym Lee`, `Ben Hardy`, `Joe Mazzello`, `Aidan Gillen`, `Allen Leech`],
     runTime: `1h 53m`,
   },
+  {
+    id: `Mindhunter8`,
+    title: `Mindhunter`,
+    genre: `Drama`,
+    date: 2017,
+    poster: `img/mindhunter.jpg`,
+    bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
+    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    rating: `9,1`,
+    ratingDescription: `Very good`,
+    votes: 150,
+    director: `Mindhunter`,
+    starring: [`Rami Malek`, `Lucy Boynton`, `Gwilym Lee`, `Ben Hardy`, `Joe Mazzello`, `Aidan Gillen`, `Allen Leech`],
+    runTime: `34—73 m`,
+  },
+  {
+    id: `Snatch9`,
+    title: `Snatch`,
+    genre: `Thriller`,
+    date: 2000,
+    poster: `img/snatch.jpg`,
+    bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
+    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    rating: `9,1`,
+    ratingDescription: `Very good`,
+    votes: 150,
+    director: `Snatch`,
+    starring: [`Rami Malek`, `Lucy Boynton`, `Gwilym Lee`, `Ben Hardy`, `Joe Mazzello`, `Aidan Gillen`, `Allen Leech`],
+    runTime: `1h 44m`,
+  },
 ];
 
 it(`Returns initial state at application start`, ()=>{
   expect(reducer(undefined, {})).toEqual({
     activeGenre: `All genres`,
     movies: testMovies,
+    shownMoviesCount: MAX_SHOWN_MOVIES,
   });
 });
 
@@ -145,11 +177,29 @@ it(`Change genre`, ()=>{
   });
 });
 
+it(`Reducer should show more movie cards by butoon click`, () => {
+  expect(reducer({
+    shownMoviesCount: 8,
+  }, {
+    type: ActionType.SHOW_MORE_MOVIES,
+    payload: 8,
+  })).toEqual({
+    shownMoviesCount: 16,
+  });
+});
+
+
 describe(`Action creators work correctly`, () => {
-  it(`Action creators change genre`, () => {
+  it(`Action creators get active genre`, () => {
     expect(ActionCreator.getActiveGenre(`Drama`)).toEqual({
       type: ActionType.ACTIVE_GENRE,
       payload: `Drama`,
+    });
+  });
+  it(`Action creator for showing more movie cards returns correct movie cards number`, () => {
+    expect(ActionCreator.showMoreMovies()).toEqual({
+      type: ActionType.SHOW_MORE_MOVIES,
+      payload: 8,
     });
   });
 });

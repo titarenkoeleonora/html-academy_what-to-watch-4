@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import App from "./app.jsx";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+import {MAX_SHOWN_MOVIES} from "../../constants.js";
 
 const mockStore = configureStore([]);
 
@@ -95,6 +96,7 @@ it(`Render App`, () => {
   const store = mockStore({
     activeGenre: `All genres`,
     movies: testMovies,
+    shownMoviesCount: MAX_SHOWN_MOVIES,
   });
 
   const tree = renderer

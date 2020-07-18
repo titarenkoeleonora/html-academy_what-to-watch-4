@@ -2,10 +2,8 @@ import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 
-import Main from "../main/main.jsx";
+import Main from "../../containers/main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/action-creators.js";
 
 class App extends PureComponent {
   constructor(props) {
@@ -15,25 +13,23 @@ class App extends PureComponent {
       activeCard: this.props.movie
     };
 
-    this._handleTitleClick = this._handleTitleClick.bind(this);
+    this.handleTitleClick = this.handleTitleClick.bind(this);
   }
 
-  _handleTitleClick(movie) {
+  handleTitleClick(movie) {
     this.setState({
       activeCard: movie,
     });
   }
 
   _renderMain() {
-    const {movie, movies, activeGenre, onGenreTabClick} = this.props;
+    const {movie, movies} = this.props;
 
     return (
       <Main
         movie={movie}
         movies={movies}
-        activeGenre={activeGenre}
-        onGenreTabClick={onGenreTabClick}
-        onMovieCardClick={this._handleTitleClick}
+        onMovieCardClick={this.handleTitleClick}
       />
     );
   }
@@ -47,7 +43,7 @@ class App extends PureComponent {
         movie={activeCard}
         movies={movies}
         reviews={reviews}
-        onMovieCardClick={this._handleTitleClick}
+        onMovieCardClick={this.handleTitleClick}
       />
     );
   }
@@ -102,19 +98,7 @@ App.propTypes = {
         id: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
-  activeGenre: PropTypes.string.isRequired,
-  onGenreTabClick: PropTypes.func.isRequired,
+
 };
 
-const mapStateToProps = (state) => ({
-  activeGenre: state.activeGenre,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onGenreTabClick(activeGenre) {
-    dispatch(ActionCreator.getActiveGenre(activeGenre));
-    dispatch(ActionCreator.getMoviesByGenre(activeGenre));
-  }
-});
-export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

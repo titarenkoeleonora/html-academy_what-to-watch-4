@@ -12,4 +12,6 @@ const MovieTabs = {
   REVIEWS: `Reviews`,
 };
 
-export {Movie, MovieTabs};
+const MAX_SHOWN_MOVIES = 8;
+
+export {Movie, MovieTabs, MAX_SHOWN_MOVIES};
