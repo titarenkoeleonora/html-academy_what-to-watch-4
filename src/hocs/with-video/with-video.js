@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 
-const withActiveVideo = (Component) => {
-  class WithActiveVideo extends PureComponent {
+const withVideo = (Component) => {
+  class WithVideo extends PureComponent {
     constructor(props) {
       super(props);
 
@@ -40,7 +40,7 @@ const withActiveVideo = (Component) => {
     }
   }
 
-  return WithActiveVideo;
+  return WithVideo;
 };
 
-export default withActiveVideo;
+export default withVideo;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import withActiveVideo from './with-active-video';
+import withVideo from './with-video';
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -23,7 +23,7 @@ MockComponent.propTypes = {
 };
 
 it(`Should return correct state isPlayng`, () => {
-  const MockComponentWrapped = withActiveVideo(MockComponent);
+  const MockComponentWrapped = withVideo(MockComponent);
 
   const onMouseOver = jest.fn();
   const onMouseOut = jest.fn();

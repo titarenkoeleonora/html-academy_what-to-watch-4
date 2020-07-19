@@ -142,7 +142,6 @@ export default class MoviePage extends PureComponent {
     );
   }
 }
-
 MoviePage.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string.isRequired,

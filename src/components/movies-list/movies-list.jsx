@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
-import withActiveVideo from "../../hocs/with-active-video/with-active-video.js";
+import withVideo from "../../hocs/with-video/with-video.js";
 
-const SmallMovieCardWrapped = withActiveVideo(SmallMovieCard);
+const SmallMovieCardWrapped = withVideo(SmallMovieCard);
 
 const MoviesList = ({movies, onMovieCardClick}) => {
   return (

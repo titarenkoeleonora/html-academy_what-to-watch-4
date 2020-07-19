@@ -7,9 +7,11 @@ import MoviesList from "../../components/movies-list/movies-list.jsx";
 import GenresList from "../../components/genres-list/genres-list.jsx";
 import ShowMoreButton from "../../components/show-more-button/show-more-button.jsx";
 import PageFooter from "../../components/page-footer/page-footer.jsx";
-import {ActionCreator} from "../../reducer/action-creators.js";
+import {ActionCreator} from "../../reducer/action-creator.js";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 
 const genresList = getGenresList(moviesMock);
+const MoviesListWrapped = withActiveItem(MoviesList);
 
 const Main = (props) => {
   const {movie, movies, activeGenre, shownMoviesCount, onGenreTabClick, onMovieCardClick, onShowMoreButtonClick} = props;
@@ -82,7 +84,7 @@ const Main = (props) => {
             onGenreTabClick={onGenreTabClick}
           />
 
-          <MoviesList
+          <MoviesListWrapped
             movies={shownMovies}
             onMovieCardClick={onMovieCardClick}
           />
