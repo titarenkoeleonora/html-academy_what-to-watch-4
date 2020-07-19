@@ -41,8 +41,8 @@ export default class VideoPlayer extends PureComponent {
 
   render() {
     const {movie} = this.props;
+
     return (
-      <>
         <video
           width="280"
           height="175"
@@ -50,7 +50,6 @@ export default class VideoPlayer extends PureComponent {
           src={movie.src}
           poster={movie.poster}
         />
-      </>
     );
   }
 }

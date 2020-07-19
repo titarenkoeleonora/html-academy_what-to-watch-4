@@ -14,11 +14,16 @@ it(`Small movie card correctly render`, () => {
     .create(
         <SmallMovieCard
           movie={testMovie}
-          onMouseOver={() => {}}
-          onMouseOut={() => {}}
+          isPlaying={false}
+          onSmallCardMouseOver={() => {}}
+          onSmallCardMouseOut={() => {}}
           onMovieCardClick={() => {}}
-        />
-    ).toJSON();
+        />, {
+          createNodeMock: () => {
+            return {};
+          }
+        })
+        .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
