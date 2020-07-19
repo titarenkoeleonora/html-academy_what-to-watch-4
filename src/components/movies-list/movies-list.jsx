@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 import withActiveVideo from "../../hocs/with-active-video/with-active-video.js";
@@ -13,7 +13,7 @@ const MoviesList = ({movies, onMovieCardClick}) => {
           key={movie.id}
           movie={movie}
           onMovieCardClick={onMovieCardClick}
-       />
+        />
       ))}
     </div>
   );
@@ -29,4 +29,5 @@ MoviesList.propTypes = {
   ).isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
 };
- export default MoviesList;
+
+export default MoviesList;

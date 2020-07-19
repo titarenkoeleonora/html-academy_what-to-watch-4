@@ -7,10 +7,10 @@ const withActiveVideo = (Component) => {
 
       this.state = {
         isPlaying: false,
-      }
+      };
 
-    this._handleMouseOver = this._handleMouseOver.bind(this);
-    this._handleMouseOut = this._handleMouseOut.bind(this);
+      this._handleMouseOver = this._handleMouseOver.bind(this);
+      this._handleMouseOut = this._handleMouseOut.bind(this);
     }
 
     _handleMouseOver() {

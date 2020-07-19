@@ -54,4 +54,5 @@ SmallMovieCard.propTypes = {
   onSmallCardMouseOver: PropTypes.func.isRequired,
   onSmallCardMouseOut: PropTypes.func.isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
 };

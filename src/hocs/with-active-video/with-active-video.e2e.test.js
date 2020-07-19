@@ -29,10 +29,10 @@ it(`Should return correct state isPlayng`, () => {
   const onMouseOut = jest.fn();
 
   const wrapper = mount(
-    <MockComponentWrapped
-      onSmallCardMouseOver={onMouseOver}
-      onSmallCardMouseOut={onMouseOut}
-    />
+      <MockComponentWrapped
+        onSmallCardMouseOver={onMouseOver}
+        onSmallCardMouseOut={onMouseOut}
+      />
   );
 
   expect(wrapper.state().isPlaying).toBe(false);
