@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 
 import {connect} from "react-redux";
-import {MoviePage} from "../movie-page/movie-page";
-import {Main} from "../../containers/main/main";
+import MoviePage from "../movie-page/movie-page";
+import Main from "../../containers/main/main";
 
 class App extends PureComponent {
   constructor(props) {

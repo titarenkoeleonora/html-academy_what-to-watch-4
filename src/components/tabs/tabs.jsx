@@ -26,6 +26,7 @@ const Tabs = ({activeTab, activeMovie, reviews, onTabClick}) => {
       <nav className="movie-nav movie-card__nav">
         <ul className="movie-nav__list">
           {navTabs.map((tab, index) => {
+
             return (
               <li
                 className={`movie-nav__item ${tab === activeTab ? `movie-nav__item--active` : ``}`}
