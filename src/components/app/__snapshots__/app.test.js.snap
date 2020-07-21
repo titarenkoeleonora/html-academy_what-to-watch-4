@@ -21,11 +21,13 @@ Array [
     <header
       className="page-header movie-card__head"
     >
+      \`   
       <div
         className="logo"
       >
         <a
           className="logo__link"
+          href="main.html"
         >
           <span
             className="logo__letter logo__letter--1"

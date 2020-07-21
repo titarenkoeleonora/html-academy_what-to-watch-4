@@ -1,6 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import MoviePage from "./movie-page";
+import configureStore from "redux-mock-store";
+import {MAX_SHOWN_MOVIES} from "../../constants";
+import { Provider } from "react-redux";
+
+const mockStore = configureStore([]);
 
 const testMovie = {
   title: `Movie title`,
@@ -86,14 +91,23 @@ const testReviews = [
 ];
 
 it(`Should MoviePage correctly render`, () => {
+  const store = mockStore({
+    activeGenre: `All genres`,
+    movies: testMovies,
+    shownMoviesCount: MAX_SHOWN_MOVIES,
+    activeMovie: testMovie,
+  });
+
   const tree = renderer
     .create(
-        <MoviePage
-          movie={testMovie}
-          movies={testMovies}
-          reviews={testReviews}
-          onMovieCardClick={() => {}}
-        />
+        <Provider store={store}>
+          <MoviePage
+            movie={testMovie}
+            movies={testMovies}
+            reviews={testReviews}
+            onMovieCardClick={() => {}}
+          />
+        </Provider>
     ).toJSON();
 
   expect(tree).toMatchSnapshot();

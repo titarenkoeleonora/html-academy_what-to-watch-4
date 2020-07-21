@@ -3,6 +3,14 @@ import {ActionCreator} from "./action-creator.js";
 import {reducer} from "./reducer.js";
 import {MAX_SHOWN_MOVIES} from "../constants.js";
 
+const testMovie = {
+  title: `The Grand Budapest Hotel`,
+  genre: `Drama`,
+  date: 2014,
+  poster: `img/the-grand-budapest-hotel-poster.jpg`,
+  bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
+};
+
 const testMovies = [
   {
     id: `The Grand Budapest Hotel0`,
@@ -160,6 +168,7 @@ it(`Returns initial state at application start`, ()=>{
   expect(reducer(undefined, {})).toEqual({
     activeGenre: `All genres`,
     movies: testMovies,
+    activeMovie: testMovie,
     shownMoviesCount: MAX_SHOWN_MOVIES,
   });
 });
@@ -203,3 +212,17 @@ describe(`Action creators work correctly`, () => {
     });
   });
 });
+
+
+// it(`Should change activeMovie`, () => {
+//   expect(reducer(
+//       {activeMovie: {}},
+//       {
+//         type: ActionType.ACTIVE_MOVIE,
+//         payload: {activeMovie: testMovie},
+//       }
+//   ))
+//   .toEqual({
+//     activeMovie: testMovie,
+//   });
+// });
