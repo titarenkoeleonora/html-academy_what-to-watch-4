@@ -37,7 +37,6 @@ const Tabs = ({activeMovie, reviews, activeTab, onTabClick}) => {
                   onClick={(evt) => {
                     evt.preventDefault();
                     onTabClick(tab);
-                    console.log(activeTab);
                   }}
                 >{tab}</a>
               </li>
@@ -47,7 +46,6 @@ const Tabs = ({activeMovie, reviews, activeTab, onTabClick}) => {
       </nav>
 
       {renderMovieInfo(activeMovie, reviews, activeTab)}
-      {console.log(activeTab)}
     </div>
   );
 };
