@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import MoviePage from "./movie-page";
 import configureStore from "redux-mock-store";
 import {MAX_SHOWN_MOVIES} from "../../constants";
-import { Provider } from "react-redux";
+import {Provider} from "react-redux";
 
 const mockStore = configureStore([]);
 
