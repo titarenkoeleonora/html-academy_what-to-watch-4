@@ -1,5 +1,5 @@
 import {ActionType} from "./action-types.js";
-import {ActionCreator} from "./action-creators.js";
+import {ActionCreator} from "./action-creator.js";
 import {reducer} from "./reducer.js";
 import {MAX_SHOWN_MOVIES} from "../constants.js";
 

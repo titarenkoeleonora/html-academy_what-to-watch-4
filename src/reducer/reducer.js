@@ -22,7 +22,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.ACTIVE_MOVIE:
       return extend(state, {
-        activeMovie: action.payload.activeMovie,
+        activeMovie: action.payload,
       });
   }
 

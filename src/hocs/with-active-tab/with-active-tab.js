@@ -1,12 +1,13 @@
 import React, {PureComponent} from "react";
+import {MovieTabs} from "../../constants";
 
-const withActiveItem = (Component) => {
-  class WithActiveItem extends PureComponent {
+const withActiveTab = (Component) => {
+  class WithActiveTab extends PureComponent {
     constructor(props) {
       super(props);
 
       this.state = {
-        activeItem: null,
+        activeTab: MovieTabs.OVERVIEW,
       };
 
       this._handleOnItemClick = this._handleOnItemClick.bind(this);
@@ -14,25 +15,25 @@ const withActiveItem = (Component) => {
 
     _handleOnItemClick(clickedItem) {
       this.setState = ({
-        activeItem: clickedItem,
+        activeTab: clickedItem,
       });
     }
 
     render() {
-      const {activeItem} = this.state;
+      const {activeTab} = this.state;
 
       return (
         <Component
           {...this.props}
-          onItemClick={this._handleOnItemClick}
-          activeItem={activeItem}
+          activeTab={activeTab}
+          onTabClick={this._handleOnItemClick}
         >
         </Component>
       );
     }
   }
 
-  return WithActiveItem;
+  return WithActiveTab;
 };
 
-export default withActiveItem;
+export default withActiveTab;
