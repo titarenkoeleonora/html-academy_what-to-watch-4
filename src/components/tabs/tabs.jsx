@@ -18,9 +18,8 @@ const renderMovieInfo = (activeMovie, reviews, activeTab) => {
   }
 };
 
-const Tabs = ({activeTab, activeMovie, reviews, onTabClick}) => {
+const Tabs = ({activeMovie, reviews, activeTab, onTabClick}) => {
   const navTabs = Object.values(MovieTabs);
-
   return (
     <div className="movie-card__desc">
       <nav className="movie-nav movie-card__nav">
@@ -35,8 +34,10 @@ const Tabs = ({activeTab, activeMovie, reviews, onTabClick}) => {
                 <a
                   href="#"
                   className="movie-nav__link"
-                  onClick={() => {
+                  onClick={(evt) => {
+                    evt.preventDefault();
                     onTabClick(tab);
+                    console.log(activeTab);
                   }}
                 >{tab}</a>
               </li>
@@ -46,6 +47,7 @@ const Tabs = ({activeTab, activeMovie, reviews, onTabClick}) => {
       </nav>
 
       {renderMovieInfo(activeMovie, reviews, activeTab)}
+      {console.log(activeTab)}
     </div>
   );
 };

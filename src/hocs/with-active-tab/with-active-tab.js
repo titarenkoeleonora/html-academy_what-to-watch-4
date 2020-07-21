@@ -14,6 +14,7 @@ const withActiveTab = (Component) => {
     }
 
     _handleOnItemClick(clickedItem) {
+      console.log(clickedItem);
       this.setState = ({
         activeTab: clickedItem,
       });

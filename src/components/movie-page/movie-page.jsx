@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import withActiveTab from "../../hocs/with-active-tab/with-active-tab.js";
 import PageHeader from "../page-header/page-header.jsx";
 import PageFooter from "../page-footer/page-footer.jsx";
 import RelatedMovies from "../related-movies/related-movies.jsx";
 import Tabs from "../tabs/tabs.jsx";
 import {ActionCreator} from "../../reducer/action-creator.js";
+import withActiveTab from "../../hocs/with-active-tab/with-active-tab.js";
 
 const TabsWrapped = withActiveTab(Tabs);
 
