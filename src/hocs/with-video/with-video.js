@@ -7,21 +7,16 @@ const withVideo = (Component) => {
 
       this.state = {
         isPlaying: false,
+        duration: 0,
+        time: 0,
       };
 
-      this._handleMouseOver = this._handleMouseOver.bind(this);
-      this._handleMouseOut = this._handleMouseOut.bind(this);
+      this._handleOnOffChange = this._handleOnOffChange.bind(this);
     }
 
-    _handleMouseOver() {
+    _handleOnOffChange() {
       this.setState({
-        isPlaying: true,
-      });
-    }
-
-    _handleMouseOut() {
-      this.setState({
-        isPlaying: false,
+        isPlaying: !this.state.isPlaying,
       });
     }
 
@@ -32,8 +27,8 @@ const withVideo = (Component) => {
         <Component
           {...this.props}
           isPlaying={isPlaying}
-          onSmallCardMouseOver={this._handleMouseOver}
-          onSmallCardMouseOut={this._handleMouseOut}
+          onSmallCardMouseOver={this._handleOnOffChange}
+          onSmallCardMouseOut={this._handleOnOffChange}
         >
         </Component>
       );
