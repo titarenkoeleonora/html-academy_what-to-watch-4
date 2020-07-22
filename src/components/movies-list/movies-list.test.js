@@ -58,6 +58,8 @@ it(`MoviesList should render correctly`, () => {
       .create(<MoviesList
         movies={testMovies}
         onMovieCardClick={() => {}}
+        onSmallCardMouseOver={() => {}}
+        onSmallCardMouseOut={() => {}}
       />).toJSON();
 
   expect(tree).toMatchSnapshot();

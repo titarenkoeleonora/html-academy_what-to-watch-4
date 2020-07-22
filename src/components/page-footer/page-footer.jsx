@@ -2,6 +2,8 @@ import React from "react";
 
 
 const PageFooter = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="page-footer">
       <div className="logo">
@@ -13,7 +15,7 @@ const PageFooter = () => {
       </div>
 
       <div className="copyright">
-        <p>© 2019 What to watch Ltd.</p>
+        <p>© {currentYear} What to watch Ltd.</p>
       </div>
     </footer>
   );

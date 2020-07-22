@@ -7,14 +7,7 @@ export default class SmallMovieCard extends PureComponent {
     super(props);
 
     this._onMovieCardClick = this.props.onMovieCardClick;
-
-    this.state = {
-      isPlaying: false,
-    };
-
     this._handleMovieTitleClick = this._handleMovieTitleClick.bind(this);
-    this._handleMouseOver = this._handleMouseOver.bind(this);
-    this._handleMouseOut = this._handleMouseOut.bind(this);
   }
 
   _handleMovieTitleClick(evt) {
@@ -24,39 +17,27 @@ export default class SmallMovieCard extends PureComponent {
     this._onMovieCardClick(this._movie);
   }
 
-  _handleMouseOver() {
-    this.setState({
-      isPlaying: true,
-    });
-  }
-
-  _handleMouseOut() {
-    this.setState({
-      isPlaying: false,
-    });
-  }
-
   render() {
-    this._movie = this.props.movie;
+    const {movie, isPlaying, onSmallCardMouseOver, onSmallCardMouseOut} = this.props;
 
     return (
       <article
         className="small-movie-card catalog__movies-card"
-        onMouseOver={this._handleMouseOver}
-        onMouseOut={this._handleMouseOut}
         onClick={this._handleMovieTitleClick}
+        onMouseOver={onSmallCardMouseOver}
+        onMouseOut={onSmallCardMouseOut}
       >
         <div className="small-movie-card__image">
           <VideoPlayer
-            isPlaying={this.state.isPlaying}
-            movie={this._movie}
+            isPlaying={isPlaying}
+            movie={movie}
             muted
           />
         </div>
         <h3 className="small-movie-card__title">
           <a
             className="small-movie-card__link" href="movie-page.html"
-          >{this._movie.title}</a>
+          >{movie.title}</a>
         </h3>
       </article>
     );
@@ -70,7 +51,8 @@ SmallMovieCard.propTypes = {
     poster: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
   }).isRequired,
-  onMouseOver: PropTypes.func.isRequired,
-  onMouseOut: PropTypes.func.isRequired,
+  onSmallCardMouseOver: PropTypes.func.isRequired,
+  onSmallCardMouseOut: PropTypes.func.isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
 };

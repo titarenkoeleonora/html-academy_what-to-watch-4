@@ -24,6 +24,7 @@ Array [
       <header
         className="page-header movie-card__head"
       >
+        \`   
         <div
           className="logo"
         >
@@ -273,7 +274,6 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
-          href="main.html"
         >
           <span
             className="logo__letter logo__letter--1"
@@ -296,7 +296,9 @@ Array [
         className="copyright"
       >
         <p>
-          © 2019 What to watch Ltd.
+          © 
+          2020
+           What to watch Ltd.
         </p>
       </div>
     </footer>

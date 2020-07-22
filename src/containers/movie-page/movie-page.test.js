@@ -1,9 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import MoviePage from "./movie-page";
 import configureStore from "redux-mock-store";
+import {MAX_SHOWN_MOVIES} from "../../constants";
 import {Provider} from "react-redux";
-import {MAX_SHOWN_MOVIES} from "../../constants.js";
 
 const mockStore = configureStore([]);
 
@@ -14,6 +14,12 @@ const testMovie = {
   poster: `image`,
   bgImage: `bgImage`,
   src: ``,
+  rating: `8,9`,
+  ratingDescription: `Very good`,
+  votes: 240,
+  director: `Wes Andreson`,
+  starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Tom Wilkinson`, `Owen Wilkinson`, `Adrien Brody`, `Ralph Fiennes`, `Jeff Goldblum`],
+  runTime: `1h 39m`,
 };
 
 const testMovies = [
@@ -22,56 +28,48 @@ const testMovies = [
     title: `movie title`,
     poster: `image`,
     src: ``,
-    genre: `genre`
   },
   {
     id: `1`,
     title: `movie title`,
     poster: `image`,
     src: ``,
-    genre: `genre`
   },
   {
     id: `2`,
     title: `movie title`,
     poster: `image`,
     src: ``,
-    genre: `genre`
   },
   {
     id: `3`,
     title: `movie title`,
     poster: `image`,
     src: ``,
-    genre: `genre`
   },
   {
     id: `4`,
     title: `movie title`,
     poster: `image`,
     src: ``,
-    genre: `genre`
   },
   {
     id: `5`,
     title: `movie title`,
     poster: `image`,
     src: ``,
-    genre: `genre`
   },
   {
     id: `6`,
     title: `movie title`,
     poster: `image`,
     src: ``,
-    genre: `genre`
   },
   {
     id: `7`,
     title: `movie title`,
     poster: `image`,
     src: ``,
-    genre: `genre`
   }
 ];
 
@@ -92,20 +90,22 @@ const testReviews = [
   },
 ];
 
-it(`Render App`, () => {
+it(`Should MoviePage correctly render`, () => {
   const store = mockStore({
     activeGenre: `All genres`,
     movies: testMovies,
     shownMoviesCount: MAX_SHOWN_MOVIES,
+    activeMovie: testMovie,
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <App
+          <MoviePage
             movie={testMovie}
             movies={testMovies}
             reviews={testReviews}
+            onMovieCardClick={() => {}}
           />
         </Provider>
     ).toJSON();

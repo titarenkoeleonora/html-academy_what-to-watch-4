@@ -10,7 +10,12 @@ const ActionCreator = {
   showMoreMovies: () => ({
     type: ActionType.SHOW_MORE_MOVIES,
     payload: MAX_SHOWN_MOVIES,
-  })
+  }),
+
+  getActiveMovie: (activeMovie) => ({
+    type: ActionType.ACTIVE_MOVIE,
+    payload: activeMovie,
+  }),
 };
 
 export {ActionCreator};

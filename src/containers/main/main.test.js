@@ -11,6 +11,9 @@ const testMovie = {
   title: `Movie title`,
   genre: `Genre`,
   date: 2020,
+  poster: `image`,
+  bgImage: `bgImage`,
+  src: ``,
 };
 
 const testMovies = [
@@ -74,6 +77,7 @@ it(`Main correctly render`, () => {
     activeGenre: `All genres`,
     movies: testMovies,
     shownMoviesCount: MAX_SHOWN_MOVIES,
+    activeMovie: testMovie,
   });
 
   const tree = renderer
@@ -81,6 +85,7 @@ it(`Main correctly render`, () => {
         <Provider store={store}>
           <Main
             movie={testMovie}
+            activeMovie={testMovie}
             movies={testMovies}
             activeGenre={mock.activeGenre}
             onGenreTabClick={() => {}}

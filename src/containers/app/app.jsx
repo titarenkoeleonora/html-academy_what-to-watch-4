@@ -1,25 +1,14 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {connect} from "react-redux";
 
-import Main from "../../containers/main/main.jsx";
-import MoviePage from "../movie-page/movie-page.jsx";
+import Main from "../main/main";
+import MoviePage from "../movie-page/movie-page";
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
-
-    this.state = {
-      activeCard: this.props.movie
-    };
-
-    this.handleTitleClick = this.handleTitleClick.bind(this);
-  }
-
-  handleTitleClick(movie) {
-    this.setState({
-      activeCard: movie,
-    });
   }
 
   _renderMain() {
@@ -29,18 +18,15 @@ class App extends PureComponent {
       <Main
         movie={movie}
         movies={movies}
-        onMovieCardClick={this.handleTitleClick}
       />
     );
   }
 
   _renderMoviePage() {
     const {movies, reviews} = this.props;
-    const {activeCard} = this.state;
 
     return (
       <MoviePage
-        movie={activeCard}
         movies={movies}
         reviews={reviews}
         onMovieCardClick={this.handleTitleClick}
@@ -49,9 +35,9 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {activeCard} = this.state;
+    const {activeMovie} = this.props;
 
-    if (activeCard !== this.props.movie) {
+    if (activeMovie !== this.props.movie) {
       return this._renderMoviePage();
     }
 
@@ -82,6 +68,13 @@ App.propTypes = {
     poster: PropTypes.string.isRequired,
     bgImage: PropTypes.string.isRequired,
   }).isRequired,
+  activeMovie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    date: PropTypes.number.isRequired,
+    poster: PropTypes.string.isRequired,
+    bgImage: PropTypes.string.isRequired,
+  }).isRequired,
   movies: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
@@ -101,4 +94,7 @@ App.propTypes = {
 
 };
 
-export default App;
+const mapStateToProps = ({activeMovie}) => ({activeMovie});
+
+export {App};
+export default connect(mapStateToProps)(App);
