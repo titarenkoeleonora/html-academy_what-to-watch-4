@@ -16,6 +16,10 @@ const ActionCreator = {
     type: ActionType.ACTIVE_MOVIE,
     payload: activeMovie,
   }),
+  activateMovieVideoplayer: (state) => ({
+    type: ActionType.ACTIVATE_MOVIE_VIDEOPLAYER,
+    payload: state,
+  })
 };
 
 export {ActionCreator};
