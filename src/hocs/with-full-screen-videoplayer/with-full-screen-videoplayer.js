@@ -21,7 +21,7 @@ const withFullScreenVideoplayer = (Component) => {
     componentDidMount() {
       const video = this._videoRef.current;
       const {activeMovie} = this.props;
-      console.log(activeMovie);
+
       video.src = activeMovie.src;
       video.poster = activeMovie.poster;
       video.play();

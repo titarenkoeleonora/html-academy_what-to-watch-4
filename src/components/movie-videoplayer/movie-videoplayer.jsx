@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {getTimeElapsed} from "../../utils";
 
 const MovieVideoplayer = (props) => {
   const {
@@ -13,6 +14,8 @@ const MovieVideoplayer = (props) => {
     children
   } = props;
 
+  const timeElapsed = getTimeElapsed(duration - progress);
+
   return (
     <div className="player">
       {children}
@@ -24,7 +27,7 @@ const MovieVideoplayer = (props) => {
             <progress className="player__progress" value={progress} max={duration}></progress>
             <div className="player__toggler" style={{left: ((progress * 100) / duration) + `%`}}>Toggler</div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{timeElapsed}</div>
         </div>
 
         <div className="player__controls-row">

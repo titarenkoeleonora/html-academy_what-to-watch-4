@@ -9,6 +9,7 @@ const testMovie = {
   date: 2014,
   poster: `img/the-grand-budapest-hotel-poster.jpg`,
   bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
+  src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };
 
 const testMovies = [
@@ -170,6 +171,7 @@ it(`Returns initial state at application start`, ()=>{
     movies: testMovies,
     activeMovie: testMovie,
     shownMoviesCount: MAX_SHOWN_MOVIES,
+    isMovieVideoplayerActive: false,
   });
 });
 
@@ -197,6 +199,19 @@ it(`Reducer should show more movie cards by butoon click`, () => {
   });
 });
 
+it(`Should change activeMovie`, () => {
+  expect(reducer(
+      {activeMovie: null},
+      {
+        type: ActionType.ACTIVE_MOVIE,
+        payload: testMovie,
+      }
+  ))
+  .toEqual({
+    activeMovie: testMovie,
+  });
+});
+
 
 describe(`Action creators work correctly`, () => {
   it(`Action creators get active genre`, () => {
@@ -212,17 +227,3 @@ describe(`Action creators work correctly`, () => {
     });
   });
 });
-
-
-// it(`Should change activeMovie`, () => {
-//   expect(reducer(
-//       {activeMovie: {}},
-//       {
-//         type: ActionType.ACTIVE_MOVIE,
-//         payload: {activeMovie: testMovie},
-//       }
-//   ))
-//   .toEqual({
-//     activeMovie: testMovie,
-//   });
-// });

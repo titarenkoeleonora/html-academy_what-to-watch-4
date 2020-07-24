@@ -78,6 +78,7 @@ it(`Main correctly render`, () => {
     movies: testMovies,
     shownMoviesCount: MAX_SHOWN_MOVIES,
     activeMovie: testMovie,
+    isMovieVideoplayerActive: false,
   });
 
   const tree = renderer
@@ -90,6 +91,7 @@ it(`Main correctly render`, () => {
             activeGenre={mock.activeGenre}
             onGenreTabClick={() => {}}
             onMovieCardClick={() => {}}
+            onPlayButtonClick={() => {}}
           />
         </Provider>
     ).toJSON();
