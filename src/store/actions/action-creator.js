@@ -1,5 +1,5 @@
 import {ActionType} from "./action-types";
-import {MAX_SHOWN_MOVIES} from "../constants";
+import {MAX_SHOWN_MOVIES} from "../../constants";
 
 const ActionCreator = {
   getActiveGenre: (genre) => ({
