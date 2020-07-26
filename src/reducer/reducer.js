@@ -1,5 +1,5 @@
 import {extend} from "../utils";
-import {moviesMock} from "../mocks/movies";
+import {moviesMock} from "../adapter/movies";
 import {ActionType} from "./action-types";
 import {MAX_SHOWN_MOVIES, Movie} from "../constants";
 
