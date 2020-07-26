@@ -15,4 +15,6 @@ const MovieTabs = {
 
 const MAX_SHOWN_MOVIES = 8;
 
-export {Movie, MovieTabs, MAX_SHOWN_MOVIES};
+const API_TIMEOUT = 5000;
+
+export {Movie, MovieTabs, MAX_SHOWN_MOVIES, API_TIMEOUT};
