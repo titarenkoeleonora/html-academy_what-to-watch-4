@@ -1,10 +1,12 @@
-import {extend} from "../../utils";
-import {ActionType} from "../actions/action-types";
-import {MAX_SHOWN_MOVIES} from "../../constants";
+import {extend} from "../utils";
+import {MAX_SHOWN_MOVIES, emptyMovie} from "../../../constants";
+import {ActionType} from "../../actions/action-types";
 
 const initialState = {
   activeGenre: `All genres`,
+  activeMovie: emptyMovie,
   shownMoviesCount: MAX_SHOWN_MOVIES,
+  isMovieVideoplayerActive: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -16,6 +18,14 @@ const reducer = (state = initialState, action) => {
     case ActionType.SHOW_MORE_MOVIES:
       return extend(state, {
         shownMoviesCount: state.shownMoviesCount + action.payload,
+      });
+    case ActionType.ACTIVE_MOVIE:
+      return extend(state, {
+        activeMovie: action.payload,
+      });
+    case ActionType.ACTIVATE_MOVIE_VIDEOPLAYER:
+      return extend(state, {
+        isMovieVideoplayerActive: action.payload,
       });
   }
 
