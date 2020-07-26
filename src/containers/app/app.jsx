@@ -5,6 +5,11 @@ import {connect} from "react-redux";
 
 import Main from "../main/main";
 import MoviePage from "../movie-page/movie-page";
+import MovieVideoplayer from "../../components/movie-videoplayer/movie-videoplayer";
+import {ActionCreator} from "../../reducer/action-creator";
+import withFullScreenVideoplayer from "../../hocs/with-full-screen-videoplayer/with-full-screen-videoplayer";
+
+const MovieVideoplayerWrapped = withFullScreenVideoplayer(MovieVideoplayer);
 
 class App extends PureComponent {
   constructor(props) {
@@ -12,33 +17,41 @@ class App extends PureComponent {
   }
 
   _renderMain() {
-    const {movie, movies} = this.props;
+    const {activeMovie, movies, onPlayButtonClick} = this.props;
 
     return (
       <Main
-        movie={movie}
+        movie={activeMovie}
         movies={movies}
+        onPlayButtonClick={onPlayButtonClick}
       />
     );
   }
 
   _renderMoviePage() {
-    const {movies, reviews} = this.props;
+    const {movies, reviews, onPlayButtonClick} = this.props;
 
     return (
       <MoviePage
         movies={movies}
         reviews={reviews}
-        onMovieCardClick={this.handleTitleClick}
+        onPlayButtonClick={onPlayButtonClick}
       />
     );
   }
 
   _renderApp() {
-    const {activeMovie} = this.props;
+    const {activeMovie, isMovieVideoplayerActive, onExitButtonClick} = this.props;
 
     if (activeMovie !== this.props.movie) {
       return this._renderMoviePage();
+    } else if (isMovieVideoplayerActive) {
+      return (
+        <MovieVideoplayerWrapped
+          activeMovie={activeMovie}
+          onExitButtonClick={onExitButtonClick}
+        />
+      );
     }
 
     return this._renderMain();
@@ -74,6 +87,7 @@ App.propTypes = {
     date: PropTypes.number.isRequired,
     poster: PropTypes.string.isRequired,
     bgImage: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
   }).isRequired,
   movies: PropTypes.arrayOf(
       PropTypes.shape({
@@ -91,10 +105,24 @@ App.propTypes = {
         id: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
-
+  isMovieVideoplayerActive: PropTypes.bool.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
+  onExitButtonClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({activeMovie}) => ({activeMovie});
+const mapStateToProps = (state) => ({
+  activeMovie: state.activeMovie,
+  isMovieVideoplayerActive: state.isMovieVideoplayerActive,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onPlayButtonClick() {
+    dispatch(ActionCreator.activateMovieVideoplayer(true));
+  },
+  onExitButtonClick() {
+    dispatch(ActionCreator.activateMovieVideoplayer(false));
+  }
+});
 
 export {App};
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

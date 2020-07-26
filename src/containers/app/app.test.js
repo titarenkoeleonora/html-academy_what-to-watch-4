@@ -97,7 +97,8 @@ it(`Render App`, () => {
     activeGenre: `All genres`,
     movies: testMovies,
     shownMoviesCount: MAX_SHOWN_MOVIES,
-    activeMovie: testMovie
+    activeMovie: testMovie,
+    isMovieVideoplayerActive: false,
   });
 
   const tree = renderer

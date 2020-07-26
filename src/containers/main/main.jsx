@@ -13,7 +13,16 @@ import PageHeader from "../../components/page-header/page-header.jsx";
 const genresList = getGenresList(moviesMock);
 
 const Main = (props) => {
-  const {movie, movies, activeGenre, shownMoviesCount, onGenreTabClick, onMovieCardClick, onShowMoreButtonClick} = props;
+  const {
+    movie,
+    movies,
+    activeGenre,
+    shownMoviesCount,
+    onGenreTabClick,
+    onMovieCardClick,
+    onShowMoreButtonClick,
+    onPlayButtonClick
+  } = props;
   const shownMovies = movies.slice(0, shownMoviesCount);
 
   return (
@@ -41,7 +50,9 @@ const Main = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button onClick={onPlayButtonClick}
+                  className="btn btn--play movie-card__button"
+                  type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -103,6 +114,7 @@ Main.propTypes = {
   onGenreTabClick: PropTypes.func.isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

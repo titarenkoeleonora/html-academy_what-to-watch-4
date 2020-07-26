@@ -8,6 +8,7 @@ const initialState = {
   movies: moviesMock,
   activeMovie: Movie,
   shownMoviesCount: MAX_SHOWN_MOVIES,
+  isMovieVideoplayerActive: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +24,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.ACTIVE_MOVIE:
       return extend(state, {
         activeMovie: action.payload,
+      });
+    case ActionType.ACTIVATE_MOVIE_VIDEOPLAYER:
+      return extend(state, {
+        isMovieVideoplayerActive: action.payload,
       });
   }
 
