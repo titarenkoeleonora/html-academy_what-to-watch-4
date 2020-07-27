@@ -1,35 +1,35 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {getGenresList, fiterMoviesByGenre} from "../../utils.js";
-import {moviesMock} from "../../mocks/movies.js";
 import MoviesList from "../../components/movies-list/movies-list.jsx";
 import GenresList from "../../components/genres-list/genres-list.jsx";
 import ShowMoreButton from "../../components/show-more-button/show-more-button.jsx";
 import PageFooter from "../../components/page-footer/page-footer.jsx";
-import {ActionCreator} from "../../reducer/action-creator.js";
 import PageHeader from "../../components/page-header/page-header.jsx";
-
-const genresList = getGenresList(moviesMock);
+import {ActionCreator} from "../../reducer/data/data.js";
+import {getMovies, getGenresList} from "../../reducer/data/selectors.js";
+import {getActiveGenre, getShownMoviesCount} from "../../reducer/app-state/selectors.js";
 
 const Main = (props) => {
   const {
-    movie,
+    promoMovie,
     movies,
     activeGenre,
+    genresList,
     shownMoviesCount,
     onGenreTabClick,
     onMovieCardClick,
     onShowMoreButtonClick,
     onPlayButtonClick
   } = props;
+
   const shownMovies = movies.slice(0, shownMoviesCount);
 
   return (
     <>
       <section className="movie-card">
-        <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={movie.title} />
+        <div className="movie-card__bg" style={{background: promoMovie.backgroundColor}}>
+          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={promoMovie.title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -39,14 +39,14 @@ const Main = (props) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt={movie.title} width="218" height="327" />
+              <img src="img/the-grand-budapest-hotel-poster.jpg" alt={promoMovie.title} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{movie.title}</h2>
+              <h2 className="movie-card__title">{promoMovie.title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{movie.genre}</span>
-                <span className="movie-card__year">{movie.date}</span>
+                <span className="movie-card__genre">{promoMovie.genre}</span>
+                <span className="movie-card__year">{promoMovie.date}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -98,10 +98,14 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  movie: PropTypes.shape({
+  promoMovie: PropTypes.shape({
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     date: PropTypes.number.isRequired,
+    poster: PropTypes.string.isRequired,
+    bgImage: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
   }).isRequired,
   movies: PropTypes.arrayOf(
       PropTypes.shape({
@@ -110,6 +114,7 @@ Main.propTypes = {
       }).isRequired
   ).isRequired,
   activeGenre: PropTypes.string.isRequired,
+  genresList: PropTypes.array.isRequired,
   shownMoviesCount: PropTypes.number.isRequired,
   onGenreTabClick: PropTypes.func.isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
@@ -119,9 +124,10 @@ Main.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    activeGenre: state.activeGenre,
-    movies: fiterMoviesByGenre(state.activeGenre, state.movies),
-    shownMoviesCount: state.shownMoviesCount,
+    activeGenre: getActiveGenre(state),
+    movies: getMovies(state),
+    shownMoviesCount: getShownMoviesCount(state),
+    genresList: getGenresList(state)
   };
 };
 

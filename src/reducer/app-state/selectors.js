@@ -1,4 +1,4 @@
-import NameSpace from '../name-space';
+import NameSpace from "../name-space";
 
 export const getActiveGenre = (state) => state[NameSpace.APP_STATE].activeGenre;
 

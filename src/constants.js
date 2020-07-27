@@ -1,6 +1,6 @@
 const emptyMovie = {
-  id: `Is loading...`,
-  title: ``,
+  id: 0,
+  title: `Is loading...`,
   poster: ``,
   previewImage: ``,
   bgImage: ``,
@@ -9,12 +9,12 @@ const emptyMovie = {
   previewVideoLink: ``,
   description: ``,
   rating: ``,
-  votes: ``,
+  votes: 0,
   director: ``,
-  starring: ``,
+  starring: [],
   runTime: ``,
   genre: ``,
-  date: ``,
+  date: 0,
   isFavorite: ``,
 };
 

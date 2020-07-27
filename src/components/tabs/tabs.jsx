@@ -20,6 +20,7 @@ const renderMovieInfo = (activeMovie, reviews, activeTab) => {
 
 const Tabs = ({activeMovie, reviews, activeTab, onTabClick}) => {
   const navTabs = Object.values(MovieTabs);
+
   return (
     <div className="movie-card__desc">
       <nav className="movie-nav movie-card__nav">

@@ -6,8 +6,11 @@ import {connect} from "react-redux";
 import Main from "../main/main";
 import MoviePage from "../movie-page/movie-page";
 import MovieVideoplayer from "../../components/movie-videoplayer/movie-videoplayer";
-import {ActionCreator} from "../../reducer/action-creator";
 import withFullScreenVideoplayer from "../../hocs/with-full-screen-videoplayer/with-full-screen-videoplayer";
+import {ActionCreator} from "../../reducer/data/data";
+import {getIsError, getPromoMovie} from "../../reducer/data/selectors";
+import {getIsMovieVideoplayerActive, getActiveMovie} from "../../reducer/app-state/selectors";
+import ErrorScreen from "../../components/error-screen/error-screen";
 
 const MovieVideoplayerWrapped = withFullScreenVideoplayer(MovieVideoplayer);
 
@@ -17,40 +20,46 @@ class App extends PureComponent {
   }
 
   _renderMain() {
-    const {activeMovie, movies, onPlayButtonClick} = this.props;
+    const {promoMovie, onPlayButtonClick} = this.props;
 
     return (
       <Main
-        movie={activeMovie}
-        movies={movies}
+        promoMovie={promoMovie}
         onPlayButtonClick={onPlayButtonClick}
       />
     );
   }
 
   _renderMoviePage() {
-    const {movies, reviews, onPlayButtonClick} = this.props;
+    const {promoMovie, activeMovie, onPlayButtonClick} = this.props;
 
     return (
       <MoviePage
-        movies={movies}
-        reviews={reviews}
+        activeMovie={activeMovie ? activeMovie : promoMovie}
         onPlayButtonClick={onPlayButtonClick}
       />
     );
   }
 
   _renderApp() {
-    const {activeMovie, isMovieVideoplayerActive, onExitButtonClick} = this.props;
+    const {activeMovie, isMovieVideoplayerActive, onExitButtonClick, isError} = this.props;
 
-    if (activeMovie !== this.props.movie) {
+    if (!activeMovie) {
       return this._renderMoviePage();
-    } else if (isMovieVideoplayerActive) {
+    }
+
+    if (isMovieVideoplayerActive) {
       return (
         <MovieVideoplayerWrapped
           activeMovie={activeMovie}
           onExitButtonClick={onExitButtonClick}
         />
+      );
+    }
+
+    if (isError) {
+      return (
+        <ErrorScreen />
       );
     }
 
@@ -74,13 +83,6 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  movie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    date: PropTypes.number.isRequired,
-    poster: PropTypes.string.isRequired,
-    bgImage: PropTypes.string.isRequired,
-  }).isRequired,
   activeMovie: PropTypes.shape({
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
@@ -89,30 +91,25 @@ App.propTypes = {
     bgImage: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
   }).isRequired,
-  movies: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        poster: PropTypes.string.isRequired,
-      }).isRequired
-  ).isRequired,
-  reviews: PropTypes.arrayOf(
-      PropTypes.shape({
-        author: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
-      }).isRequired
-  ).isRequired,
+  promoMovie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    date: PropTypes.number.isRequired,
+    poster: PropTypes.string.isRequired,
+    bgImage: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+  }).isRequired,
+  isError: PropTypes.bool.isRequired,
   isMovieVideoplayerActive: PropTypes.bool.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
   onExitButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  activeMovie: state.activeMovie,
-  isMovieVideoplayerActive: state.isMovieVideoplayerActive,
+  promoMovie: getPromoMovie(state),
+  activeMovie: getActiveMovie(state),
+  isMovieVideoplayerActive: getIsMovieVideoplayerActive(state),
+  isError: getIsError(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

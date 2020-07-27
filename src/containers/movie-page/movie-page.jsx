@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/action-creator.js";
 import withActiveTab from "../../hocs/with-active-tab/with-active-tab.js";
 import Tabs from "../../components/tabs/tabs.jsx";
 import PageHeader from "../../components/page-header/page-header.jsx";
 import PageFooter from "../../components/page-footer/page-footer.jsx";
 import RelatedMovies from "../../components/related-movies/related-movies.jsx";
+import {ActionCreator} from "../../reducer/data/data.js";
+import {getRelatedMovies, getReviews} from "../../reducer/data/selectors.js";
 
 const TabsWrapped = withActiveTab(Tabs);
 
@@ -70,7 +71,7 @@ const MoviePage = ({activeMovie, movies, onMovieCardClick, reviews}) => {
             <h2 className="catalog__title">More like this</h2>
             <RelatedMovies
               currentMovie={activeMovie}
-              movies={movies}
+              relatedMovies={movies}
               onMovieCardClick={onMovieCardClick}
             />
           </section>
@@ -106,7 +107,10 @@ MoviePage.propTypes = {
   onMovieCardClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({activeMovie}) => ({activeMovie});
+const mapStateToProps = (state) => ({
+  movies: getRelatedMovies(state),
+  reviews: getReviews(state),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onMovieCardClick(activeMovie) {
