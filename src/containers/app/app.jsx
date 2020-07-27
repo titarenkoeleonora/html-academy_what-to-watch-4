@@ -7,10 +7,10 @@ import Main from "../main/main";
 import MoviePage from "../movie-page/movie-page";
 import MovieVideoplayer from "../../components/movie-videoplayer/movie-videoplayer";
 import withFullScreenVideoplayer from "../../hocs/with-full-screen-videoplayer/with-full-screen-videoplayer";
-import {ActionCreator} from "../../reducer/data/data";
 import {getIsError, getPromoMovie} from "../../reducer/data/selectors";
 import {getIsMovieVideoplayerActive, getActiveMovie} from "../../reducer/app-state/selectors";
 import ErrorScreen from "../../components/error-screen/error-screen";
+import {ActionCreator} from "../../reducer/actions/action-creator";
 
 const MovieVideoplayerWrapped = withFullScreenVideoplayer(MovieVideoplayer);
 
@@ -31,27 +31,28 @@ class App extends PureComponent {
   }
 
   _renderMoviePage() {
-    const {promoMovie, activeMovie, onPlayButtonClick} = this.props;
+    const {activeMovie, onPlayButtonClick} = this.props;
 
     return (
       <MoviePage
-        activeMovie={activeMovie ? activeMovie : promoMovie}
+        activeMovie={activeMovie}
         onPlayButtonClick={onPlayButtonClick}
       />
     );
   }
 
   _renderApp() {
-    const {activeMovie, isMovieVideoplayerActive, onExitButtonClick, isError} = this.props;
+    const {activeMovie, promoMovie, isMovieVideoplayerActive, onExitButtonClick, isError} = this.props;
 
-    if (!activeMovie) {
+    if (activeMovie) {
       return this._renderMoviePage();
     }
 
     if (isMovieVideoplayerActive) {
+
       return (
         <MovieVideoplayerWrapped
-          activeMovie={activeMovie}
+          activeMovie={activeMovie ? activeMovie : promoMovie}
           onExitButtonClick={onExitButtonClick}
         />
       );
@@ -83,22 +84,8 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  activeMovie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    date: PropTypes.number.isRequired,
-    poster: PropTypes.string.isRequired,
-    bgImage: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-  }).isRequired,
-  promoMovie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    date: PropTypes.number.isRequired,
-    poster: PropTypes.string.isRequired,
-    bgImage: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-  }).isRequired,
+  activeMovie: PropTypes.object,
+  promoMovie: PropTypes.object.isRequired,
   isError: PropTypes.bool.isRequired,
   isMovieVideoplayerActive: PropTypes.bool.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,

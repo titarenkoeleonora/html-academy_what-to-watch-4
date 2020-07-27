@@ -6,7 +6,7 @@ import GenresList from "../../components/genres-list/genres-list.jsx";
 import ShowMoreButton from "../../components/show-more-button/show-more-button.jsx";
 import PageFooter from "../../components/page-footer/page-footer.jsx";
 import PageHeader from "../../components/page-header/page-header.jsx";
-import {ActionCreator} from "../../reducer/data/data.js";
+import {ActionCreator} from "../../reducer/actions/action-creator.js";
 import {getMovies, getGenresList} from "../../reducer/data/selectors.js";
 import {getActiveGenre, getShownMoviesCount} from "../../reducer/app-state/selectors.js";
 
@@ -29,7 +29,7 @@ const Main = (props) => {
     <>
       <section className="movie-card">
         <div className="movie-card__bg" style={{background: promoMovie.backgroundColor}}>
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={promoMovie.title} />
+          <img src={promoMovie.bgImage} alt={promoMovie.title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -39,7 +39,7 @@ const Main = (props) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt={promoMovie.title} width="218" height="327" />
+              <img src={promoMovie.poster} alt={promoMovie.title} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">

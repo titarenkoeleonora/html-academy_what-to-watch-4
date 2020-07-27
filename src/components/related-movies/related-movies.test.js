@@ -2,15 +2,6 @@ import React from "react";
 import renderer from "react-test-renderer";
 import RelatedMovies from "./related-movies";
 
-const testMovie = {
-  title: `Movie title`,
-  genre: `Genre`,
-  date: 2020,
-  poster: `image`,
-  bgImage: `bg-image`,
-  src: ``,
-};
-
 const testMovies = [
   {
     id: `0`,
@@ -65,7 +56,6 @@ const testMovies = [
 it(`RelatedMovies should render correctly`, () => {
   const tree = renderer
       .create(<RelatedMovies
-        currentMovie={testMovie}
         movies={testMovies}
         onMovieCardClick={() => {}}
       />).toJSON();

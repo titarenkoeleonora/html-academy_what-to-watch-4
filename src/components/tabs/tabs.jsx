@@ -66,7 +66,7 @@ Tabs.propTypes = {
         rating: PropTypes.string.isRequired,
         date: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
       }).isRequired
   ).isRequired,
   onTabClick: PropTypes.func.isRequired,

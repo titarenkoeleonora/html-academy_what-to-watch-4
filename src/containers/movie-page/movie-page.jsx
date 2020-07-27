@@ -6,17 +6,22 @@ import Tabs from "../../components/tabs/tabs.jsx";
 import PageHeader from "../../components/page-header/page-header.jsx";
 import PageFooter from "../../components/page-footer/page-footer.jsx";
 import RelatedMovies from "../../components/related-movies/related-movies.jsx";
-import {ActionCreator} from "../../reducer/data/data.js";
+import {ActionCreator} from "../../reducer/actions/action-creator.js";
 import {getRelatedMovies, getReviews} from "../../reducer/data/selectors.js";
 
 const TabsWrapped = withActiveTab(Tabs);
 
-const MoviePage = ({activeMovie, movies, onMovieCardClick, reviews}) => {
+const MoviePage = ({
+  activeMovie,
+  movies,
+  onMovieCardClick,
+  onPlayButtonClick,
+  reviews}) => {
 
   return (
       <>
-        <section className="movie-card movie-card--full">
-          <div className="movie-card__hero">
+        <section className="movie-card movie-card--full" style={{background: activeMovie.backgroundColor}}>
+          <div className="movie-card__hero" >
             <div className="movie-card__bg">
               <img src={activeMovie.bgImage} alt="The Grand Budapest Hotel" />
             </div>
@@ -34,7 +39,9 @@ const MoviePage = ({activeMovie, movies, onMovieCardClick, reviews}) => {
                 </p>
 
                 <div className="movie-card__buttons">
-                  <button className="btn btn--play movie-card__button" type="button">
+                  <button onClick={onPlayButtonClick}
+                    className="btn btn--play movie-card__button"
+                    type="button">
                     <svg viewBox="0 0 19 19" width="19" height="19">
                       <use xlinkHref="#play-s" />
                     </svg>
@@ -82,13 +89,7 @@ const MoviePage = ({activeMovie, movies, onMovieCardClick, reviews}) => {
 };
 
 MoviePage.propTypes = {
-  activeMovie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    date: PropTypes.number.isRequired,
-    poster: PropTypes.string.isRequired,
-    bgImage: PropTypes.string.isRequired,
-  }).isRequired,
+  activeMovie: PropTypes.object.isRequired,
   movies: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
@@ -105,6 +106,7 @@ MoviePage.propTypes = {
       }).isRequired
   ).isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

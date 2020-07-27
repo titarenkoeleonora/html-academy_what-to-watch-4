@@ -1,7 +1,7 @@
-import {MAX_SHOWN_MOVIES} from "../constants.js";
 import {reducer, initialState} from "./app-state.js";
-import {ActionType} from "../../actions/action-types.js";
-import {ActionCreator} from "../../actions/action-creator.js";
+import {MAX_SHOWN_MOVIES} from "../../constants.js";
+import {ActionType} from "../actions/action-types.js";
+import {ActionCreator} from "../actions/action-creator.js";
 
 const testMovie = {
   title: `The Grand Budapest Hotel`,

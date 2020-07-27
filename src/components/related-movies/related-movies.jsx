@@ -13,7 +13,7 @@ const RelatedMovies = ({relatedMovies, onMovieCardClick}) => {
 };
 
 RelatedMovies.propTypes = {
-  relatedMovies: PropTypes.array.isRequired,
+  relatedMovies: PropTypes.array,
   onMovieCardClick: PropTypes.func.isRequired,
 };
 

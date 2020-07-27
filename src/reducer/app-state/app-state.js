@@ -1,10 +1,10 @@
-import {MAX_SHOWN_MOVIES, emptyMovie} from "../../constants";
+import {MAX_SHOWN_MOVIES} from "../../constants";
 import {ActionType} from "../actions/action-types";
 import {extend} from "../../utils";
 
 const initialState = {
   activeGenre: `All genres`,
-  activeMovie: emptyMovie,
+  activeMovie: null,
   shownMoviesCount: MAX_SHOWN_MOVIES,
   isMovieVideoplayerActive: false,
 };

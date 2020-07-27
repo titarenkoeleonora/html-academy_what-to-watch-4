@@ -15,8 +15,6 @@ exports[`MoviesList should render correctly 1`] = `
     >
       <video
         height="175"
-        poster="image"
-        src=""
         width="280"
       />
     </div>
@@ -42,8 +40,6 @@ exports[`MoviesList should render correctly 1`] = `
     >
       <video
         height="175"
-        poster="image"
-        src=""
         width="280"
       />
     </div>
@@ -69,8 +65,6 @@ exports[`MoviesList should render correctly 1`] = `
     >
       <video
         height="175"
-        poster="image"
-        src=""
         width="280"
       />
     </div>
@@ -96,8 +90,6 @@ exports[`MoviesList should render correctly 1`] = `
     >
       <video
         height="175"
-        poster="image"
-        src=""
         width="280"
       />
     </div>
@@ -123,8 +115,6 @@ exports[`MoviesList should render correctly 1`] = `
     >
       <video
         height="175"
-        poster="image"
-        src=""
         width="280"
       />
     </div>
@@ -150,8 +140,6 @@ exports[`MoviesList should render correctly 1`] = `
     >
       <video
         height="175"
-        poster="image"
-        src=""
         width="280"
       />
     </div>
@@ -177,8 +165,6 @@ exports[`MoviesList should render correctly 1`] = `
     >
       <video
         height="175"
-        poster="image"
-        src=""
         width="280"
       />
     </div>
@@ -204,8 +190,6 @@ exports[`MoviesList should render correctly 1`] = `
     >
       <video
         height="175"
-        poster="image"
-        src=""
         width="280"
       />
     </div>

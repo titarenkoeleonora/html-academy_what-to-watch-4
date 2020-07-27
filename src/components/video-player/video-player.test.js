@@ -3,8 +3,8 @@ import renderer from "react-test-renderer";
 import VideoPlayer from "./video-player";
 
 const testData = {
-  src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-  poster: `poster`,
+  previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  previewImage: `poster`,
 };
 
 it(`Video player correctly render`, () => {

@@ -10,16 +10,16 @@ const initialState = {
 };
 
 const ActionType = {
-  LOAD_ACTIVE_MOVIE: `LOAD_ACTIVE_MOVIE`,
+  LOAD_PROMO_MOVIE: `LOAD_PROMO_MOVIE`,
   LOAD_MOVIES: `LOAD_MOVIES`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   CATCH_ERROR: `CATCH_ERROR`,
 };
 
 const ActionCreator = {
-  loadActiveMovie: (promoMovie) => {
+  loadPromoMovie: (promoMovie) => {
     return {
-      type: ActionType.LOAD_ACTIVE_MOVIE,
+      type: ActionType.LOAD_PROMO_MOVIE,
       payload: promoMovie
     };
   },
@@ -47,10 +47,10 @@ const ActionCreator = {
 };
 
 const Operation = {
-  loadActiveMovie: () => (dispatch, getState, api) => {
+  loadPromoMovie: () => (dispatch, getState, api) => {
     return api.get(`/films/promo`)
       .then((response) => {
-        dispatch(ActionCreator.loadActiveMovie(createMovie(response.data)));
+        dispatch(ActionCreator.loadPromoMovie(createMovie(response.data)));
       })
       .catch(() => {
         dispatch(ActionCreator.catchError());
@@ -81,9 +81,9 @@ const Operation = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.LOAD_ACTIVE_MOVIE:
+    case ActionType.LOAD_PROMO_MOVIE:
       return extend(state, {
-        movieCard: action.payload,
+        promoMovie: action.payload,
       });
     case ActionType.LOAD_MOVIES:
       return extend(state, {

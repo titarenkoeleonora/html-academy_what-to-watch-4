@@ -31,12 +31,12 @@ MovieOverview.propTypes = {
     date: PropTypes.number.isRequired,
     poster: PropTypes.string.isRequired,
     bgImage: PropTypes.string.isRequired,
-    rating: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
     votes: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string.isRequired),
-    runTime: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    runTime: PropTypes.number.isRequired,
+    description: PropTypes.string,
   }).isRequired,
 };
 

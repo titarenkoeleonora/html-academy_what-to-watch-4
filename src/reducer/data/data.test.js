@@ -1,7 +1,7 @@
 import MockAdapter from 'axios-mock-adapter';
-import {initialState, ActionType, reducer, Operations} from './data';
+import {initialState, ActionType, reducer, Operation} from './data';
 import {createAPI} from '../../api';
-import {createMovie} from '../../../adapter/movies';
+import {createMovie} from '../../adapter/movies';
 
 const testMovie = {
   title: `The Grand Budapest Hotel`,
@@ -84,14 +84,14 @@ describe(`Data Reducer`, () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
 
-  it(`Reducer should update MovieCard by load`, () => {
+  it(`Reducer should update PromoMovie by load`, () => {
     expect(reducer({
-      movieCard: {},
+      promoMovie: {},
     }, {
-      type: ActionType.LOAD_ACTIVE_MOVIE,
+      type: ActionType.LOAD_PROMO_MOVIE,
       payload: testMovie,
     })).toEqual({
-      movieCard: testMovie,
+      promoMovie: testMovie,
     });
   });
 
@@ -122,7 +122,7 @@ describe(`Operations work correctly`, () => {
   it(`Should make a correct API call to /films/promo`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const activeMovieLoad = Operations.loadActiveMovie();
+    const activeMovieLoad = Operation.loadPromoMovie();
 
     apiMock
       .onGet(`/films/promo`)
@@ -132,7 +132,7 @@ describe(`Operations work correctly`, () => {
           .then(() => {
             expect(dispatch).toHaveBeenCalledTimes(1);
             expect(dispatch).toHaveBeenCalledWith({
-              type: ActionType.LOAD_ACTIVE_MOVIE,
+              type: ActionType.LOAD_PROMO_MOVIE,
               payload: createMovie({fake: true}),
             });
           });
@@ -141,7 +141,7 @@ describe(`Operations work correctly`, () => {
   it(`Should make a correct API call to /films`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const moviesLoad = Operations.loadMovies();
+    const moviesLoad = Operation.loadMovies();
 
     apiMock
       .onGet(`/films`)
@@ -160,7 +160,7 @@ describe(`Operations work correctly`, () => {
   it(`Should make a correct API call to /comments/1`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const reviewsLoad = Operations.loadReviews(1);
+    const reviewsLoad = Operation.loadReviews(1);
 
     apiMock
       .onGet(`/comments/1`)

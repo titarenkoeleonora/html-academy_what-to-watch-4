@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import SmallMovieCard from './small-movie-card';
 
 const testMovie = {
-  id: `0`,
+  id: 0,
   title: `movie title`,
   poster: `image`,
   src: ``,
