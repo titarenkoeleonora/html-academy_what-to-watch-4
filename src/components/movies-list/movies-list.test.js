@@ -4,49 +4,19 @@ import MoviesList from "./movies-list";
 
 const testMovies = [
   {
-    id: `0`,
+    id: 0,
     title: `movie title`,
     poster: `image`,
     src: ``,
   },
   {
-    id: `1`,
+    id: 1,
     title: `movie title`,
     poster: `image`,
     src: ``,
   },
   {
-    id: `2`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-  },
-  {
-    id: `3`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-  },
-  {
-    id: `4`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-  },
-  {
-    id: `5`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-  },
-  {
-    id: `6`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-  },
-  {
-    id: `7`,
+    id: 2,
     title: `movie title`,
     poster: `image`,
     src: ``,

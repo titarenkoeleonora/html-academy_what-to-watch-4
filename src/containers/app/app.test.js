@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import App from "./app.jsx";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
-import {MAX_SHOWN_MOVIES} from "../../constants.js";
+import NameSpace from "../../reducer/name-space.js";
 
 const mockStore = configureStore([]);
 
@@ -14,91 +14,49 @@ const testMovie = {
   poster: `image`,
   bgImage: `bgImage`,
   src: ``,
+  starring: [],
 };
 
 const testMovies = [
   {
-    id: `0`,
+    id: 0,
     title: `movie title`,
     poster: `image`,
     src: ``,
-    genre: `genre`
+    genre: `genre`,
+    starring: [],
   },
   {
-    id: `1`,
+    id: 1,
     title: `movie title`,
     poster: `image`,
     src: ``,
-    genre: `genre`
+    genre: `genre`,
+    starring: [],
   },
   {
-    id: `2`,
+    id: 2,
     title: `movie title`,
     poster: `image`,
     src: ``,
-    genre: `genre`
-  },
-  {
-    id: `3`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-    genre: `genre`
-  },
-  {
-    id: `4`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-    genre: `genre`
-  },
-  {
-    id: `5`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-    genre: `genre`
-  },
-  {
-    id: `6`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-    genre: `genre`
-  },
-  {
-    id: `7`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-    genre: `genre`
+    genre: `genre`,
+    starring: [],
   }
-];
-
-const testReviews = [
-  {
-    id: `1`,
-    author: `Kate Muir`,
-    date: `December 24, 2016`,
-    rating: `8.9`,
-    text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years`,
-  },
-  {
-    id: `2`,
-    author: `Bill Goodykoontz`,
-    date: `November 18, 2015`,
-    rating: `8.0`,
-    text: `Anderson's films are too precious for some, but for those of us willing to lose ourselves in them, they're a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.`,
-  },
 ];
 
 it(`Render App`, () => {
   const store = mockStore({
-    activeGenre: `All genres`,
-    movies: testMovies,
-    shownMoviesCount: MAX_SHOWN_MOVIES,
-    activeMovie: testMovie,
-    isMovieVideoplayerActive: false,
+
+    [NameSpace.DATA]: {
+      promoMovie: testMovie,
+      movies: testMovies,
+      isError: false,
+    },
+    [NameSpace.APP_STATE]: {
+      activeGenre: `All genres`,
+      activeMovie: testMovie,
+      isMovieVideoplayerActive: false,
+    },
   });
 
   const tree = renderer
@@ -108,7 +66,6 @@ it(`Render App`, () => {
             movie={testMovie}
             activeMovie={testMovie}
             movies={testMovies}
-            reviews={testReviews}
           />
         </Provider>
     ).toJSON();

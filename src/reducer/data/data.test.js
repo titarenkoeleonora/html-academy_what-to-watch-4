@@ -102,7 +102,7 @@ describe(`Data Reducer`, () => {
       type: ActionType.LOAD_MOVIES,
       payload: testMovies,
     })).toEqual({
-      testMovies,
+      movies: testMovies,
     });
   });
 

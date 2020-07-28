@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import Main from "./main.jsx";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
-import {MAX_SHOWN_MOVIES} from "../../constants.js";
+import NameSpace from "../../reducer/name-space.js";
 
 const mockStore = configureStore([]);
 
@@ -74,18 +74,23 @@ const mock = {
 
 it(`Main correctly render`, () => {
   const store = mockStore({
-    activeGenre: `All genres`,
-    movies: testMovies,
-    shownMoviesCount: MAX_SHOWN_MOVIES,
-    activeMovie: testMovie,
-    isMovieVideoplayerActive: false,
+    [NameSpace.DATA]: {
+      promoMovie: testMovie,
+      movies: testMovies,
+      isError: false,
+    },
+    [NameSpace.APP_STATE]: {
+      activeGenre: `All genres`,
+      activeMovie: testMovie,
+      isMovieVideoplayerActive: false,
+    },
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
           <Main
-            movie={testMovie}
+            promoMovie={testMovie}
             activeMovie={testMovie}
             movies={testMovies}
             activeGenre={mock.activeGenre}

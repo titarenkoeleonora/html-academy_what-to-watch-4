@@ -31,7 +31,7 @@ MovieOverview.propTypes = {
     date: PropTypes.number.isRequired,
     poster: PropTypes.string.isRequired,
     bgImage: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
+    rating: PropTypes.number,
     votes: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string.isRequired),

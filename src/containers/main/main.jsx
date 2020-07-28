@@ -9,6 +9,7 @@ import PageHeader from "../../components/page-header/page-header.jsx";
 import {ActionCreator} from "../../reducer/actions/action-creator.js";
 import {getMovies, getGenresList} from "../../reducer/data/selectors.js";
 import {getActiveGenre, getShownMoviesCount} from "../../reducer/app-state/selectors.js";
+import {MovieCardButtons} from "../../components/movie-card-buttons/movie-card-buttons.jsx";
 
 const Main = (props) => {
   const {
@@ -20,7 +21,7 @@ const Main = (props) => {
     onGenreTabClick,
     onMovieCardClick,
     onShowMoreButtonClick,
-    onPlayButtonClick
+    onPlayButtonClick,
   } = props;
 
   const shownMovies = movies.slice(0, shownMoviesCount);
@@ -49,22 +50,7 @@ const Main = (props) => {
                 <span className="movie-card__year">{promoMovie.date}</span>
               </p>
 
-              <div className="movie-card__buttons">
-                <button onClick={onPlayButtonClick}
-                  className="btn btn--play movie-card__button"
-                  type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
-              </div>
+              <MovieCardButtons onPlayButtonClick={onPlayButtonClick}/>
             </div>
           </div>
         </div>
@@ -98,15 +84,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  promoMovie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    date: PropTypes.number.isRequired,
-    poster: PropTypes.string.isRequired,
-    bgImage: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string.isRequired,
-  }).isRequired,
+  promoMovie: PropTypes.object.isRequired,
   movies: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,

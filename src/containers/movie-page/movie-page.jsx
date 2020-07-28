@@ -8,6 +8,7 @@ import PageFooter from "../../components/page-footer/page-footer.jsx";
 import RelatedMovies from "../../components/related-movies/related-movies.jsx";
 import {ActionCreator} from "../../reducer/actions/action-creator.js";
 import {getRelatedMovies, getReviews} from "../../reducer/data/selectors.js";
+import {MovieCardButtons} from "../../components/movie-card-buttons/movie-card-buttons.jsx";
 
 const TabsWrapped = withActiveTab(Tabs);
 
@@ -38,23 +39,7 @@ const MoviePage = ({
                   <span className="movie-card__year">{activeMovie.date}</span>
                 </p>
 
-                <div className="movie-card__buttons">
-                  <button onClick={onPlayButtonClick}
-                    className="btn btn--play movie-card__button"
-                    type="button">
-                    <svg viewBox="0 0 19 19" width="19" height="19">
-                      <use xlinkHref="#play-s" />
-                    </svg>
-                    <span>Play</span>
-                  </button>
-                  <button className="btn btn--list movie-card__button" type="button">
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add" />
-                    </svg>
-                    <span>My list</span>
-                  </button>
-                  <a href="add-review.html" className="btn movie-card__button">Add review</a>
-                </div>
+                <MovieCardButtons onPlayButtonClick={onPlayButtonClick}/>
               </div>
             </div>
           </div>
@@ -104,7 +89,7 @@ MoviePage.propTypes = {
         text: PropTypes.string.isRequired,
         id: PropTypes.string.isRequired,
       }).isRequired
-  ).isRequired,
+  ),
   onMovieCardClick: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
 };

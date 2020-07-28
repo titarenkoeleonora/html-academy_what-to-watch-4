@@ -102,6 +102,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onPlayButtonClick() {
     dispatch(ActionCreator.activateMovieVideoplayer(true));
+    console.log(`nn`);
   },
   onExitButtonClick() {
     dispatch(ActionCreator.activateMovieVideoplayer(false));

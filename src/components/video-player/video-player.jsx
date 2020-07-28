@@ -58,7 +58,7 @@ VideoPlayer.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   muted: PropTypes.bool.isRequired,
   movie: PropTypes.shape({
-    previewImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired
+    previewImage: PropTypes.string,
+    previewVideoLink: PropTypes.string
   }).isRequired,
 };

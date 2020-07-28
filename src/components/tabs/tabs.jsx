@@ -63,12 +63,12 @@ Tabs.propTypes = {
   reviews: PropTypes.arrayOf(
       PropTypes.shape({
         author: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
         date: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
         id: PropTypes.number.isRequired,
       }).isRequired
-  ).isRequired,
+  ),
   onTabClick: PropTypes.func.isRequired,
 };
 

@@ -4,7 +4,7 @@ import {MovieTabs} from "../../constants";
 import Tabs from "./tabs";
 
 const testMovie = {
-  id: `The Grand Budapest Hotel0`,
+  id: 0,
   title: `The Grand Budapest Hotel`,
   genre: `Drama`,
   date: 2014,
@@ -21,14 +21,14 @@ const testMovie = {
 
 const testReviews = [
   {
-    id: `1`,
+    id: 1,
     author: `Kate Muir`,
     date: `December 24, 2016`,
     rating: 8.9,
     text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years`,
   },
   {
-    id: `2`,
+    id: 2,
     author: `Bill Goodykoontz`,
     date: `November 18, 2015`,
     rating: 8.9,
