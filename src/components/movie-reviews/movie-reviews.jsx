@@ -23,7 +23,6 @@ const MovieReviews = ({reviews}) => {
 
   const renderReviews = (reviewColumn) => reviewColumn.map(createReviewMarkup);
 
-  console.log(reviews);
   return (
     <div className="movie-card__reviews movie-card__row">
       <div className="movie-card__reviews-col">

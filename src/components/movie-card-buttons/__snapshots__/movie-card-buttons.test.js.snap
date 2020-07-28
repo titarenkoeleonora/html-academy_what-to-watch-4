@@ -6,7 +6,7 @@ exports[`Correctly render 1`] = `
 >
   <button
     className="btn btn--play movie-card__button"
-    onClick={[MockFunction]}
+    onClick={[Function]}
     type="button"
   >
     <svg

@@ -25,7 +25,7 @@ const GenresList = ({genres, activeGenre, onGenreTabClick}) => {
 };
 
 GenresList.propTypes = {
-  genres: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  genres: PropTypes.array,
   activeGenre: PropTypes.string.isRequired,
   onGenreTabClick: PropTypes.func.isRequired,
 };

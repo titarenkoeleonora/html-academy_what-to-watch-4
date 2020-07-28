@@ -92,7 +92,7 @@ MoviePage.propTypes = {
       }).isRequired
   ),
   onMovieCardClick: PropTypes.func.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

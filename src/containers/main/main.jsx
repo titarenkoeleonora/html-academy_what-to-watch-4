@@ -94,11 +94,11 @@ Main.propTypes = {
   ).isRequired,
   activeGenre: PropTypes.string.isRequired,
   genresList: PropTypes.array.isRequired,
-  shownMoviesCount: PropTypes.number.isRequired,
+  shownMoviesCount: PropTypes.number,
   onGenreTabClick: PropTypes.func.isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {

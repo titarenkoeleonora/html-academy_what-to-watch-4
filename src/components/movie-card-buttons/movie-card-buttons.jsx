@@ -24,5 +24,5 @@ export const MovieCardButtons = ({onPlayButtonClick}) => {
 };
 
 MovieCardButtons.propTypes = {
-  onPlayButtonClick: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func,
 };
