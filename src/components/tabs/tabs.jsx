@@ -62,10 +62,10 @@ Tabs.propTypes = {
   activeTab: PropTypes.string.isRequired,
   reviews: PropTypes.arrayOf(
       PropTypes.shape({
-        author: PropTypes.string.isRequired,
+        user: PropTypes.object.isRequired,
         rating: PropTypes.number.isRequired,
         date: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
+        comment: PropTypes.string.isRequired,
         id: PropTypes.number.isRequired,
       }).isRequired
   ),

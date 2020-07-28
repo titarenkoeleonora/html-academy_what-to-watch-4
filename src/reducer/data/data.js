@@ -91,7 +91,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.LOAD_REVIEWS:
       return extend(state, {
-        movieReviews: action.payload,
+        reviews: action.payload,
       });
     case ActionType.CATCH_ERROR:
       return extend(state, {

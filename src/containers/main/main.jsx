@@ -10,6 +10,7 @@ import {ActionCreator} from "../../reducer/actions/action-creator.js";
 import {getMovies, getGenresList} from "../../reducer/data/selectors.js";
 import {getActiveGenre, getShownMoviesCount} from "../../reducer/app-state/selectors.js";
 import {MovieCardButtons} from "../../components/movie-card-buttons/movie-card-buttons.jsx";
+import {Operation} from "../../reducer/data/data.js";
 
 const Main = (props) => {
   const {
@@ -117,6 +118,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.showMoreMovies());
   },
   onMovieCardClick(activeMovie) {
+    dispatch(Operation.loadReviews(activeMovie.id));
     dispatch(ActionCreator.getActiveMovie(activeMovie));
   },
 });

@@ -9,6 +9,7 @@ import RelatedMovies from "../../components/related-movies/related-movies.jsx";
 import {ActionCreator} from "../../reducer/actions/action-creator.js";
 import {getRelatedMovies, getReviews} from "../../reducer/data/selectors.js";
 import {MovieCardButtons} from "../../components/movie-card-buttons/movie-card-buttons.jsx";
+import {Operation} from "../../reducer/data/data.js";
 
 const TabsWrapped = withActiveTab(Tabs);
 
@@ -83,11 +84,11 @@ MoviePage.propTypes = {
   ).isRequired,
   reviews: PropTypes.arrayOf(
       PropTypes.shape({
-        author: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
+        user: PropTypes.object.isRequired,
+        rating: PropTypes.number.isRequired,
         date: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
+        comment: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
       }).isRequired
   ),
   onMovieCardClick: PropTypes.func.isRequired,
@@ -101,6 +102,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onMovieCardClick(activeMovie) {
+    dispatch(Operation.loadReviews(activeMovie.id));
     dispatch(ActionCreator.getActiveMovie(activeMovie));
   }
 });
