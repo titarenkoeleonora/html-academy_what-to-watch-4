@@ -1,8 +1,8 @@
-const ActionType = {
+const AppStateActionType = {
   ACTIVE_GENRE: `ACTIVE_GENRE`,
   SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
   ACTIVE_MOVIE: `ACTIVE_MOVIE`,
   ACTIVATE_MOVIE_VIDEOPLAYER: `ACTIVATE_MOVIE_VIDEOPLAYER`,
 };
 
-export {ActionType};
+export {AppStateActionType};

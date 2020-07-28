@@ -1,25 +1,25 @@
-import {ActionType} from "./action-types";
 import {MAX_SHOWN_MOVIES} from "../../constants";
+import {AppStateActionType} from "./app-state-action-types";
 
-const ActionCreator = {
+const AppStateActionCreator = {
   getActiveGenre: (genre) => ({
-    type: ActionType.ACTIVE_GENRE,
+    type: AppStateActionType.ACTIVE_GENRE,
     payload: genre,
   }),
 
   showMoreMovies: () => ({
-    type: ActionType.SHOW_MORE_MOVIES,
+    type: AppStateActionType.SHOW_MORE_MOVIES,
     payload: MAX_SHOWN_MOVIES,
   }),
 
   getActiveMovie: (activeMovie) => ({
-    type: ActionType.ACTIVE_MOVIE,
+    type: AppStateActionType.ACTIVE_MOVIE,
     payload: activeMovie,
   }),
   activateMovieVideoplayer: (state) => ({
-    type: ActionType.ACTIVATE_MOVIE_VIDEOPLAYER,
+    type: AppStateActionType.ACTIVATE_MOVIE_VIDEOPLAYER,
     payload: state,
   })
 };
 
-export {ActionCreator};
+export {AppStateActionCreator};

@@ -10,7 +10,7 @@ import withFullScreenVideoplayer from "../../hocs/with-full-screen-videoplayer/w
 import {getIsError, getPromoMovie} from "../../reducer/data/selectors";
 import {getIsMovieVideoplayerActive, getActiveMovie} from "../../reducer/app-state/selectors";
 import ErrorScreen from "../../components/error-screen/error-screen";
-import {ActionCreator} from "../../reducer/actions/action-creator";
+import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator";
 
 const MovieVideoplayerWrapped = withFullScreenVideoplayer(MovieVideoplayer);
 
@@ -108,10 +108,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onPlayButtonClick() {
-    dispatch(ActionCreator.activateMovieVideoplayer(true));
+    dispatch(AppStateActionCreator.activateMovieVideoplayer(true));
   },
   onExitButtonClick() {
-    dispatch(ActionCreator.activateMovieVideoplayer(false));
+    dispatch(AppStateActionCreator.activateMovieVideoplayer(false));
   }
 });
 

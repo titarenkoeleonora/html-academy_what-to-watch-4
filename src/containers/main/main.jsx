@@ -6,11 +6,11 @@ import GenresList from "../../components/genres-list/genres-list.jsx";
 import ShowMoreButton from "../../components/show-more-button/show-more-button.jsx";
 import PageFooter from "../../components/page-footer/page-footer.jsx";
 import PageHeader from "../../components/page-header/page-header.jsx";
-import {ActionCreator} from "../../reducer/actions/action-creator.js";
 import {getMovies, getGenresList} from "../../reducer/data/selectors.js";
 import {getActiveGenre, getShownMoviesCount} from "../../reducer/app-state/selectors.js";
 import {MovieCardButtons} from "../../components/movie-card-buttons/movie-card-buttons.jsx";
 import {Operation} from "../../reducer/data/data.js";
+import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator.js";
 
 const Main = (props) => {
   const {
@@ -112,14 +112,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreTabClick(genre) {
-    dispatch(ActionCreator.getActiveGenre(genre));
+    dispatch(AppStateActionCreator.getActiveGenre(genre));
   },
   onShowMoreButtonClick() {
-    dispatch(ActionCreator.showMoreMovies());
+    dispatch(AppStateActionCreator.showMoreMovies());
   },
   onMovieCardClick(activeMovie) {
     dispatch(Operation.loadReviews(activeMovie.id));
-    dispatch(ActionCreator.getActiveMovie(activeMovie));
+    dispatch(AppStateActionCreator.getActiveMovie(activeMovie));
   },
 });
 

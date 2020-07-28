@@ -6,10 +6,10 @@ import Tabs from "../../components/tabs/tabs.jsx";
 import PageHeader from "../../components/page-header/page-header.jsx";
 import PageFooter from "../../components/page-footer/page-footer.jsx";
 import RelatedMovies from "../../components/related-movies/related-movies.jsx";
-import {ActionCreator} from "../../reducer/actions/action-creator.js";
 import {getRelatedMovies, getReviews} from "../../reducer/data/selectors.js";
 import {MovieCardButtons} from "../../components/movie-card-buttons/movie-card-buttons.jsx";
 import {Operation} from "../../reducer/data/data.js";
+import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator.js";
 
 const TabsWrapped = withActiveTab(Tabs);
 
@@ -103,7 +103,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onMovieCardClick(activeMovie) {
     dispatch(Operation.loadReviews(activeMovie.id));
-    dispatch(ActionCreator.getActiveMovie(activeMovie));
+    dispatch(AppStateActionCreator.getActiveMovie(activeMovie));
   }
 });
 

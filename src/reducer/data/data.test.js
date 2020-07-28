@@ -1,7 +1,8 @@
 import MockAdapter from 'axios-mock-adapter';
-import {initialState, ActionType, reducer, Operation} from './data';
+import {initialState, reducer, Operation} from './data';
 import {createAPI} from '../../api';
 import {createMovie} from '../../adapter/movies';
+import {DataActionType} from '../actions/data-action-types';
 
 const testMovie = {
   title: `The Grand Budapest Hotel`,
@@ -85,7 +86,7 @@ describe(`Data Reducer`, () => {
     expect(reducer({
       promoMovie: {},
     }, {
-      type: ActionType.LOAD_PROMO_MOVIE,
+      type: DataActionType.LOAD_PROMO_MOVIE,
       payload: testMovie,
     })).toEqual({
       promoMovie: testMovie,
@@ -96,7 +97,7 @@ describe(`Data Reducer`, () => {
     expect(reducer({
       movies: [],
     }, {
-      type: ActionType.LOAD_MOVIES,
+      type: DataActionType.LOAD_MOVIES,
       payload: testMovies,
     })).toEqual({
       movies: testMovies,
@@ -107,7 +108,7 @@ describe(`Data Reducer`, () => {
     expect(reducer({
       reviews: [],
     }, {
-      type: ActionType.LOAD_REVIEWS,
+      type: DataActionType.LOAD_REVIEWS,
       payload: testReviews,
     })).toEqual({
       reviews: testReviews,
@@ -129,7 +130,7 @@ describe(`Operations work correctly`, () => {
           .then(() => {
             expect(dispatch).toHaveBeenCalledTimes(1);
             expect(dispatch).toHaveBeenCalledWith({
-              type: ActionType.LOAD_PROMO_MOVIE,
+              type: DataActionType.LOAD_PROMO_MOVIE,
               payload: createMovie({fake: true}),
             });
           });
@@ -148,7 +149,7 @@ describe(`Operations work correctly`, () => {
           .then(() => {
             expect(dispatch).toHaveBeenCalledTimes(1);
             expect(dispatch).toHaveBeenCalledWith({
-              type: ActionType.LOAD_MOVIES,
+              type: DataActionType.LOAD_MOVIES,
               payload: [createMovie({fake: true})],
             });
           });
@@ -167,7 +168,7 @@ describe(`Operations work correctly`, () => {
           .then(() => {
             expect(dispatch).toHaveBeenCalledTimes(1);
             expect(dispatch).toHaveBeenCalledWith({
-              type: ActionType.LOAD_REVIEWS,
+              type: DataActionType.LOAD_REVIEWS,
               payload: [{fake: true}],
             });
           });

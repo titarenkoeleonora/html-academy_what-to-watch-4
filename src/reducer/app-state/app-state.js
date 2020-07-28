@@ -1,6 +1,6 @@
 import {MAX_SHOWN_MOVIES} from "../../constants";
-import {ActionType} from "../actions/action-types";
 import {extend} from "../../utils";
+import {AppStateActionType} from "../actions/app-state-action-types";
 
 const initialState = {
   activeGenre: `All genres`,
@@ -11,19 +11,19 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.ACTIVE_GENRE:
+    case AppStateActionType.ACTIVE_GENRE:
       return extend(state, {
         activeGenre: action.payload,
       });
-    case ActionType.SHOW_MORE_MOVIES:
+    case AppStateActionType.SHOW_MORE_MOVIES:
       return extend(state, {
         shownMoviesCount: state.shownMoviesCount + action.payload,
       });
-    case ActionType.ACTIVE_MOVIE:
+    case AppStateActionType.ACTIVE_MOVIE:
       return extend(state, {
         activeMovie: action.payload,
       });
-    case ActionType.ACTIVATE_MOVIE_VIDEOPLAYER:
+    case AppStateActionType.ACTIVATE_MOVIE_VIDEOPLAYER:
       return extend(state, {
         isMovieVideoplayerActive: action.payload,
       });
