@@ -31,7 +31,15 @@ class App extends PureComponent {
   }
 
   _renderMoviePage() {
-    const {activeMovie, onPlayButtonClick} = this.props;
+    const {activeMovie, promoMovie, onExitButtonClick, onPlayButtonClick, isMovieVideoplayerActive} = this.props;
+    if (isMovieVideoplayerActive) {
+      return (
+        <MovieVideoplayerWrapped
+          activeMovie={activeMovie ? activeMovie : promoMovie}
+          onExitButtonClick={onExitButtonClick}
+        />
+      );
+    }
 
     return (
       <MoviePage
@@ -49,7 +57,6 @@ class App extends PureComponent {
     }
 
     if (isMovieVideoplayerActive) {
-
       return (
         <MovieVideoplayerWrapped
           activeMovie={activeMovie ? activeMovie : promoMovie}
@@ -102,7 +109,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onPlayButtonClick() {
     dispatch(ActionCreator.activateMovieVideoplayer(true));
-    console.log(`nn`);
   },
   onExitButtonClick() {
     dispatch(ActionCreator.activateMovieVideoplayer(false));
