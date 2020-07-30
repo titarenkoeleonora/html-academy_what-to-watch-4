@@ -49,14 +49,17 @@ const reducer = (state = initialState, action) => {
     case DataActionType.LOAD_PROMO_MOVIE:
       return extend(state, {
         promoMovie: action.payload,
+        isError: null,
       });
     case DataActionType.LOAD_MOVIES:
       return extend(state, {
         movies: action.payload,
+        isError: null,
       });
     case DataActionType.LOAD_REVIEWS:
       return extend(state, {
         reviews: action.payload,
+        isError: null,
       });
     case DataActionType.CATCH_ERROR:
       return extend(state, {
