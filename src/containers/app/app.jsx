@@ -11,6 +11,9 @@ import {getIsError, getPromoMovie} from "../../reducer/data/selectors";
 import {getIsMovieVideoplayerActive, getActiveMovie} from "../../reducer/app-state/selectors";
 import ErrorScreen from "../../components/error-screen/error-screen";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator";
+import {getAuthorizationStatus, getIsAuthorizing} from "../../reducer/user/selectors";
+import {Operation as UserOperation, AuthorizationStatus} from "../../reducer/user/user";
+import SignIn from "../../components/sign-in/sign-in";
 
 const MovieVideoplayerWrapped = withFullScreenVideoplayer(MovieVideoplayer);
 
@@ -49,8 +52,17 @@ class App extends PureComponent {
     );
   }
 
+  _renderSignIn() {
+    const {login} = this.props;
+    return (
+      <SignIn
+        onSubmit={login}
+      />
+    );
+  }
+
   _renderApp() {
-    const {activeMovie, promoMovie, isMovieVideoplayerActive, onExitButtonClick, isError} = this.props;
+    const {activeMovie, promoMovie, isMovieVideoplayerActive, isAuthorizing, authorizationStatus, onPlayButtonClick, onExitButtonClick, isError} = this.props;
 
     if (activeMovie) {
       return this._renderMoviePage();
@@ -63,6 +75,19 @@ class App extends PureComponent {
           onExitButtonClick={onExitButtonClick}
         />
       );
+    }
+
+    if (authorizationStatus === AuthorizationStatus.AUTH) {
+      return (
+        <Main
+          promoMovie={promoMovie}
+          onPlayButtonClick={onPlayButtonClick}
+        />
+      );
+    }
+
+    if (isAuthorizing) {
+      return this._renderSignIn();
     }
 
     if (isError) {
@@ -84,6 +109,9 @@ class App extends PureComponent {
           <Route exact path="/movie-page">
             {this._renderMoviePage()}
           </Route>
+          <Route exact path="/dev-auth">
+            {this._renderSignIn()}
+          </Route>
         </Switch>
       </BrowserRouter>
     );
@@ -93,8 +121,11 @@ class App extends PureComponent {
 App.propTypes = {
   activeMovie: PropTypes.object,
   promoMovie: PropTypes.object.isRequired,
-  isError: PropTypes.bool.isRequired,
+  isError: PropTypes.bool,
   isMovieVideoplayerActive: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  login: PropTypes.func.isRequired,
+  isAuthorizing: PropTypes.bool.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
   onExitButtonClick: PropTypes.func.isRequired,
 };
@@ -104,6 +135,8 @@ const mapStateToProps = (state) => ({
   activeMovie: getActiveMovie(state),
   isMovieVideoplayerActive: getIsMovieVideoplayerActive(state),
   isError: getIsError(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  isAuthorizing: getIsAuthorizing(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -112,7 +145,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onExitButtonClick() {
     dispatch(AppStateActionCreator.activateMovieVideoplayer(false));
-  }
+  },
+  login(authData) {
+    dispatch(UserOperation.login(authData));
+  },
 });
 
 export {App};

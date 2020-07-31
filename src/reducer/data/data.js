@@ -39,7 +39,7 @@ const Operation = {
         dispatch(DataActionCreator.loadReviews(response.data));
       })
       .catch(() => {
-        dispatch(DataActionCreator.catchError(true));
+        dispatch(DataActionCreator.catchError());
       });
   },
 };
