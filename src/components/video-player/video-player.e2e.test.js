@@ -4,8 +4,8 @@ import Adapter from "enzyme-adapter-react-16";
 import VideoPlayer from "./video-player.jsx";
 
 const testData = {
-  src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-  poster: `poster`,
+  previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  previewImage: `poster`,
 };
 
 Enzyme.configure({

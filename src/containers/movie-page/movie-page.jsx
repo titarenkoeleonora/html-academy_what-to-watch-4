@@ -1,21 +1,29 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/action-creator.js";
 import withActiveTab from "../../hocs/with-active-tab/with-active-tab.js";
 import Tabs from "../../components/tabs/tabs.jsx";
 import PageHeader from "../../components/page-header/page-header.jsx";
 import PageFooter from "../../components/page-footer/page-footer.jsx";
 import RelatedMovies from "../../components/related-movies/related-movies.jsx";
+import {getRelatedMovies, getReviews} from "../../reducer/data/selectors.js";
+import {MovieCardButtons} from "../../components/movie-card-buttons/movie-card-buttons.jsx";
+import {Operation} from "../../reducer/data/data.js";
+import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator.js";
 
 const TabsWrapped = withActiveTab(Tabs);
 
-const MoviePage = ({activeMovie, movies, onMovieCardClick, reviews}) => {
+const MoviePage = ({
+  activeMovie,
+  movies,
+  onMovieCardClick,
+  onPlayButtonClick,
+  reviews}) => {
 
   return (
       <>
-        <section className="movie-card movie-card--full">
-          <div className="movie-card__hero">
+        <section className="movie-card movie-card--full" style={{background: activeMovie.backgroundColor}}>
+          <div className="movie-card__hero" >
             <div className="movie-card__bg">
               <img src={activeMovie.bgImage} alt="The Grand Budapest Hotel" />
             </div>
@@ -32,21 +40,7 @@ const MoviePage = ({activeMovie, movies, onMovieCardClick, reviews}) => {
                   <span className="movie-card__year">{activeMovie.date}</span>
                 </p>
 
-                <div className="movie-card__buttons">
-                  <button className="btn btn--play movie-card__button" type="button">
-                    <svg viewBox="0 0 19 19" width="19" height="19">
-                      <use xlinkHref="#play-s" />
-                    </svg>
-                    <span>Play</span>
-                  </button>
-                  <button className="btn btn--list movie-card__button" type="button">
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add" />
-                    </svg>
-                    <span>My list</span>
-                  </button>
-                  <a href="add-review.html" className="btn movie-card__button">Add review</a>
-                </div>
+                <MovieCardButtons onPlayButtonClick={onPlayButtonClick}/>
               </div>
             </div>
           </div>
@@ -70,7 +64,7 @@ const MoviePage = ({activeMovie, movies, onMovieCardClick, reviews}) => {
             <h2 className="catalog__title">More like this</h2>
             <RelatedMovies
               currentMovie={activeMovie}
-              movies={movies}
+              relatedMovies={movies}
               onMovieCardClick={onMovieCardClick}
             />
           </section>
@@ -81,13 +75,7 @@ const MoviePage = ({activeMovie, movies, onMovieCardClick, reviews}) => {
 };
 
 MoviePage.propTypes = {
-  activeMovie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    date: PropTypes.number.isRequired,
-    poster: PropTypes.string.isRequired,
-    bgImage: PropTypes.string.isRequired,
-  }).isRequired,
+  activeMovie: PropTypes.object.isRequired,
   movies: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
@@ -96,21 +84,26 @@ MoviePage.propTypes = {
   ).isRequired,
   reviews: PropTypes.arrayOf(
       PropTypes.shape({
-        author: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
+        user: PropTypes.object.isRequired,
+        rating: PropTypes.number.isRequired,
         date: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
+        comment: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
       }).isRequired
-  ).isRequired,
+  ),
   onMovieCardClick: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func,
 };
 
-const mapStateToProps = ({activeMovie}) => ({activeMovie});
+const mapStateToProps = (state) => ({
+  movies: getRelatedMovies(state),
+  reviews: getReviews(state),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onMovieCardClick(activeMovie) {
-    dispatch(ActionCreator.getActiveMovie(activeMovie));
+    dispatch(Operation.loadReviews(activeMovie.id));
+    dispatch(AppStateActionCreator.getActiveMovie(activeMovie));
   }
 });
 

@@ -1,35 +1,37 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {getGenresList, fiterMoviesByGenre} from "../../utils.js";
-import {moviesMock} from "../../mocks/movies.js";
 import MoviesList from "../../components/movies-list/movies-list.jsx";
 import GenresList from "../../components/genres-list/genres-list.jsx";
 import ShowMoreButton from "../../components/show-more-button/show-more-button.jsx";
 import PageFooter from "../../components/page-footer/page-footer.jsx";
-import {ActionCreator} from "../../reducer/action-creator.js";
 import PageHeader from "../../components/page-header/page-header.jsx";
-
-const genresList = getGenresList(moviesMock);
+import {getMovies, getGenresList} from "../../reducer/data/selectors.js";
+import {getActiveGenre, getShownMoviesCount} from "../../reducer/app-state/selectors.js";
+import {MovieCardButtons} from "../../components/movie-card-buttons/movie-card-buttons.jsx";
+import {Operation} from "../../reducer/data/data.js";
+import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator.js";
 
 const Main = (props) => {
   const {
-    movie,
+    promoMovie,
     movies,
     activeGenre,
+    genresList,
     shownMoviesCount,
     onGenreTabClick,
     onMovieCardClick,
     onShowMoreButtonClick,
-    onPlayButtonClick
+    onPlayButtonClick,
   } = props;
+
   const shownMovies = movies.slice(0, shownMoviesCount);
 
   return (
     <>
       <section className="movie-card">
-        <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={movie.title} />
+        <div className="movie-card__bg" style={{background: promoMovie.backgroundColor}}>
+          <img src={promoMovie.bgImage} alt={promoMovie.title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -39,32 +41,17 @@ const Main = (props) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt={movie.title} width="218" height="327" />
+              <img src={promoMovie.poster} alt={promoMovie.title} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{movie.title}</h2>
+              <h2 className="movie-card__title">{promoMovie.title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{movie.genre}</span>
-                <span className="movie-card__year">{movie.date}</span>
+                <span className="movie-card__genre">{promoMovie.genre}</span>
+                <span className="movie-card__year">{promoMovie.date}</span>
               </p>
 
-              <div className="movie-card__buttons">
-                <button onClick={onPlayButtonClick}
-                  className="btn btn--play movie-card__button"
-                  type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
-              </div>
+              <MovieCardButtons onPlayButtonClick={onPlayButtonClick}/>
             </div>
           </div>
         </div>
@@ -98,11 +85,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  movie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    date: PropTypes.number.isRequired,
-  }).isRequired,
+  promoMovie: PropTypes.object.isRequired,
   movies: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
@@ -110,30 +93,33 @@ Main.propTypes = {
       }).isRequired
   ).isRequired,
   activeGenre: PropTypes.string.isRequired,
-  shownMoviesCount: PropTypes.number.isRequired,
+  genresList: PropTypes.array.isRequired,
+  shownMoviesCount: PropTypes.number,
   onGenreTabClick: PropTypes.func.isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
   return {
-    activeGenre: state.activeGenre,
-    movies: fiterMoviesByGenre(state.activeGenre, state.movies),
-    shownMoviesCount: state.shownMoviesCount,
+    activeGenre: getActiveGenre(state),
+    movies: getMovies(state),
+    shownMoviesCount: getShownMoviesCount(state),
+    genresList: getGenresList(state)
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreTabClick(genre) {
-    dispatch(ActionCreator.getActiveGenre(genre));
+    dispatch(AppStateActionCreator.getActiveGenre(genre));
   },
   onShowMoreButtonClick() {
-    dispatch(ActionCreator.showMoreMovies());
+    dispatch(AppStateActionCreator.showMoreMovies());
   },
   onMovieCardClick(activeMovie) {
-    dispatch(ActionCreator.getActiveMovie(activeMovie));
+    dispatch(Operation.loadReviews(activeMovie.id));
+    dispatch(AppStateActionCreator.getActiveMovie(activeMovie));
   },
 });
 

@@ -13,8 +13,8 @@ export default class VideoPlayer extends PureComponent {
     const video = this._videoRef.current;
 
     if (video) {
-      video.src = movie.src;
-      video.image = movie.poster;
+      video.src = movie.previewVideoLink;
+      video.poster = movie.previewImage;
       video.muted = muted;
     }
   }
@@ -24,7 +24,7 @@ export default class VideoPlayer extends PureComponent {
 
     if (video) {
       video.src = ``;
-      video.image = ``;
+      video.poster = ``;
       video.muted = null;
     }
   }
@@ -47,8 +47,8 @@ export default class VideoPlayer extends PureComponent {
         width="280"
         height="175"
         ref={this._videoRef}
-        src={movie.src}
-        poster={movie.poster}
+        src={movie.previewVideoLink}
+        poster={movie.previewImage}
       />
     );
   }
@@ -58,7 +58,7 @@ VideoPlayer.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   muted: PropTypes.bool.isRequired,
   movie: PropTypes.shape({
-    poster: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired
+    previewImage: PropTypes.string,
+    previewVideoLink: PropTypes.string
   }).isRequired,
 };

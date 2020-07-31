@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import Main from "./main.jsx";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+import NameSpace from "../../reducer/name-space.js";
 import {MAX_SHOWN_MOVIES} from "../../constants.js";
 
 const mockStore = configureStore([]);
@@ -18,49 +19,19 @@ const testMovie = {
 
 const testMovies = [
   {
-    id: `0`,
+    id: 0,
     title: `movie title`,
     poster: `image`,
     src: ``,
   },
   {
-    id: `1`,
+    id: 1,
     title: `movie title`,
     poster: `image`,
     src: ``,
   },
   {
-    id: `2`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-  },
-  {
-    id: `3`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-  },
-  {
-    id: `4`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-  },
-  {
-    id: `5`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-  },
-  {
-    id: `6`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-  },
-  {
-    id: `7`,
+    id: 2,
     title: `movie title`,
     poster: `image`,
     src: ``,
@@ -74,21 +45,27 @@ const mock = {
 
 it(`Main correctly render`, () => {
   const store = mockStore({
-    activeGenre: `All genres`,
-    movies: testMovies,
-    shownMoviesCount: MAX_SHOWN_MOVIES,
-    activeMovie: testMovie,
-    isMovieVideoplayerActive: false,
+    [NameSpace.DATA]: {
+      promoMovie: testMovie,
+      movies: testMovies,
+      isError: false,
+    },
+    [NameSpace.APP_STATE]: {
+      activeGenre: `All genres`,
+      activeMovie: testMovie,
+      isMovieVideoplayerActive: false,
+    },
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
           <Main
-            movie={testMovie}
+            promoMovie={testMovie}
             activeMovie={testMovie}
             movies={testMovies}
             activeGenre={mock.activeGenre}
+            shownMoviesCount={MAX_SHOWN_MOVIES}
             onGenreTabClick={() => {}}
             onMovieCardClick={() => {}}
             onPlayButtonClick={() => {}}

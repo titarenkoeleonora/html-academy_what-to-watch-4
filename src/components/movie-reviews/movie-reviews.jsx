@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 const createReviewMarkup = (review) => (
   <div key={review.id} className="review">
     <blockquote className="review__quote">
-      <p className="review__text">{review.text}</p>
+      <p className="review__text">{review.comment}</p>
 
       <footer className="review__details">
-        <cite className="review__author">{review.author}</cite>
-        <time className="review__date" dateTime="2016-12-24">{review.date}</time>
+        <cite className="review__author">{review.user.name}</cite>
+        <time className="review__date" dateTime={review.date}>{review.date}</time>
       </footer>
     </blockquote>
 
@@ -38,13 +38,13 @@ const MovieReviews = ({reviews}) => {
 MovieReviews.propTypes = {
   reviews: PropTypes.arrayOf(
       PropTypes.shape({
-        author: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
+        user: PropTypes.object.isRequired,
+        rating: PropTypes.number.isRequired,
         date: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
+        comment: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
       }).isRequired
-  ).isRequired,
+  ),
 };
 
 export default MovieReviews;

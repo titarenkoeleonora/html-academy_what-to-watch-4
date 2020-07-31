@@ -9,12 +9,11 @@ const testMovie = {
   poster: `image`,
   bgImage: `bgImage`,
   src: ``,
-  rating: `8,9`,
-  ratingDescription: `Very good`,
+  rating: 8.9,
   votes: 240,
   director: `Wes Andreson`,
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Tom Wilkinson`, `Owen Wilkinson`, `Adrien Brody`, `Ralph Fiennes`, `Jeff Goldblum`],
-  runTime: `1h 39m`,
+  runTime: 99,
 };
 
 it(`Correctlt render`, () => {

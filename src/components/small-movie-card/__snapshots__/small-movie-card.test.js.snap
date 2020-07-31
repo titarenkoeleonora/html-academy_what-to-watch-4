@@ -12,8 +12,6 @@ exports[`Small movie card correctly render 1`] = `
   >
     <video
       height="175"
-      poster="image"
-      src=""
       width="280"
     />
   </div>

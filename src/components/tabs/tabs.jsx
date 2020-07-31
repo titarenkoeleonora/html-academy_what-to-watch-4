@@ -20,6 +20,7 @@ const renderMovieInfo = (activeMovie, reviews, activeTab) => {
 
 const Tabs = ({activeMovie, reviews, activeTab, onTabClick}) => {
   const navTabs = Object.values(MovieTabs);
+
   return (
     <div className="movie-card__desc">
       <nav className="movie-nav movie-card__nav">
@@ -61,13 +62,13 @@ Tabs.propTypes = {
   activeTab: PropTypes.string.isRequired,
   reviews: PropTypes.arrayOf(
       PropTypes.shape({
-        author: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
+        user: PropTypes.object.isRequired,
+        rating: PropTypes.number.isRequired,
         date: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
+        comment: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
       }).isRequired
-  ).isRequired,
+  ),
   onTabClick: PropTypes.func.isRequired,
 };
 

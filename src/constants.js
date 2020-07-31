@@ -1,10 +1,21 @@
-const Movie = {
-  title: `The Grand Budapest Hotel`,
-  genre: `Drama`,
-  date: 2014,
-  poster: `img/the-grand-budapest-hotel-poster.jpg`,
-  bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
-  src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+const emptyMovie = {
+  id: 0,
+  title: `Is loading...`,
+  poster: ``,
+  previewImage: ``,
+  bgImage: ``,
+  backgroundColor: ``,
+  src: ``,
+  previewVideoLink: ``,
+  description: ``,
+  rating: 0,
+  votes: 0,
+  director: ``,
+  starring: [],
+  runTime: 0,
+  genre: ``,
+  date: 0,
+  isFavorite: ``,
 };
 
 const MovieTabs = {
@@ -15,4 +26,6 @@ const MovieTabs = {
 
 const MAX_SHOWN_MOVIES = 8;
 
-export {Movie, MovieTabs, MAX_SHOWN_MOVIES};
+const API_TIMEOUT = 5000;
+
+export {emptyMovie, MovieTabs, MAX_SHOWN_MOVIES, API_TIMEOUT};
