@@ -38,7 +38,7 @@ const Operation = {
       .then((response) => {
         dispatch(UserActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(UserActionCreator.loadAuthorizationInfo(createUserInfo(response.data)));
-        dispatch(UserActionCreator.isNotAuthorizing());
+        dispatch(UserActionCreator.isAuthorizing(false));
       })
       .catch(() => {
         dispatch(UserActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
@@ -60,10 +60,6 @@ const reducer = (state = initialState, action) => {
     case UserActionType.IS_AUTHORIZING:
       return extend(state, {
         isAuthorizing: true,
-      });
-    case UserActionType.IS_NOT_AUTHORIZING:
-      return extend(state, {
-        isAuthorizing: false,
       });
   }
 

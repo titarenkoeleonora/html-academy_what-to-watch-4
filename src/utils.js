@@ -14,4 +14,28 @@ const getTimeElapsed = (duration) => {
   ].join(`:`);
 };
 
-export {extend, getTimeElapsed};
+const validateEmail = (evt) => {
+  const inputEmail = evt.target.value;
+  const pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
+
+  if (inputEmail === ``) {
+    evt.target.setCustomValidity(`Email is required`);
+    return;
+  }
+
+  if (!inputEmail.match(pattern)) {
+    evt.target.setCustomValidity(`Email must be in the format email@mail.com`);
+    return;
+  }
+};
+
+const validatePassword = (evt) => {
+  const inputPassword = evt.target.value;
+
+  if (inputPassword === ``) {
+    evt.target.setCustomValidity(`Password is required`);
+    return;
+  }
+};
+
+export {extend, getTimeElapsed, validateEmail, validatePassword};

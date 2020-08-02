@@ -15,12 +15,9 @@ const UserActionCreator = {
     };
   },
 
-  isAuthorizing: () => ({
+  isAuthorizing: (bool) => ({
     type: UserActionType.IS_AUTHORIZING,
-  }),
-
-  isNotAuthorizing: () => ({
-    type: UserActionType.IS_NOT_AUTHORIZING,
+    payload: bool,
   }),
 };
 
