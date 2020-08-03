@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
 import Main from "../main/main";
@@ -13,7 +13,12 @@ import ErrorScreen from "../../components/error-screen/error-screen";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator";
 import {getAuthorizationStatus, getIsAuthorizing} from "../../reducer/user/selectors";
 import {Operation as UserOperation, AuthorizationStatus} from "../../reducer/user/user";
+import {Operation as DataOperation} from "../../reducer/data/data";
 import SignIn from "../../components/sign-in/sign-in";
+import history from "../../history.js";
+import {AppRoute} from "../../constants";
+import {PrivateRoute} from "../../components/private-route/private-route";
+import {MyList} from "../my-list/my-list";
 
 const MovieVideoplayerWrapped = withFullScreenVideoplayer(MovieVideoplayer);
 
@@ -22,98 +27,138 @@ class App extends PureComponent {
     super(props);
   }
 
-  _renderMain() {
-    const {promoMovie, onPlayButtonClick} = this.props;
+  // _renderMain() {
+  //   const {promoMovie} = this.props;
 
-    return (
-      <Main
-        promoMovie={promoMovie}
-        onPlayButtonClick={onPlayButtonClick}
-      />
-    );
-  }
+  //   return (
+  //     <Main
+  //       promoMovie={promoMovie}
+  //     />
+  //   );
+  // }
 
-  _renderMoviePage() {
-    const {activeMovie, promoMovie, onExitButtonClick, onPlayButtonClick, isMovieVideoplayerActive} = this.props;
-    if (isMovieVideoplayerActive) {
-      return (
-        <MovieVideoplayerWrapped
-          activeMovie={activeMovie ? activeMovie : promoMovie}
-          onExitButtonClick={onExitButtonClick}
-        />
-      );
-    }
+  // _renderMoviePage() {
+  //   const {activeMovie, promoMovie, onExitButtonClick, isMovieVideoplayerActive} = this.props;
+  //   if (isMovieVideoplayerActive) {
+  //     return (
+  //       <MovieVideoplayerWrapped
+  //         activeMovie={activeMovie ? activeMovie : promoMovie}
+  //         onExitButtonClick={onExitButtonClick}
+  //       />
+  //     );
+  //   }
 
-    return (
-      <MoviePage
-        activeMovie={activeMovie}
-        onPlayButtonClick={onPlayButtonClick}
-      />
-    );
-  }
+  //   return (
+  //     <MoviePage
+  //       activeMovie={activeMovie}
+  //     />
+  //   );
+  // }
 
-  _renderSignIn() {
-    const {login} = this.props;
-    return (
-      <SignIn
-        onSubmit={login}
-      />
-    );
-  }
+  // _renderSignIn() {
+  //   const {login} = this.props;
 
-  _renderApp() {
-    const {activeMovie, promoMovie, isMovieVideoplayerActive, isAuthorizing, authorizationStatus, onPlayButtonClick, onExitButtonClick, isError} = this.props;
+  //   return (
+  //     <SignIn
+  //       onSubmit={login}
+  //     />
+  //   );
+  // }
 
-    if (activeMovie) {
-      return this._renderMoviePage();
-    }
+  // _renderApp() {
+  //   const {activeMovie, promoMovie, isMovieVideoplayerActive, isAuthorizing, authorizationStatus, onExitButtonClick, isError} = this.props;
 
-    if (isMovieVideoplayerActive) {
-      return (
-        <MovieVideoplayerWrapped
-          activeMovie={activeMovie ? activeMovie : promoMovie}
-          onExitButtonClick={onExitButtonClick}
-        />
-      );
-    }
+  //   if (activeMovie) {
+  //     return this._renderMoviePage();
+  //   }
 
-    if (authorizationStatus === AuthorizationStatus.AUTH) {
-      return (
-        <Main
-          promoMovie={promoMovie}
-          onPlayButtonClick={onPlayButtonClick}
-        />
-      );
-    }
+  //   if (isMovieVideoplayerActive) {
+  //     return (
+  //       <MovieVideoplayerWrapped
+  //         activeMovie={activeMovie ? activeMovie : promoMovie}
+  //         onExitButtonClick={onExitButtonClick}
+  //       />
+  //     );
+  //   }
 
-    if (isAuthorizing) {
-      return this._renderSignIn();
-    }
+  //   if (authorizationStatus === AuthorizationStatus.AUTH) {
+  //     return history.push(AppRoute.ROOT);
+  //   }
 
-    if (isError) {
-      return (
-        <ErrorScreen />
-      );
-    }
+  //   if (isAuthorizing) {
+  //     return history.push(AppRoute.LOGIN);
+  //   }
 
-    return this._renderMain();
-  }
+  //   if (isError) {
+  //     return (
+  //       <ErrorScreen />
+  //     );
+  //   }
+
+  //   return history.push(AppRoute.ROOT);
+  // }
 
   render() {
+    const {activeMovie, login, promoMovie, authorizationStatus, onPlayButtonClick, onExitButtonClick, loadFavoriteMovies} = this.props;
+
     return (
-      <BrowserRouter>
+      <Router
+        history={history}
+      >
         <Switch>
-          <Route exact path="/">
-            {this._renderApp()}
-          </Route>
-          <Route exact path="/movie-page">
-            {this._renderMoviePage()}
-          </Route>
-          <Route exact path="/dev-auth">
-            {this._renderSignIn()}
-          </Route>
+          <Route exact path={AppRoute.ROOT}
+            render={() => {
+
+              return <Main
+                promoMovie={promoMovie}
+                onPlayButtonClick={onPlayButtonClick}
+              />;
+            }}
+          />
+          <Route exact path={`${AppRoute.MOVIE}/:id`}
+            render={() => {
+
+              return <MoviePage
+                activeMovie={activeMovie}
+                onPlayButtonClick={onPlayButtonClick}
+              />;
+            }}
+          />
+          <Route exact path={AppRoute.LOGIN}
+            render={() => {
+
+              return authorizationStatus !== AuthorizationStatus.AUTH ?
+                <SignIn
+                  onSubmit={login}
+                /> :
+                <Redirect
+                  to={AppRoute.ROOT}
+                />;
+            }}
+          />
+          <Route exact
+            path={`${AppRoute.PLAYER}/:id`}
+            render={() => {
+              return <MovieVideoplayerWrapped
+                activeMovie={activeMovie ? activeMovie : promoMovie}
+                onExitButtonClick={onExitButtonClick}
+              />;
+            }}
+          />
+          <PrivateRoute exact
+            path={AppRoute.MY_LIST}
+            render={(routeProps) => {
+              loadFavoriteMovies();
+              return <MyList
+                routeProps={routeProps}
+              />;
+            }}
+          />
+          <Route
+            component={ErrorScreen}
+          />
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
@@ -126,8 +171,9 @@ App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   login: PropTypes.func.isRequired,
   isAuthorizing: PropTypes.bool.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
   onExitButtonClick: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
+  loadFavoriteMovies: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -148,6 +194,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   login(authData) {
     dispatch(UserOperation.login(authData));
+  },
+  loadFavoriteMovies() {
+    dispatch(DataOperation.loadFavoriteMovies());
   },
 });
 

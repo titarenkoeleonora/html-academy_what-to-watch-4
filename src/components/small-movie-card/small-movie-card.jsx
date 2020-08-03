@@ -1,20 +1,22 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import VideoPlayer from "../video-player/video-player.jsx";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../constants.js";
+import history from "../../history.js";
 
 export default class SmallMovieCard extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._onMovieCardClick = this.props.onMovieCardClick;
     this._handleMovieTitleClick = this._handleMovieTitleClick.bind(this);
   }
 
-  _handleMovieTitleClick(evt) {
-    evt.preventDefault();
+  _handleMovieTitleClick() {
+    const {movie, onMovieCardClick} = this.props;
 
-    this._movie = this.props.movie;
-    this._onMovieCardClick(this._movie);
+    history.push(`${AppRoute.MOVIE}/${movie.id}`);
+    onMovieCardClick(movie);
   }
 
   render() {
@@ -27,6 +29,7 @@ export default class SmallMovieCard extends PureComponent {
         onMouseOver={onSmallCardMouseOver}
         onMouseOut={onSmallCardMouseOut}
       >
+
         <div className="small-movie-card__image">
           <VideoPlayer
             isPlaying={isPlaying}
@@ -34,10 +37,14 @@ export default class SmallMovieCard extends PureComponent {
             muted
           />
         </div>
-        <h3 className="small-movie-card__title">
-          <a
-            className="small-movie-card__link" href="movie-page.html"
-          >{movie.title}</a>
+        <h3 className="small-movie-card__title"
+          onClick={this._handleMovieTitleClick}
+        >
+          <Link className="small-movie-card__link"
+            to={`${AppRoute.MOVIE}/${movie.id}`}
+          >
+            {movie.title}
+          </Link>
         </h3>
       </article>
     );

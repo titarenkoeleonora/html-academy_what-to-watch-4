@@ -3,6 +3,7 @@ const DataActionType = {
   LOAD_MOVIES: `LOAD_MOVIES`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   CATCH_ERROR: `CATCH_ERROR`,
+  LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`,
 };
 
 export {DataActionType};

@@ -22,6 +22,11 @@ const DataActionCreator = {
     };
   },
 
+  loadFavoriteMovies: (movies) => ({
+    type: DataActionType.LOAD_FAVORITE_MOVIES,
+    payload: movies,
+  }),
+
   catchError: () => {
     return {
       type: DataActionType.CATCH_ERROR,

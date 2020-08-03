@@ -16,7 +16,6 @@ const withVideo = (Component) => {
       this._handleFullScreenButtonClick = this._handleFullScreenButtonClick.bind(this);
     }
 
-
     _handleOnOffChange() {
       this.setState({
         isPlaying: !this.state.isPlaying,

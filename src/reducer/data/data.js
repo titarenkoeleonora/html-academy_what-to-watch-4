@@ -8,6 +8,7 @@ const initialState = {
   promoMovie: emptyMovie,
   movies: [],
   reviews: [],
+  favoriteMovies: [],
   isError: false,
 };
 
@@ -42,6 +43,19 @@ const Operation = {
         dispatch(DataActionCreator.catchError());
       });
   },
+
+  loadFavoriteMovies: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        if (response.data) {
+          const favoriteMovies = response.data.map((favoriteMovie) => createMovie(favoriteMovie));
+          dispatch(DataActionCreator.loadFavoriteMovies(favoriteMovies));
+        }
+      })
+      .catch(() => {
+        dispatch(DataActionCreator.catchError());
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -60,6 +74,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         reviews: action.payload,
         isError: null,
+      });
+    case DataActionType.LOAD_FAVORITE_MOVIES:
+      return extend(state, {
+        favoriteMovies: action.payload,
       });
     case DataActionType.CATCH_ERROR:
       return extend(state, {

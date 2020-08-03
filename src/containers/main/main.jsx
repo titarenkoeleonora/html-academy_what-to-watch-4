@@ -7,13 +7,15 @@ import ShowMoreButton from "../../components/show-more-button/show-more-button.j
 import PageFooter from "../../components/page-footer/page-footer.jsx";
 import PageHeader from "../../components/page-header/page-header.jsx";
 import {getMovies, getGenresList} from "../../reducer/data/selectors.js";
-import {getActiveGenre, getShownMoviesCount} from "../../reducer/app-state/selectors.js";
+import {getActiveGenre, getShownMoviesCount, getActiveMovie} from "../../reducer/app-state/selectors.js";
 import {MovieCardButtons} from "../../components/movie-card-buttons/movie-card-buttons.jsx";
 import {Operation} from "../../reducer/data/data.js";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator.js";
+import { getFilteredMovies } from "../../utils.js";
 
 const Main = (props) => {
   const {
+    activeMovie,
     promoMovie,
     movies,
     activeGenre,
@@ -21,11 +23,12 @@ const Main = (props) => {
     shownMoviesCount,
     onGenreTabClick,
     onMovieCardClick,
-    onShowMoreButtonClick,
     onPlayButtonClick,
+    onShowMoreButtonClick,
   } = props;
 
-  const shownMovies = movies.slice(0, shownMoviesCount);
+  const filteredMovies = getFilteredMovies(movies, activeGenre, shownMoviesCount);
+  const shownMovies = filteredMovies.slice(0, shownMoviesCount);
 
   return (
     <>
@@ -51,7 +54,10 @@ const Main = (props) => {
                 <span className="movie-card__year">{promoMovie.date}</span>
               </p>
 
-              <MovieCardButtons onPlayButtonClick={onPlayButtonClick}/>
+              <MovieCardButtons
+                activeMovie={activeMovie ? activeMovie : promoMovie}
+                onPlayButtonClick={onPlayButtonClick}
+              />
             </div>
           </div>
         </div>
@@ -85,6 +91,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
+  activeMovie: PropTypes.object,
   promoMovie: PropTypes.object.isRequired,
   movies: PropTypes.arrayOf(
       PropTypes.shape({
@@ -103,6 +110,7 @@ Main.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
+    activeMovie: getActiveMovie(state),
     activeGenre: getActiveGenre(state),
     movies: getMovies(state),
     shownMoviesCount: getShownMoviesCount(state),

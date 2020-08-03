@@ -14,6 +14,14 @@ const getTimeElapsed = (duration) => {
   ].join(`:`);
 };
 
+const getFilteredMovies = (movies, activeGenre) => {
+  if (activeGenre === `All genres`) {
+    return movies;
+  } else {
+    return movies.filter((movie) => movie.genre === activeGenre);
+  }
+};
+
 const validateEmail = (evt) => {
   const inputEmail = evt.target.value;
   const pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
@@ -38,4 +46,4 @@ const validatePassword = (evt) => {
   }
 };
 
-export {extend, getTimeElapsed, validateEmail, validatePassword};
+export {extend, getTimeElapsed, validateEmail, validatePassword, getFilteredMovies};

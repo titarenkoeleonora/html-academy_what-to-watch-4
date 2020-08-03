@@ -40,7 +40,9 @@ const MoviePage = ({
                   <span className="movie-card__year">{activeMovie.date}</span>
                 </p>
 
-                <MovieCardButtons onPlayButtonClick={onPlayButtonClick}/>
+                <MovieCardButtons onPlayButtonClick={onPlayButtonClick}
+                  activeMovie={activeMovie}
+                />
               </div>
             </div>
           </div>
