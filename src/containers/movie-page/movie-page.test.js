@@ -4,6 +4,7 @@ import MoviePage from "./movie-page";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import NameSpace from "../../reducer/name-space";
+import {AuthorizationStatus} from "../../reducer/user/user";
 
 const mockStore = configureStore([]);
 
@@ -66,6 +67,16 @@ it(`Should MoviePage correctly render`, () => {
     },
     [NameSpace.APP_STATE]: {
       activeMovie: testMovie,
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      isAuthorizing: false,
+      authorizationInfo: {
+        id: 0,
+        email: ``,
+        name: ``,
+        avatar: ``,
+      }
     }
   });
 

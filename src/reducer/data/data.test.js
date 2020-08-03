@@ -90,7 +90,7 @@ describe(`Data Reducer`, () => {
       payload: testMovie,
     })).toEqual({
       promoMovie: testMovie,
-      isError: null
+      isError: null,
     });
   });
 
@@ -102,7 +102,7 @@ describe(`Data Reducer`, () => {
       payload: testMovies,
     })).toEqual({
       movies: testMovies,
-      isError: null
+      isError: null,
     });
   });
 
@@ -114,7 +114,7 @@ describe(`Data Reducer`, () => {
       payload: testReviews,
     })).toEqual({
       reviews: testReviews,
-      isError: null
+      isError: null,
     });
   });
 });

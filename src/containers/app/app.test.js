@@ -4,6 +4,7 @@ import App from "./app.jsx";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import NameSpace from "../../reducer/name-space.js";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 
 const mockStore = configureStore([]);
 
@@ -57,6 +58,16 @@ it(`Render App`, () => {
       activeMovie: testMovie,
       isMovieVideoplayerActive: false,
     },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      isAuthorizing: false,
+      authorizationInfo: {
+        id: 0,
+        email: ``,
+        name: ``,
+        avatar: ``,
+      }
+    }
   });
 
   const tree = renderer

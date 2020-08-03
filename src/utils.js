@@ -2,18 +2,6 @@ const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
-// const getGenresList = (movies) => {
-//   return [`All genres`, ...new Set(movies.map((movie) => movie.genre))];
-// };
-
-// const fiterMoviesByGenre = (activeGenre, movies) => {
-//   if (activeGenre === `All genres`) {
-//     return movies;
-//   } else {
-//     return movies.filter((movie) => movie.genre === activeGenre);
-//   }
-// };
-
 const getTimeElapsed = (duration) => {
   const seconds = Math.trunc(duration % 60);
   const minutes = Math.trunc(duration / 60);
@@ -26,4 +14,28 @@ const getTimeElapsed = (duration) => {
   ].join(`:`);
 };
 
-export {extend, getTimeElapsed};
+const validateEmail = (evt) => {
+  const inputEmail = evt.target.value;
+  const pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
+
+  if (inputEmail === ``) {
+    evt.target.setCustomValidity(`Email is required`);
+    return;
+  }
+
+  if (!inputEmail.match(pattern)) {
+    evt.target.setCustomValidity(`Email must be in the format email@mail.com`);
+    return;
+  }
+};
+
+const validatePassword = (evt) => {
+  const inputPassword = evt.target.value;
+
+  if (inputPassword === ``) {
+    evt.target.setCustomValidity(`Password is required`);
+    return;
+  }
+};
+
+export {extend, getTimeElapsed, validateEmail, validatePassword};
