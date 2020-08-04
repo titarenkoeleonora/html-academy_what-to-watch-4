@@ -1,12 +1,25 @@
 import React from "react";
-import {PageHeader} from "../page-header/page-header";
+import PropTypes from "prop-types";
 
-const AddReview = () => {
+import {PageHeader} from "../page-header/page-header";
+import {Link} from "react-router-dom";
+import {AppRoute, RATING} from "../../constants";
+import {getIsError} from "../../reducer/data/selectors";
+import {connect} from "react-redux";
+
+const AddReview = (props) => {
+  const {activeMovie,
+    onReviewFormSubmit,
+    isFormDisabled,
+    isSubmitButtonDisabled,
+    isError,
+  } = props;
+
   return (
-    <section className="movie-card movie-card--full">
+    <section className="movie-card movie-card--full" style={{background: activeMovie.backgroundColor}}>
       <div className="movie-card__header">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={activeMovie.background} alt={activeMovie.title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -15,8 +28,7 @@ const AddReview = () => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="movie-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
-              </li>
+                <Link to={`${AppRoute.FILM}/${activeMovie.id}`} className="breadcrumbs__link">{activeMovie.title}</Link>              </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
               </li>
@@ -25,43 +37,58 @@ const AddReview = () => {
         </PageHeader>
 
         <div className="movie-card__poster movie-card__poster--small">
-          <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+          <img src={activeMovie.poster} alt={`${activeMovie.title} poster`} width="218" height="327" />
         </div>
       </div>
 
       <div className="add-review">
-        <form action="#" className="add-review__form">
+        <form action="#" className="add-review__form" onSubmit={onReviewFormSubmit} disabled={isFormDisabled}>
           <div className="rating">
             <div className="rating__stars">
-              <input className="rating__input" id="star-1" type="radio" name="rating" value="1"/>
-              <label className="rating__label" htmlFor="star-1">Rating 1</label>
-
-              <input className="rating__input" id="star-2" type="radio" name="rating" value="2" />
-              <label className="rating__label" htmlFor="star-2">Rating 2</label>
-
-              <input className="rating__input" id="star-3" type="radio" name="rating" value="3" checked />
-              <label className="rating__label" htmlFor="star-3">Rating 3</label>
-
-              <input className="rating__input" id="star-4" type="radio" name="rating" value="4" />
-              <label className="rating__label" htmlFor="star-4">Rating 4</label>
-
-              <input className="rating__input" id="star-5" type="radio" name="rating" value="5" />
-              <label className="rating__label" htmlFor="star-5">Rating 5</label>
+              {new Array(RATING)
+                .fill().map((item, index) => {
+                  const rating = index + 1;
+                  return (
+                    <React.Fragment key={index + 1}>
+                      <input className="rating__input" id={`star-${rating}`} type="radio" name="rating" value={`${rating}`}/>
+                      <label className="rating__label" htmlFor={`star-${rating}`}>Rating {rating}</label>
+                    </React.Fragment>
+                  );
+                })
+              }
             </div>
           </div>
 
           <div className="add-review__text">
             <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit">Post</button>
+              <button className="add-review__btn" type="submit" disabled={isSubmitButtonDisabled}
+                style={{cursor: `${isSubmitButtonDisabled ? `default` : `pointer`}`}}
+              >Post</button>
             </div>
 
           </div>
         </form>
+
+        {isError &&
+           <p style={{color: `tomato`, textAlign: `center`}}>Your review has not been sent. Please try again later.</p>}
       </div>
 
     </section>
   );
 };
 
-export default AddReview;
+AddReview.propTypes = {
+  activeMovie: PropTypes.object.isRequired,
+  onReviewFormSubmit: PropTypes.func.isRequired,
+  isSubmitButtonDisabled: PropTypes.bool.isRequired,
+  isError: PropTypes.bool.isRequired,
+  isFormDisabled: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  isError: getIsError(state),
+  isFormDisabled: getIsFormDisabled(state),
+});
+
+export default connect(mapStateToProps)(AddReview);

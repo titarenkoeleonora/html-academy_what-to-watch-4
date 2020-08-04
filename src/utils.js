@@ -1,10 +1,10 @@
 import {MAX_SHOWN_MOVIES} from "./constants";
 
-const extend = (a, b) => {
+export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
-const getTimeElapsed = (duration) => {
+export const getTimeElapsed = (duration) => {
   const seconds = Math.trunc(duration % 60);
   const minutes = Math.trunc(duration / 60);
   const hours = Math.trunc(minutes / 60);
@@ -16,7 +16,7 @@ const getTimeElapsed = (duration) => {
   ].join(`:`);
 };
 
-const getFilteredMovies = (movies, activeGenre) => {
+export const getFilteredMovies = (movies, activeGenre) => {
   if (activeGenre === `All genres`) {
     return movies;
   } else {
@@ -24,7 +24,7 @@ const getFilteredMovies = (movies, activeGenre) => {
   }
 };
 
-const validateEmail = (evt) => {
+export const validateEmail = (evt) => {
   const inputEmail = evt.target.value;
   const pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
 
@@ -39,7 +39,7 @@ const validateEmail = (evt) => {
   }
 };
 
-const validatePassword = (evt) => {
+export const validatePassword = (evt) => {
   const inputPassword = evt.target.value;
 
   if (inputPassword === ``) {
@@ -48,11 +48,9 @@ const validatePassword = (evt) => {
   }
 };
 
-const getRelatedMovies = (filteredMovies, activeMovie) => {
+export const getRelatedMovies = (filteredMovies, activeMovie) => {
   return (filteredMovies
     .filter((movie) => movie.genre === activeMovie.genre)
     .slice(0, MAX_SHOWN_MOVIES)
   );
 };
-
-export {extend, getTimeElapsed, getRelatedMovies, validateEmail, validatePassword, getFilteredMovies};

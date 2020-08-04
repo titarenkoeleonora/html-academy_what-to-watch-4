@@ -12,6 +12,7 @@ import {AppStateActionCreator} from "../../reducer/actions/app-state-action-crea
 import {getRelatedMovies} from "../../utils.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import MovieCardButtons from "../../components/movie-card-buttons/movie-card-buttons.jsx";
+import ErrorScreen from "../../components/error-screen/error-screen.jsx";
 
 const TabsWrapped = withActiveTab(Tabs);
 
@@ -26,6 +27,9 @@ const MoviePage = ({
   const activeMovie = movies.find((movie) => movie.id === id);
   const relatedMovies = getRelatedMovies(movies, activeMovie);
 
+  if (!activeMovie) {
+    return <ErrorScreen/>;
+  }
   return (
       <>
         <section className="movie-card movie-card--full" style={{background: activeMovie.backgroundColor}}>

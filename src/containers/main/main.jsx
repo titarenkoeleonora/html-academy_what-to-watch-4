@@ -79,7 +79,7 @@ const Main = (props) => {
             movies={shownMovies}
             onMovieCardClick={onMovieCardClick}
           />
-          {shownMovies.length < movies.length &&
+          {shownMovies.length > movies.length || shownMovies.length < filteredMovies.length &&
             <ShowMoreButton
               onShowMoreButtonClick={onShowMoreButtonClick}
             />
