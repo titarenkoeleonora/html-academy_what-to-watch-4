@@ -9,9 +9,8 @@ import PageHeader from "../../components/page-header/page-header.jsx";
 import {getMovies, getGenresList} from "../../reducer/data/selectors.js";
 import {getActiveGenre, getShownMoviesCount, getActiveMovie} from "../../reducer/app-state/selectors.js";
 import {MovieCardButtons} from "../../components/movie-card-buttons/movie-card-buttons.jsx";
-import {Operation} from "../../reducer/data/data.js";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator.js";
-import { getFilteredMovies } from "../../utils.js";
+import {getFilteredMovies} from "../../utils.js";
 
 const Main = (props) => {
   const {
@@ -124,11 +123,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onShowMoreButtonClick() {
     dispatch(AppStateActionCreator.showMoreMovies());
-  },
-  onMovieCardClick(activeMovie) {
-    dispatch(Operation.loadReviews(activeMovie.id));
-    dispatch(AppStateActionCreator.getActiveMovie(activeMovie));
-  },
+  }
 });
 
 export {Main};

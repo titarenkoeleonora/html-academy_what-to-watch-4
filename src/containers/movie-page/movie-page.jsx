@@ -6,19 +6,23 @@ import Tabs from "../../components/tabs/tabs.jsx";
 import PageHeader from "../../components/page-header/page-header.jsx";
 import PageFooter from "../../components/page-footer/page-footer.jsx";
 import RelatedMovies from "../../components/related-movies/related-movies.jsx";
-import {getRelatedMovies, getReviews} from "../../reducer/data/selectors.js";
+import {getReviews, getMovies} from "../../reducer/data/selectors.js";
 import {MovieCardButtons} from "../../components/movie-card-buttons/movie-card-buttons.jsx";
 import {Operation} from "../../reducer/data/data.js";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator.js";
+import {getRelatedMovies} from "../../utils.js";
 
 const TabsWrapped = withActiveTab(Tabs);
 
 const MoviePage = ({
-  activeMovie,
+  id,
   movies,
   onMovieCardClick,
   onPlayButtonClick,
   reviews}) => {
+
+  const activeMovie = movies.find((movie) => movie.id === id);
+  const relatedMovies = getRelatedMovies(movies, activeMovie);
 
   return (
       <>
@@ -40,9 +44,7 @@ const MoviePage = ({
                   <span className="movie-card__year">{activeMovie.date}</span>
                 </p>
 
-                <MovieCardButtons onPlayButtonClick={onPlayButtonClick}
-                  activeMovie={activeMovie}
-                />
+                <MovieCardButtons onPlayButtonClick={onPlayButtonClick}/>
               </div>
             </div>
           </div>
@@ -65,8 +67,7 @@ const MoviePage = ({
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
             <RelatedMovies
-              currentMovie={activeMovie}
-              relatedMovies={movies}
+              relatedMovies={relatedMovies}
               onMovieCardClick={onMovieCardClick}
             />
           </section>
@@ -75,9 +76,8 @@ const MoviePage = ({
       </>
   );
 };
-
 MoviePage.propTypes = {
-  activeMovie: PropTypes.object.isRequired,
+  id: PropTypes.number.isRequired,
   movies: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
@@ -96,18 +96,15 @@ MoviePage.propTypes = {
   onMovieCardClick: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func,
 };
-
 const mapStateToProps = (state) => ({
-  movies: getRelatedMovies(state),
+  movies: getMovies(state),
   reviews: getReviews(state),
 });
-
 const mapDispatchToProps = (dispatch) => ({
   onMovieCardClick(activeMovie) {
     dispatch(Operation.loadReviews(activeMovie.id));
     dispatch(AppStateActionCreator.getActiveMovie(activeMovie));
   }
 });
-
 export {MoviePage};
 export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

@@ -56,6 +56,20 @@ const Operation = {
         dispatch(DataActionCreator.catchError());
       });
   },
+
+  sendReview: (film, reviewData) => (dispatch, getState, api) => {
+    return api.post(`/comments/${film.id}`, {
+      rating: reviewData.rating,
+      comment: reviewData.comment,
+    })
+      .then((response) => {
+        dispatch(DataActionCreator.sendReview(reviewData));
+        dispatch(DataActionCreator.loadReviews(response.data));
+      })
+      .catch(() => {
+        dispatch(DataActionCreator.catchError());
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -78,6 +92,7 @@ const reducer = (state = initialState, action) => {
     case DataActionType.LOAD_FAVORITE_MOVIES:
       return extend(state, {
         favoriteMovies: action.payload,
+        isError: null,
       });
     case DataActionType.CATCH_ERROR:
       return extend(state, {

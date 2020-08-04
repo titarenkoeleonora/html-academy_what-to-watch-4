@@ -4,6 +4,7 @@ const DataActionType = {
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   CATCH_ERROR: `CATCH_ERROR`,
   LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`,
+  POST_REVIEW: `POST_REVIEW`,
 };
 
 export {DataActionType};

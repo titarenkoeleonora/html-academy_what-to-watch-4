@@ -1,3 +1,5 @@
+import {MAX_SHOWN_MOVIES} from "./constants";
+
 const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
@@ -46,4 +48,11 @@ const validatePassword = (evt) => {
   }
 };
 
-export {extend, getTimeElapsed, validateEmail, validatePassword, getFilteredMovies};
+const getRelatedMovies = (filteredMovies, activeMovie) => {
+  return (filteredMovies
+    .filter((movie) => movie.genre === activeMovie.genre)
+    .slice(0, MAX_SHOWN_MOVIES)
+  );
+};
+
+export {extend, getTimeElapsed, getRelatedMovies, validateEmail, validatePassword, getFilteredMovies};

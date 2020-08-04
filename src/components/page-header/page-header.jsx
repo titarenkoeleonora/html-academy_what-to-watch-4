@@ -8,6 +8,7 @@ import {Link} from "react-router-dom";
 import {AppRoute} from "../../constants";
 
 const PageHeader = ({authorizationStatus, authorizationInfo}) => {
+  console.log(authorizationStatus);
   return (
     <header className={`page-header ${authorizationStatus === AuthorizationStatus.NO_AUTH ? `user-page__head` : `movie-card__head`}}`}>
   `   <div className="logo">
@@ -32,8 +33,7 @@ const PageHeader = ({authorizationStatus, authorizationInfo}) => {
           :
           <Link
             to={AppRoute.LOGIN}
-            className="user-block__link"
-          >
+            className="user-block__link">
           Sign in
           </Link>
         }
@@ -50,7 +50,7 @@ PageHeader.propTypes = {
     name: PropTypes.string.isRequired,
     avatar: PropTypes.string.isRequired,
   }),
-  authorizationStatus: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({

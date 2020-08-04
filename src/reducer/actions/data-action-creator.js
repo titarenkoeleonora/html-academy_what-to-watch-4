@@ -22,10 +22,17 @@ const DataActionCreator = {
     };
   },
 
-  loadFavoriteMovies: (movies) => ({
+  loadFavoriteMovies: (favoriteMovies) => ({
     type: DataActionType.LOAD_FAVORITE_MOVIES,
-    payload: movies,
+    payload: favoriteMovies,
   }),
+
+  postReview: (review) => {
+    return {
+      type: DataActionType.POST_REVIEW,
+      payload: review,
+    };
+  },
 
   catchError: () => {
     return {
