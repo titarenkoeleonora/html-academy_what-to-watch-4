@@ -7,8 +7,9 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {connect} from "react-redux";
 import {Operation as DataOperation} from "../../reducer/data/data";
+import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator";
 
-const MovieCardButtons = ({activeMovie, authorizationStatus, changeMovieIsFavorite, onPlayButtonClick}) => {
+const MovieCardButtons = ({activeMovie, authorizationStatus, onAddReviewClick, changeMovieIsFavorite, onPlayButtonClick}) => {
   const handleMovieListButtonClick = () => {
 
     return authorizationStatus === AuthorizationStatus.AUTH
@@ -58,7 +59,16 @@ const MovieCardButtons = ({activeMovie, authorizationStatus, changeMovieIsFavori
         <span>Play</span>
       </Link>
       {activeMovie.isFavorite ? removeFromMyList : addToMyList}
-      <a href="add-review.html" className="btn movie-card__button">Add review</a>
+      {authorizationStatus === AuthorizationStatus.AUTH &&
+        <Link
+          to={`${AppRoute.MOVIE}/:${activeMovie.id}/review`}
+          className="btn movie-card__button"
+          onClick={(evt) => {
+            evt.preventDefault();
+            onAddReviewClick();
+          }}
+        >Add review</Link>
+      }
     </div>
   );
 };
@@ -68,6 +78,7 @@ MovieCardButtons.propTypes = {
   onPlayButtonClick: PropTypes.func,
   authorizationStatus: PropTypes.string.isRequired,
   changeMovieIsFavorite: PropTypes.func.isRequired,
+  onAddReviewClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -77,6 +88,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeMovieIsFavorite(movie) {
     dispatch(DataOperation.changeFavoriteStatus(movie));
+  },
+  onAddReviewClick() {
+    console.log(`dd`);
+    dispatch(AppStateActionCreator.addReview(true));
   }
 });
 

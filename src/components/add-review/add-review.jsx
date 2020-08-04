@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import {AppRoute, RATING} from "../../constants";
 import {getIsError} from "../../reducer/data/selectors";
 import {connect} from "react-redux";
+import {getIsFormDisabled} from "../../reducer/app-state/selectors";
 
 const AddReview = (props) => {
   const {activeMovie,
@@ -91,4 +92,5 @@ const mapStateToProps = (state) => ({
   isFormDisabled: getIsFormDisabled(state),
 });
 
+export {AddReview};
 export default connect(mapStateToProps)(AddReview);

@@ -26,6 +26,8 @@ export const MovieTabs = {
 
 export const MAX_SHOWN_MOVIES = 8;
 
+export const MAX_RELATED_MOVIES_COUNT = 4;
+
 export const API_TIMEOUT = 5000;
 
 export const AppRoute = {

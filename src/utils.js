@@ -1,4 +1,4 @@
-import {MAX_SHOWN_MOVIES} from "./constants";
+import {MAX_RELATED_MOVIES_COUNT} from "./constants";
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
@@ -51,6 +51,6 @@ export const validatePassword = (evt) => {
 export const getRelatedMovies = (filteredMovies, activeMovie) => {
   return (filteredMovies
     .filter((movie) => movie.genre === activeMovie.genre)
-    .slice(0, MAX_SHOWN_MOVIES)
+    .slice(0, MAX_RELATED_MOVIES_COUNT)
   );
 };

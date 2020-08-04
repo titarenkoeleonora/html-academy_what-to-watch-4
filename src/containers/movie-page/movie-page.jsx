@@ -7,14 +7,19 @@ import PageHeader from "../../components/page-header/page-header.jsx";
 import PageFooter from "../../components/page-footer/page-footer.jsx";
 import RelatedMovies from "../../components/related-movies/related-movies.jsx";
 import {getReviews, getMovies} from "../../reducer/data/selectors.js";
-import {Operation} from "../../reducer/data/data.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator.js";
 import {getRelatedMovies} from "../../utils.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import MovieCardButtons from "../../components/movie-card-buttons/movie-card-buttons.jsx";
 import ErrorScreen from "../../components/error-screen/error-screen.jsx";
+import withReview from "../../hocs/with-review/with-review.js";
+import AddReview from "../../components/add-review/add-review.jsx";
+import { getIsReviewOpen } from "../../reducer/app-state/selectors.js";
 
 const TabsWrapped = withActiveTab(Tabs);
+const AddReviewWrapped = withReview(AddReview);
+
 
 const MoviePage = ({
   id,
@@ -22,7 +27,9 @@ const MoviePage = ({
   onMovieCardClick,
   onPlayButtonClick,
   reviews,
-  authorizationStatus}) => {
+  authorizationStatus,
+  isReviewOpen,
+  onReviewSubmit}) => {
 
   const activeMovie = movies.find((movie) => movie.id === id);
   const relatedMovies = getRelatedMovies(movies, activeMovie);
@@ -30,6 +37,17 @@ const MoviePage = ({
   if (!activeMovie) {
     return <ErrorScreen/>;
   }
+
+  if (isReviewOpen) {
+    return (
+      <AddReviewWrapped
+        authorizationStatus={authorizationStatus}
+        id={id}
+        onReviewSubmit={onReviewSubmit}
+      />
+    );
+  }
+
   return (
       <>
         <section className="movie-card movie-card--full" style={{background: activeMovie.backgroundColor}}>
@@ -110,12 +128,16 @@ const mapStateToProps = (state) => ({
   movies: getMovies(state),
   reviews: getReviews(state),
   authorizationStatus: getAuthorizationStatus(state),
+  isReviewOpen: getIsReviewOpen(state),
 });
 const mapDispatchToProps = (dispatch) => ({
   onMovieCardClick(activeMovie) {
-    dispatch(Operation.loadReviews(activeMovie.id));
+    dispatch(DataOperation.loadReviews(activeMovie.id));
     dispatch(AppStateActionCreator.getActiveMovie(activeMovie));
-  }
+  },
+  onReviewSubmit(movieId, review) {
+    dispatch(DataOperation.postReview(movieId, review));
+  },
 });
 export {MoviePage};
 export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);
