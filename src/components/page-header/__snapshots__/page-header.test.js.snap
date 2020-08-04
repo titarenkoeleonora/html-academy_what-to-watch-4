@@ -2,15 +2,15 @@
 
 exports[`Correctly PageFooter render 1`] = `
 <header
-  className="page-header user-page__head}"
+  className="page-header user-page__head"
 >
-  \`   
   <div
     className="logo"
   >
     <a
       className="logo__link"
-      href="main.html"
+      href="/"
+      onClick={[Function]}
     >
       <span
         className="logo__letter logo__letter--1"
@@ -34,7 +34,7 @@ exports[`Correctly PageFooter render 1`] = `
   >
     <a
       className="user-block__link"
-      href="sign-in.html"
+      href="/login"
       onClick={[Function]}
     >
       Sign in

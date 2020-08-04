@@ -27,7 +27,7 @@ const Main = (props) => {
     onShowMoreButtonClick,
     authorizationStatus,
   } = props;
-  console.log(movies)
+
   const filteredMovies = getFilteredMovies(movies, activeGenre, shownMoviesCount);
   const shownMovies = filteredMovies.slice(0, shownMoviesCount);
 

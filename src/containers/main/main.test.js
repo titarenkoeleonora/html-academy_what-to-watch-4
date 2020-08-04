@@ -6,6 +6,8 @@ import {Provider} from "react-redux";
 import NameSpace from "../../reducer/name-space.js";
 import {MAX_SHOWN_MOVIES} from "../../constants.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 
 const mockStore = configureStore([]);
 
@@ -70,18 +72,20 @@ it(`Main correctly render`, () => {
 
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <Main
-            promoMovie={testMovie}
-            activeMovie={testMovie}
-            movies={testMovies}
-            activeGenre={mock.activeGenre}
-            shownMoviesCount={MAX_SHOWN_MOVIES}
-            onGenreTabClick={() => {}}
-            onMovieCardClick={() => {}}
-            onPlayButtonClick={() => {}}
-          />
-        </Provider>
+        <Router history={history}>
+          <Provider store={store}>
+            <Main
+              promoMovie={testMovie}
+              activeMovie={testMovie}
+              movies={testMovies}
+              activeGenre={mock.activeGenre}
+              shownMoviesCount={MAX_SHOWN_MOVIES}
+              onGenreTabClick={() => {}}
+              onMovieCardClick={() => {}}
+              onPlayButtonClick={() => {}}
+            />
+          </Provider>
+        </Router>
     ).toJSON();
 
   expect(tree).toMatchSnapshot();

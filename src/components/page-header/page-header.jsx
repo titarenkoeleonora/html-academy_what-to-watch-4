@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 import {AppRoute} from "../../constants";
 
 const PageHeader = ({authorizationStatus, authorizationInfo, children}) => {
-  console.log(authorizationStatus);
+
   return (
     <header className={`page-header user-page__head`}>
       <div className="logo">

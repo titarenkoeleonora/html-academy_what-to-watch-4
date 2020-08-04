@@ -25,7 +25,7 @@ const MoviePage = ({
 
   const activeMovie = movies.find((movie) => movie.id === id);
   const relatedMovies = getRelatedMovies(movies, activeMovie);
-  console.log(activeMovie);
+
   return (
       <>
         <section className="movie-card movie-card--full" style={{background: activeMovie.backgroundColor}}>

@@ -21,7 +21,7 @@ class MyList extends PureComponent {
 
   render() {
     const {favoriteMovies, authorizationInfo, authorizationStatus, onMovieCardClick} = this.props;
-    console.log(favoriteMovies);
+
     if (!favoriteMovies) {
       return <ErrorScreen />;
     }
