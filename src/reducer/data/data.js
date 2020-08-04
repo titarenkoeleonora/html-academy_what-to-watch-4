@@ -3,6 +3,7 @@ import {emptyMovie} from "../../constants";
 import {extend} from "../../utils";
 import {DataActionType} from "../actions/data-action-types";
 import {DataActionCreator} from "../actions/data-action-creator";
+import {AppStateActionCreator} from "../actions/app-state-action-creator";
 
 const initialState = {
   promoMovie: emptyMovie,
@@ -57,19 +58,34 @@ const Operation = {
       });
   },
 
-  sendReview: (film, reviewData) => (dispatch, getState, api) => {
-    return api.post(`/comments/${film.id}`, {
-      rating: reviewData.rating,
-      comment: reviewData.comment,
+  postReview: (movieId, review) => (dispatch, getState, api) => {
+    return api.post(`comments/${movieId}`, {
+      rating: review.rating,
+      comment: review.comment,
     })
-      .then((response) => {
-        dispatch(DataActionCreator.sendReview(reviewData));
-        dispatch(DataActionCreator.loadReviews(response.data));
-      })
-      .catch(() => {
-        dispatch(DataActionCreator.catchError());
-      });
+    .then(() => {
+      dispatch(DataActionCreator.postReview(review));
+      dispatch(Operation.loadReviews(movieId));
+    }).
+    then(() => {
+      dispatch(AppStateActionCreator.addReview(false));
+      dispatch(AppStateActionCreator.toggleFormState(false));
+    })
+    .catch(() => {
+      dispatch(DataActionCreator.catchError());
+    });
   },
+  changeFavoriteStatus: (movie) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${movie.id}/${movie.isFavorite ? 0 : 1}`)
+    .then(() => {
+      dispatch(Operation.loadMovies());
+      dispatch(Operation.loadPromoMovie());
+      dispatch(Operation.loadFavoriteMovies());
+    })
+    .catch(() => {
+      dispatch(DataActionCreator.catchError());
+    });
+  }
 };
 
 const reducer = (state = initialState, action) => {

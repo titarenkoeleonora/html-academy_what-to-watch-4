@@ -30,19 +30,21 @@ export default class SignIn extends PureComponent {
   render() {
     return (
       <div className="user-page">
-        <PageHeader/>
+        <PageHeader>
+          <h1 className="page-title user-page__title">Sign in</h1>
+        </PageHeader>
 
         <div className="sign-in user-page__content">
           <form action="#" className="sign-in__form" onSubmit={this.handleSubmit}>
             <div className="sign-in__fields">
               <div className="sign-in__field">
                 <input className="sign-in__input" type="email" placeholder="Email address" name="user-email"
-                  id="user-email" ref={this.loginRef} onInput={validateEmail} required/>
+                  id="user-email" ref={this.loginRef} onChange={validateEmail} required/>
                 <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
               </div>
               <div className="sign-in__field">
                 <input className="sign-in__input" type="password" placeholder="Password" name="user-password"
-                  id="user-password" ref={this.passwordRef} onInput={validatePassword} required/>
+                  id="user-password" ref={this.passwordRef} onChange={validatePassword} required/>
                 <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
               </div>
             </div>

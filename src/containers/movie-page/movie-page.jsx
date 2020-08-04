@@ -7,10 +7,11 @@ import PageHeader from "../../components/page-header/page-header.jsx";
 import PageFooter from "../../components/page-footer/page-footer.jsx";
 import RelatedMovies from "../../components/related-movies/related-movies.jsx";
 import {getReviews, getMovies} from "../../reducer/data/selectors.js";
-import {MovieCardButtons} from "../../components/movie-card-buttons/movie-card-buttons.jsx";
 import {Operation} from "../../reducer/data/data.js";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator.js";
 import {getRelatedMovies} from "../../utils.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import MovieCardButtons from "../../components/movie-card-buttons/movie-card-buttons.jsx";
 
 const TabsWrapped = withActiveTab(Tabs);
 
@@ -19,11 +20,12 @@ const MoviePage = ({
   movies,
   onMovieCardClick,
   onPlayButtonClick,
-  reviews}) => {
+  reviews,
+  authorizationStatus}) => {
 
   const activeMovie = movies.find((movie) => movie.id === id);
   const relatedMovies = getRelatedMovies(movies, activeMovie);
-
+  console.log(activeMovie);
   return (
       <>
         <section className="movie-card movie-card--full" style={{background: activeMovie.backgroundColor}}>
@@ -44,7 +46,10 @@ const MoviePage = ({
                   <span className="movie-card__year">{activeMovie.date}</span>
                 </p>
 
-                <MovieCardButtons onPlayButtonClick={onPlayButtonClick}/>
+                <MovieCardButtons
+                  activeMovie={activeMovie}
+                  onPlayButtonClick={onPlayButtonClick}
+                  authorizationStatus={authorizationStatus}/>
               </div>
             </div>
           </div>
@@ -95,10 +100,12 @@ MoviePage.propTypes = {
   ),
   onMovieCardClick: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 const mapStateToProps = (state) => ({
   movies: getMovies(state),
   reviews: getReviews(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 const mapDispatchToProps = (dispatch) => ({
   onMovieCardClick(activeMovie) {

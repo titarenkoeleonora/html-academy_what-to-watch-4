@@ -8,9 +8,10 @@ import PageFooter from "../../components/page-footer/page-footer.jsx";
 import PageHeader from "../../components/page-header/page-header.jsx";
 import {getMovies, getGenresList} from "../../reducer/data/selectors.js";
 import {getActiveGenre, getShownMoviesCount, getActiveMovie} from "../../reducer/app-state/selectors.js";
-import {MovieCardButtons} from "../../components/movie-card-buttons/movie-card-buttons.jsx";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator.js";
 import {getFilteredMovies} from "../../utils.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import MovieCardButtons from "../../components/movie-card-buttons/movie-card-buttons.jsx";
 
 const Main = (props) => {
   const {
@@ -24,8 +25,9 @@ const Main = (props) => {
     onMovieCardClick,
     onPlayButtonClick,
     onShowMoreButtonClick,
+    authorizationStatus,
   } = props;
-
+  console.log(movies)
   const filteredMovies = getFilteredMovies(movies, activeGenre, shownMoviesCount);
   const shownMovies = filteredMovies.slice(0, shownMoviesCount);
 
@@ -56,6 +58,7 @@ const Main = (props) => {
               <MovieCardButtons
                 activeMovie={activeMovie ? activeMovie : promoMovie}
                 onPlayButtonClick={onPlayButtonClick}
+                authorizationStatus={authorizationStatus}
               />
             </div>
           </div>
@@ -105,6 +108,7 @@ Main.propTypes = {
   onMovieCardClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -113,7 +117,8 @@ const mapStateToProps = (state) => {
     activeGenre: getActiveGenre(state),
     movies: getMovies(state),
     shownMoviesCount: getShownMoviesCount(state),
-    genresList: getGenresList(state)
+    genresList: getGenresList(state),
+    authorizationStatus: getAuthorizationStatus(state),
   };
 };
 

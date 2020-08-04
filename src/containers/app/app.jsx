@@ -17,9 +17,12 @@ import {Operation as DataOperation} from "../../reducer/data/data";
 import SignIn from "../../components/sign-in/sign-in";
 import history from "../../history.js";
 import {AppRoute} from "../../constants";
-import {MyList} from "../my-list/my-list";
+import MyList from "../my-list/my-list";
+import withReview from "../../hocs/with-review/with-review";
+import AddReview from "../../components/add-review/add-review";
 
 const MovieVideoplayerWrapped = withFullScreenVideoplayer(MovieVideoplayer);
+const AddReviewWrapped = withReview(AddReview);
 
 class App extends PureComponent {
   constructor(props) {
@@ -88,6 +91,12 @@ class App extends PureComponent {
               return <MyList
                 onMovieCardClick={onMovieCardClick}
               />;
+            }}
+          />
+          <Route exact
+            path={`${AppRoute.MOVIE}/:id/review`}
+            render={() => {
+              return <AddReviewWrapped/>;
             }}
           />
           <Route

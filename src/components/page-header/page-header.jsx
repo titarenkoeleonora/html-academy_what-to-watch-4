@@ -7,23 +7,21 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../constants";
 
-const PageHeader = ({authorizationStatus, authorizationInfo}) => {
+const PageHeader = ({authorizationStatus, authorizationInfo, children}) => {
   console.log(authorizationStatus);
   return (
-    <header className={`page-header ${authorizationStatus === AuthorizationStatus.NO_AUTH ? `user-page__head` : `movie-card__head`}}`}>
-  `   <div className="logo">
+    <header className={`page-header user-page__head`}>
+      <div className="logo">
         <Link
           className="logo__link"
-          to={AppRoute.ROOT}
-        >
+          to={AppRoute.ROOT}>
           <span className="logo__letter logo__letter--1">W</span>
           <span className="logo__letter logo__letter--2">T</span>
           <span className="logo__letter logo__letter--3">W</span>
         </Link>
       </div>
-
+      {children}
       <div className="user-block">
-
         {authorizationStatus === AuthorizationStatus.AUTH ?
           <Link to={AppRoute.MY_LIST}>
             <div className="user-block__avatar">
@@ -50,7 +48,8 @@ PageHeader.propTypes = {
     name: PropTypes.string.isRequired,
     avatar: PropTypes.string.isRequired,
   }),
-  authorizationStatus: PropTypes.string,
+  children: PropTypes.node,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({

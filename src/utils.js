@@ -33,7 +33,7 @@ const validateEmail = (evt) => {
     return;
   }
 
-  if (!inputEmail.match(pattern)) {
+  if (!pattern.test(inputEmail)) {
     evt.target.setCustomValidity(`Email must be in the format email@mail.com`);
     return;
   }

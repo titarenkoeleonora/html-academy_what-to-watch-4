@@ -36,4 +36,9 @@ const AppRoute = {
   PLAYER: `/player`,
 };
 
-export {emptyMovie, MovieTabs, MAX_SHOWN_MOVIES, API_TIMEOUT, AppRoute};
+const Review = {
+  MIN_LENGTH: 50,
+  MAX_LENGTH: 400,
+};
+
+export {emptyMovie, Review, MovieTabs, MAX_SHOWN_MOVIES, API_TIMEOUT, AppRoute};
