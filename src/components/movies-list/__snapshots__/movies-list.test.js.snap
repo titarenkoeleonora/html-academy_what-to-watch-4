@@ -20,10 +20,12 @@ exports[`MoviesList should render correctly 1`] = `
     </div>
     <h3
       className="small-movie-card__title"
+      onClick={[Function]}
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/0"
+        onClick={[Function]}
       >
         movie title
       </a>
@@ -45,10 +47,12 @@ exports[`MoviesList should render correctly 1`] = `
     </div>
     <h3
       className="small-movie-card__title"
+      onClick={[Function]}
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/1"
+        onClick={[Function]}
       >
         movie title
       </a>
@@ -70,10 +74,12 @@ exports[`MoviesList should render correctly 1`] = `
     </div>
     <h3
       className="small-movie-card__title"
+      onClick={[Function]}
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/2"
+        onClick={[Function]}
       >
         movie title
       </a>

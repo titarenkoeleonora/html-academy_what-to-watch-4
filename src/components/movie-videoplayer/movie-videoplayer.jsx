@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {getTimeElapsed} from "../../utils";
+import ErrorScreen from "../error-screen/error-screen";
 
 const MovieVideoplayer = (props) => {
   const {
@@ -15,6 +16,10 @@ const MovieVideoplayer = (props) => {
   } = props;
 
   const timeElapsed = getTimeElapsed(duration - progress);
+
+  if (!activeMovie) {
+    return <ErrorScreen/>;
+  }
 
   return (
     <div className="player">

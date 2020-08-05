@@ -16,7 +16,7 @@ const ErrorScreen = () => {
 
         <div className="sign-in user-page__content">
           <div className="sign-in__message">
-            <p>Server unavailable. Please try again later.</p>
+            <p>Loading...</p>
           </div>
         </div>
 

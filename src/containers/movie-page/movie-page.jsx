@@ -6,19 +6,47 @@ import Tabs from "../../components/tabs/tabs.jsx";
 import PageHeader from "../../components/page-header/page-header.jsx";
 import PageFooter from "../../components/page-footer/page-footer.jsx";
 import RelatedMovies from "../../components/related-movies/related-movies.jsx";
-import {getRelatedMovies, getReviews} from "../../reducer/data/selectors.js";
-import {MovieCardButtons} from "../../components/movie-card-buttons/movie-card-buttons.jsx";
-import {Operation} from "../../reducer/data/data.js";
+import {getReviews, getMovies} from "../../reducer/data/selectors.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator.js";
+import {getRelatedMovies} from "../../utils.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import MovieCardButtons from "../../components/movie-card-buttons/movie-card-buttons.jsx";
+import ErrorScreen from "../../components/error-screen/error-screen.jsx";
+import withReview from "../../hocs/with-review/with-review.js";
+import AddReview from "../../components/add-review/add-review.jsx";
+import {getIsReviewOpen} from "../../reducer/app-state/selectors.js";
 
 const TabsWrapped = withActiveTab(Tabs);
+const AddReviewWrapped = withReview(AddReview);
+
 
 const MoviePage = ({
-  activeMovie,
+  id,
   movies,
   onMovieCardClick,
   onPlayButtonClick,
-  reviews}) => {
+  reviews,
+  authorizationStatus,
+  isReviewOpen,
+  onReviewSubmit}) => {
+
+  const activeMovie = movies.find((movie) => movie.id === id);
+  const relatedMovies = getRelatedMovies(movies, activeMovie);
+
+  if (!activeMovie) {
+    return <ErrorScreen/>;
+  }
+
+  if (isReviewOpen) {
+    return (
+      <AddReviewWrapped
+        authorizationStatus={authorizationStatus}
+        id={id}
+        onReviewSubmit={onReviewSubmit}
+      />
+    );
+  }
 
   return (
       <>
@@ -40,7 +68,10 @@ const MoviePage = ({
                   <span className="movie-card__year">{activeMovie.date}</span>
                 </p>
 
-                <MovieCardButtons onPlayButtonClick={onPlayButtonClick}/>
+                <MovieCardButtons
+                  activeMovie={activeMovie}
+                  onPlayButtonClick={onPlayButtonClick}
+                  authorizationStatus={authorizationStatus}/>
               </div>
             </div>
           </div>
@@ -63,8 +94,7 @@ const MoviePage = ({
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
             <RelatedMovies
-              currentMovie={activeMovie}
-              relatedMovies={movies}
+              relatedMovies={relatedMovies}
               onMovieCardClick={onMovieCardClick}
             />
           </section>
@@ -73,9 +103,8 @@ const MoviePage = ({
       </>
   );
 };
-
 MoviePage.propTypes = {
-  activeMovie: PropTypes.object.isRequired,
+  id: PropTypes.number.isRequired,
   movies: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
@@ -93,19 +122,24 @@ MoviePage.propTypes = {
   ),
   onMovieCardClick: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func,
+  authorizationStatus: PropTypes.string.isRequired,
+  isReviewOpen: PropTypes.bool.isRequired,
+  onReviewSubmit: PropTypes.func.isRequired,
 };
-
 const mapStateToProps = (state) => ({
-  movies: getRelatedMovies(state),
+  movies: getMovies(state),
   reviews: getReviews(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  isReviewOpen: getIsReviewOpen(state),
 });
-
 const mapDispatchToProps = (dispatch) => ({
   onMovieCardClick(activeMovie) {
-    dispatch(Operation.loadReviews(activeMovie.id));
+    dispatch(DataOperation.loadReviews(activeMovie.id));
     dispatch(AppStateActionCreator.getActiveMovie(activeMovie));
-  }
+  },
+  onReviewSubmit(movieId, review) {
+    dispatch(DataOperation.postReview(movieId, review));
+  },
 });
-
 export {MoviePage};
 export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

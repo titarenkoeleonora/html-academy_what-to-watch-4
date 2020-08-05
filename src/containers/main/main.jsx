@@ -7,13 +7,15 @@ import ShowMoreButton from "../../components/show-more-button/show-more-button.j
 import PageFooter from "../../components/page-footer/page-footer.jsx";
 import PageHeader from "../../components/page-header/page-header.jsx";
 import {getMovies, getGenresList} from "../../reducer/data/selectors.js";
-import {getActiveGenre, getShownMoviesCount} from "../../reducer/app-state/selectors.js";
-import {MovieCardButtons} from "../../components/movie-card-buttons/movie-card-buttons.jsx";
-import {Operation} from "../../reducer/data/data.js";
+import {getActiveGenre, getShownMoviesCount, getActiveMovie} from "../../reducer/app-state/selectors.js";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator.js";
+import {getFilteredMovies} from "../../utils.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import MovieCardButtons from "../../components/movie-card-buttons/movie-card-buttons.jsx";
 
 const Main = (props) => {
   const {
+    activeMovie,
     promoMovie,
     movies,
     activeGenre,
@@ -21,11 +23,13 @@ const Main = (props) => {
     shownMoviesCount,
     onGenreTabClick,
     onMovieCardClick,
-    onShowMoreButtonClick,
     onPlayButtonClick,
+    onShowMoreButtonClick,
+    authorizationStatus,
   } = props;
 
-  const shownMovies = movies.slice(0, shownMoviesCount);
+  const filteredMovies = getFilteredMovies(movies, activeGenre, shownMoviesCount);
+  const shownMovies = filteredMovies.slice(0, shownMoviesCount);
 
   return (
     <>
@@ -51,7 +55,11 @@ const Main = (props) => {
                 <span className="movie-card__year">{promoMovie.date}</span>
               </p>
 
-              <MovieCardButtons onPlayButtonClick={onPlayButtonClick}/>
+              <MovieCardButtons
+                activeMovie={activeMovie ? activeMovie : promoMovie}
+                onPlayButtonClick={onPlayButtonClick}
+                authorizationStatus={authorizationStatus}
+              />
             </div>
           </div>
         </div>
@@ -71,7 +79,7 @@ const Main = (props) => {
             movies={shownMovies}
             onMovieCardClick={onMovieCardClick}
           />
-          {shownMovies.length < movies.length &&
+          {shownMovies.length > movies.length || shownMovies.length < filteredMovies.length &&
             <ShowMoreButton
               onShowMoreButtonClick={onShowMoreButtonClick}
             />
@@ -85,6 +93,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
+  activeMovie: PropTypes.object,
   promoMovie: PropTypes.object.isRequired,
   movies: PropTypes.arrayOf(
       PropTypes.shape({
@@ -99,14 +108,17 @@ Main.propTypes = {
   onMovieCardClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
+    activeMovie: getActiveMovie(state),
     activeGenre: getActiveGenre(state),
     movies: getMovies(state),
     shownMoviesCount: getShownMoviesCount(state),
-    genresList: getGenresList(state)
+    genresList: getGenresList(state),
+    authorizationStatus: getAuthorizationStatus(state),
   };
 };
 
@@ -116,11 +128,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onShowMoreButtonClick() {
     dispatch(AppStateActionCreator.showMoreMovies());
-  },
-  onMovieCardClick(activeMovie) {
-    dispatch(Operation.loadReviews(activeMovie.id));
-    dispatch(AppStateActionCreator.getActiveMovie(activeMovie));
-  },
+  }
 });
 
 export {Main};

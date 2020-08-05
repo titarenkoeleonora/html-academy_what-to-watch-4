@@ -4,10 +4,10 @@ exports[`Correctly render 1`] = `
 <div
   className="movie-card__buttons"
 >
-  <button
+  <a
     className="btn btn--play movie-card__button"
+    href="/player/undefined"
     onClick={[Function]}
-    type="button"
   >
     <svg
       height="19"
@@ -21,9 +21,10 @@ exports[`Correctly render 1`] = `
     <span>
       Play
     </span>
-  </button>
+  </a>
   <button
     className="btn btn--list movie-card__button"
+    onClick={[Function]}
     type="button"
   >
     <svg
@@ -41,7 +42,8 @@ exports[`Correctly render 1`] = `
   </button>
   <a
     className="btn movie-card__button"
-    href="add-review.html"
+    href="/films/:undefined/review"
+    onClick={[Function]}
   >
     Add review
   </a>

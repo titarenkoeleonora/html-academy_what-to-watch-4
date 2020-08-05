@@ -1,124 +1,111 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
 import Main from "../main/main";
 import MoviePage from "../movie-page/movie-page";
 import MovieVideoplayer from "../../components/movie-videoplayer/movie-videoplayer";
 import withFullScreenVideoplayer from "../../hocs/with-full-screen-videoplayer/with-full-screen-videoplayer";
-import {getIsError, getPromoMovie} from "../../reducer/data/selectors";
+import {getIsError, getPromoMovie, getMovies} from "../../reducer/data/selectors";
 import {getIsMovieVideoplayerActive, getActiveMovie} from "../../reducer/app-state/selectors";
 import ErrorScreen from "../../components/error-screen/error-screen";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator";
 import {getAuthorizationStatus, getIsAuthorizing} from "../../reducer/user/selectors";
 import {Operation as UserOperation, AuthorizationStatus} from "../../reducer/user/user";
+import {Operation as DataOperation} from "../../reducer/data/data";
 import SignIn from "../../components/sign-in/sign-in";
+import history from "../../history.js";
+import {AppRoute} from "../../constants";
+import MyList from "../my-list/my-list";
+import withReview from "../../hocs/with-review/with-review";
+import AddReview from "../../components/add-review/add-review";
 
 const MovieVideoplayerWrapped = withFullScreenVideoplayer(MovieVideoplayer);
+const AddReviewWrapped = withReview(AddReview);
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
   }
 
-  _renderMain() {
-    const {promoMovie, onPlayButtonClick} = this.props;
-
-    return (
-      <Main
-        promoMovie={promoMovie}
-        onPlayButtonClick={onPlayButtonClick}
-      />
-    );
-  }
-
-  _renderMoviePage() {
-    const {activeMovie, promoMovie, onExitButtonClick, onPlayButtonClick, isMovieVideoplayerActive} = this.props;
-    if (isMovieVideoplayerActive) {
-      return (
-        <MovieVideoplayerWrapped
-          activeMovie={activeMovie ? activeMovie : promoMovie}
-          onExitButtonClick={onExitButtonClick}
-        />
-      );
-    }
-
-    return (
-      <MoviePage
-        activeMovie={activeMovie}
-        onPlayButtonClick={onPlayButtonClick}
-      />
-    );
-  }
-
-  _renderSignIn() {
-    const {login} = this.props;
-    return (
-      <SignIn
-        onSubmit={login}
-      />
-    );
-  }
-
-  _renderApp() {
-    const {activeMovie, promoMovie, isMovieVideoplayerActive, isAuthorizing, authorizationStatus, onPlayButtonClick, onExitButtonClick, isError} = this.props;
-
-    if (activeMovie) {
-      return this._renderMoviePage();
-    }
-
-    if (isMovieVideoplayerActive) {
-      return (
-        <MovieVideoplayerWrapped
-          activeMovie={activeMovie ? activeMovie : promoMovie}
-          onExitButtonClick={onExitButtonClick}
-        />
-      );
-    }
-
-    if (authorizationStatus === AuthorizationStatus.AUTH) {
-      return (
-        <Main
-          promoMovie={promoMovie}
-          onPlayButtonClick={onPlayButtonClick}
-        />
-      );
-    }
-
-    if (isAuthorizing) {
-      return this._renderSignIn();
-    }
-
-    if (isError) {
-      return (
-        <ErrorScreen />
-      );
-    }
-
-    return this._renderMain();
-  }
-
   render() {
+    const {activeMovie, movies, login, isMovieVideoplayerActive, promoMovie, authorizationStatus, onPlayButtonClick, onExitButtonClick, onMovieCardClick} = this.props;
+
     return (
-      <BrowserRouter>
+      <Router
+        history={history}
+      >
         <Switch>
-          <Route exact path="/">
-            {this._renderApp()}
-          </Route>
-          <Route exact path="/movie-page">
-            {this._renderMoviePage()}
-          </Route>
-          <Route exact path="/dev-auth">
-            {this._renderSignIn()}
-          </Route>
+          <Route exact path={AppRoute.ROOT}
+            render={() => {
+
+              return <Main
+                promoMovie={promoMovie}
+                onPlayButtonClick={onPlayButtonClick}
+                onMovieCardClick={onMovieCardClick}
+              />;
+            }}
+          />
+          <Route exact path={`${AppRoute.MOVIE}/:id`}
+            render={({match}) => {
+              const id = Number(match.params.id);
+              return <MoviePage
+                id={id}
+                movies={movies}
+                onPlayButtonClick={onPlayButtonClick}
+              />;
+            }}
+          />
+          <Route exact path={AppRoute.LOGIN}
+            render={() => {
+
+              return authorizationStatus !== AuthorizationStatus.AUTH ?
+                <SignIn
+                  onSubmit={login}
+                /> :
+                <Redirect
+                  to={AppRoute.ROOT}
+                />;
+            }}
+          />
+          <Route exact
+            path={`${AppRoute.PLAYER}/:id`}
+            render={() => {
+              if (isMovieVideoplayerActive) {
+                return <MovieVideoplayerWrapped
+                  activeMovie={activeMovie ? activeMovie : promoMovie}
+                  onExitButtonClick={onExitButtonClick}
+                />;
+              }
+              return history.goBack();
+            }}
+          />
+          <Route exact
+            path={AppRoute.MY_LIST}
+            render={() => {
+              return <MyList
+                onMovieCardClick={onMovieCardClick}
+              />;
+            }}
+          />
+          <Route exact
+            path={`${AppRoute.MOVIE}/:id/review`}
+            render={() => {
+              return <AddReviewWrapped/>;
+            }}
+          />
+          <Route
+            component={ErrorScreen}
+          />
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
 
 App.propTypes = {
+  movies: PropTypes.array.isRequired,
   activeMovie: PropTypes.object,
   promoMovie: PropTypes.object.isRequired,
   isError: PropTypes.bool,
@@ -126,8 +113,9 @@ App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   login: PropTypes.func.isRequired,
   isAuthorizing: PropTypes.bool.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
   onExitButtonClick: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
+  onMovieCardClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -137,6 +125,7 @@ const mapStateToProps = (state) => ({
   isError: getIsError(state),
   authorizationStatus: getAuthorizationStatus(state),
   isAuthorizing: getIsAuthorizing(state),
+  movies: getMovies(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -149,6 +138,10 @@ const mapDispatchToProps = (dispatch) => ({
   login(authData) {
     dispatch(UserOperation.login(authData));
   },
+  onMovieCardClick(activeMovie) {
+    dispatch(DataOperation.loadReviews(activeMovie.id));
+    dispatch(AppStateActionCreator.getActiveMovie(activeMovie));
+  }
 });
 
 export {App};

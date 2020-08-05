@@ -3,11 +3,13 @@ import {emptyMovie} from "../../constants";
 import {extend} from "../../utils";
 import {DataActionType} from "../actions/data-action-types";
 import {DataActionCreator} from "../actions/data-action-creator";
+import {AppStateActionCreator} from "../actions/app-state-action-creator";
 
 const initialState = {
   promoMovie: emptyMovie,
   movies: [],
   reviews: [],
+  favoriteMovies: [],
   isError: false,
 };
 
@@ -42,6 +44,48 @@ const Operation = {
         dispatch(DataActionCreator.catchError());
       });
   },
+
+  loadFavoriteMovies: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        if (response.data) {
+          const favoriteMovies = response.data.map((favoriteMovie) => createMovie(favoriteMovie));
+          dispatch(DataActionCreator.loadFavoriteMovies(favoriteMovies));
+        }
+      })
+      .catch(() => {
+        dispatch(DataActionCreator.catchError());
+      });
+  },
+
+  postReview: (movieId, review) => (dispatch, getState, api) => {
+    return api.post(`comments/${movieId}`, {
+      rating: review.rating,
+      comment: review.comment,
+    })
+    .then(() => {
+      dispatch(DataActionCreator.postReview(review));
+      dispatch(Operation.loadReviews(movieId));
+    }).
+    then(() => {
+      dispatch(AppStateActionCreator.addReview(false));
+      dispatch(AppStateActionCreator.toggleFormState(false));
+    })
+    .catch(() => {
+      dispatch(DataActionCreator.catchError());
+    });
+  },
+  changeFavoriteStatus: (movie) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${movie.id}/${movie.isFavorite ? 0 : 1}`)
+    .then(() => {
+      dispatch(Operation.loadMovies());
+      dispatch(Operation.loadPromoMovie());
+      dispatch(Operation.loadFavoriteMovies());
+    })
+    .catch(() => {
+      dispatch(DataActionCreator.catchError());
+    });
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -59,6 +103,11 @@ const reducer = (state = initialState, action) => {
     case DataActionType.LOAD_REVIEWS:
       return extend(state, {
         reviews: action.payload,
+        isError: null,
+      });
+    case DataActionType.LOAD_FAVORITE_MOVIES:
+      return extend(state, {
+        favoriteMovies: action.payload,
         isError: null,
       });
     case DataActionType.CATCH_ERROR:

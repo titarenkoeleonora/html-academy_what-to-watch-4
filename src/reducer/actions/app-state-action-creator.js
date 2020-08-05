@@ -19,6 +19,14 @@ const AppStateActionCreator = {
   activateMovieVideoplayer: (state) => ({
     type: AppStateActionType.ACTIVATE_MOVIE_VIDEOPLAYER,
     payload: state,
+  }),
+  addReview: (bool) => ({
+    type: AppStateActionType.ADD_REVIEW,
+    payload: bool,
+  }),
+  toggleFormState: (bool) => ({
+    type: AppStateActionType.TOGGLE_FORM_STATE,
+    payload: bool,
   })
 };
 

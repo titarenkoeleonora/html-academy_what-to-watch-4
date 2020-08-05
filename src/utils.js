@@ -1,8 +1,10 @@
-const extend = (a, b) => {
+import {MAX_RELATED_MOVIES_COUNT} from "./constants";
+
+export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
-const getTimeElapsed = (duration) => {
+export const getTimeElapsed = (duration) => {
   const seconds = Math.trunc(duration % 60);
   const minutes = Math.trunc(duration / 60);
   const hours = Math.trunc(minutes / 60);
@@ -14,7 +16,15 @@ const getTimeElapsed = (duration) => {
   ].join(`:`);
 };
 
-const validateEmail = (evt) => {
+export const getFilteredMovies = (movies, activeGenre) => {
+  if (activeGenre === `All genres`) {
+    return movies;
+  } else {
+    return movies.filter((movie) => movie.genre === activeGenre);
+  }
+};
+
+export const validateEmail = (evt) => {
   const inputEmail = evt.target.value;
   const pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
 
@@ -23,13 +33,13 @@ const validateEmail = (evt) => {
     return;
   }
 
-  if (!inputEmail.match(pattern)) {
+  if (!pattern.test(inputEmail)) {
     evt.target.setCustomValidity(`Email must be in the format email@mail.com`);
     return;
   }
 };
 
-const validatePassword = (evt) => {
+export const validatePassword = (evt) => {
   const inputPassword = evt.target.value;
 
   if (inputPassword === ``) {
@@ -38,4 +48,9 @@ const validatePassword = (evt) => {
   }
 };
 
-export {extend, getTimeElapsed, validateEmail, validatePassword};
+export const getRelatedMovies = (filteredMovies, activeMovie) => {
+  return (filteredMovies
+    .filter((movie) => movie.genre === activeMovie.genre)
+    .slice(0, MAX_RELATED_MOVIES_COUNT)
+  );
+};

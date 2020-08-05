@@ -1,4 +1,4 @@
-const emptyMovie = {
+export const emptyMovie = {
   id: 0,
   title: `Is loading...`,
   poster: ``,
@@ -18,14 +18,44 @@ const emptyMovie = {
   isFavorite: ``,
 };
 
-const MovieTabs = {
+export const MovieTabs = {
   OVERVIEW: `Overview`,
   DETAILS: `Details`,
   REVIEWS: `Reviews`,
 };
 
-const MAX_SHOWN_MOVIES = 8;
+export const MAX_SHOWN_MOVIES = 8;
 
-const API_TIMEOUT = 5000;
+export const MAX_RELATED_MOVIES_COUNT = 4;
 
-export {emptyMovie, MovieTabs, MAX_SHOWN_MOVIES, API_TIMEOUT};
+export const API_TIMEOUT = 5000;
+
+export const AppRoute = {
+  ROOT: `/`,
+  LOGIN: `/login`,
+  MY_LIST: `/mylist`,
+  MOVIE: `/films`,
+  PLAYER: `/player`,
+};
+
+export const Review = {
+  MIN_LENGTH: 50,
+  MAX_LENGTH: 400,
+};
+
+export const RATING = 5;
+
+export const Rating = {
+  BAD: `Bad`,
+  NORMAL: `Normal`,
+  GOOD: `Good`,
+  VERY_GOOD: `Very good`,
+  AWESOME: `Awesome`
+};
+
+export const Score = {
+  BAD: 3,
+  NORMAL: 5,
+  VERY_GOOD: 8,
+  AWESOME: 10
+};

@@ -4,33 +4,36 @@ import PropTypes from "prop-types";
 import {getAuthorizationStatus, getAuthorizationInfo} from "../../reducer/user/selectors";
 import {connect} from "react-redux";
 import {AuthorizationStatus} from "../../reducer/user/user";
-import {UserActionCreator} from "../../reducer/actions/user-action-creator";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../constants";
 
-const PageHeader = ({authorizationStatus, authorizationInfo, onSignInClick}) => {
+const PageHeader = ({authorizationStatus, authorizationInfo, children}) => {
+
   return (
-    <header className={`page-header ${authorizationStatus === AuthorizationStatus.NO_AUTH ? `user-page__head` : `movie-card__head`}}`}>
-  `   <div className="logo">
-        <a href="main.html" className="logo__link">
+    <header className={`page-header user-page__head`}>
+      <div className="logo">
+        <Link
+          className="logo__link"
+          to={AppRoute.ROOT}>
           <span className="logo__letter logo__letter--1">W</span>
           <span className="logo__letter logo__letter--2">T</span>
           <span className="logo__letter logo__letter--3">W</span>
-        </a>
+        </Link>
       </div>
-
+      {children}
       <div className="user-block">
-
         {authorizationStatus === AuthorizationStatus.AUTH ?
-          <div className="user-block__avatar">
-            <img src={authorizationInfo.avatar} alt={`${authorizationInfo.name} avatar`} width="63" height="63" />
-          </div>
-          : <a
-            href="sign-in.html"
-            className="user-block__link"
-            onClick={(evt) => {
-              evt.preventDefault();
-              onSignInClick();
-            }}
-          >Sign in</a>
+          <Link to={AppRoute.MY_LIST}>
+            <div className="user-block__avatar">
+              <img src={authorizationInfo.avatar} alt={`${authorizationInfo.name} avatar`} width="63" height="63" />
+            </div>
+          </Link>
+          :
+          <Link
+            to={AppRoute.LOGIN}
+            className="user-block__link">
+          Sign in
+          </Link>
         }
 
       </div>
@@ -45,8 +48,8 @@ PageHeader.propTypes = {
     name: PropTypes.string.isRequired,
     avatar: PropTypes.string.isRequired,
   }),
+  children: PropTypes.node,
   authorizationStatus: PropTypes.string.isRequired,
-  onSignInClick: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -54,11 +57,5 @@ const mapStateToProps = (state) => ({
   authorizationInfo: getAuthorizationInfo(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onSignInClick() {
-    dispatch(UserActionCreator.isAuthorizing());
-  }
-});
-
 export {PageHeader};
-export default connect(mapStateToProps, mapDispatchToProps)(PageHeader);
+export default connect(mapStateToProps)(PageHeader);

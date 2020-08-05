@@ -7,6 +7,8 @@ const initialState = {
   activeMovie: null,
   shownMoviesCount: MAX_SHOWN_MOVIES,
   isMovieVideoplayerActive: false,
+  isReviewOpen: false,
+  isFormDisabled: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,6 +28,14 @@ const reducer = (state = initialState, action) => {
     case AppStateActionType.ACTIVATE_MOVIE_VIDEOPLAYER:
       return extend(state, {
         isMovieVideoplayerActive: action.payload,
+      });
+    case (AppStateActionType.ADD_REVIEW):
+      return extend(state, {
+        isReviewOpen: action.payload,
+      });
+    case (AppStateActionType.TOGGLE_FORM_STATE):
+      return extend(state, {
+        isFormDisabled: action.payload,
       });
   }
 

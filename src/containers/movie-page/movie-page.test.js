@@ -5,41 +5,55 @@ import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import NameSpace from "../../reducer/name-space";
 import {AuthorizationStatus} from "../../reducer/user/user";
+import {Router} from "react-router-dom";
+import history from "../../history";
 
 const mockStore = configureStore([]);
 
-const testMovie = {
-  title: `Movie title`,
-  genre: `Genre`,
-  date: 2020,
-  poster: `image`,
-  bgImage: `bgImage`,
-  src: ``,
-  rating: 8.2,
-  votes: 240,
-  director: `Wes Andreson`,
-  starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Tom Wilkinson`, `Owen Wilkinson`, `Adrien Brody`, `Ralph Fiennes`, `Jeff Goldblum`],
-  runTime: 99,
-};
+const id = 0;
 
 const testMovies = [
   {
     id: 0,
-    title: `movie title`,
+    title: `Movie title`,
+    genre: `Genre`,
+    date: 2020,
     poster: `image`,
+    bgImage: `bgImage`,
     src: ``,
+    rating: 8.2,
+    votes: 240,
+    director: `Wes Andreson`,
+    starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Tom Wilkinson`, `Owen Wilkinson`, `Adrien Brody`, `Ralph Fiennes`, `Jeff Goldblum`],
+    runTime: 99,
   },
   {
     id: 1,
-    title: `movie title`,
+    title: `Movie title`,
+    genre: `Genre`,
+    date: 2020,
     poster: `image`,
+    bgImage: `bgImage`,
     src: ``,
+    rating: 8.2,
+    votes: 240,
+    director: `Wes Andreson`,
+    starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Tom Wilkinson`, `Owen Wilkinson`, `Adrien Brody`, `Ralph Fiennes`, `Jeff Goldblum`],
+    runTime: 99,
   },
   {
     id: 2,
-    title: `movie title`,
+    title: `Movie title`,
+    genre: `Genre`,
+    date: 2020,
     poster: `image`,
+    bgImage: `bgImage`,
     src: ``,
+    rating: 8.2,
+    votes: 240,
+    director: `Wes Andreson`,
+    starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Tom Wilkinson`, `Owen Wilkinson`, `Adrien Brody`, `Ralph Fiennes`, `Jeff Goldblum`],
+    runTime: 99,
   }
 ];
 
@@ -65,9 +79,6 @@ it(`Should MoviePage correctly render`, () => {
     [NameSpace.DATA]: {
       movies: testMovies,
     },
-    [NameSpace.APP_STATE]: {
-      activeMovie: testMovie,
-    },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
       isAuthorizing: false,
@@ -77,20 +88,30 @@ it(`Should MoviePage correctly render`, () => {
         name: ``,
         avatar: ``,
       }
-    }
+    },
+    [NameSpace.APP_STATE]: {
+      isReviewOpen: false,
+    },
   });
+
+  store.dispatch = jest.fn();
 
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <MoviePage
-            activeMovie={testMovie}
-            movies={testMovies}
-            reviews={testReviews}
-            onMovieCardClick={() => {}}
-          />
-        </Provider>
-    ).toJSON();
+        <Router history={history}>
+          <Provider store={store}>
+            <MoviePage
+              id={id}
+              movies={testMovies}
+              reviews={testReviews}
+              onMovieCardClick={() => {}}
+            />
+          </Provider>
+        </Router>, {
+          createNodeMock: () => {
+            return {};
+          }
+        }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
