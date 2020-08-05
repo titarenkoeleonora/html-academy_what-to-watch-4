@@ -42,7 +42,7 @@ const MoviePage = ({
     return (
       <AddReviewWrapped
         authorizationStatus={authorizationStatus}
-        activeMovie={activeMovie}
+        id={id}
         onReviewSubmit={onReviewSubmit}
       />
     );

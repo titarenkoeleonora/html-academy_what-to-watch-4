@@ -58,14 +58,14 @@ const Operation = {
       });
   },
 
-  postReview: (movie, review) => (dispatch, getState, api) => {
-    return api.post(`comments/${movie.id}`, {
+  postReview: (id, review) => (dispatch, getState, api) => {
+    return api.post(`comments/${id}`, {
       rating: review.rating,
       comment: review.comment,
     })
     .then(() => {
       dispatch(DataActionCreator.postReview(review));
-      dispatch(Operation.loadReviews(movie.id));
+      dispatch(Operation.loadReviews(id));
     }).
     then(() => {
       dispatch(AppStateActionCreator.addReview(false));
@@ -75,6 +75,7 @@ const Operation = {
       dispatch(DataActionCreator.catchError());
     });
   },
+
   changeFavoriteStatus: (movie) => (dispatch, getState, api) => {
     return api.post(`/favorite/${movie.id}/${movie.isFavorite ? 0 : 1}`)
     .then(() => {

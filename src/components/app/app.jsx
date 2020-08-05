@@ -39,7 +39,8 @@ class App extends PureComponent {
       authorizationStatus,
       onPlayButtonClick,
       onExitButtonClick,
-      onMovieCardClick} = this.props;
+      onMovieCardClick,
+      onReviewSubmit} = this.props;
 
     return (
       <Router
@@ -100,8 +101,12 @@ class App extends PureComponent {
           />
           <PrivateRoute exact
             path={`${AppRoute.MOVIE}/:id/review`}
-            render={() => {
-              return <AddReviewWrapped/>;
+            render={({match}) => {
+              const id = Number(match.params.id);
+              return <AddReviewWrapped
+                id={id}
+                onReviewSubmit={onReviewSubmit}
+              />;
             }}
           />
           <Route
@@ -125,6 +130,7 @@ App.propTypes = {
   onExitButtonClick: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
+  onReviewSubmit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -150,7 +156,10 @@ const mapDispatchToProps = (dispatch) => ({
   onMovieCardClick(activeMovie) {
     dispatch(DataOperation.loadReviews(activeMovie.id));
     dispatch(AppStateActionCreator.getActiveMovie(activeMovie));
-  }
+  },
+  onReviewSubmit(activeMovie, review) {
+    dispatch(DataOperation.postReview(activeMovie.id, review));
+  },
 });
 
 export {App};

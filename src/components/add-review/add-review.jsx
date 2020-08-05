@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 import {AppRoute, RATING} from "../../constants";
 import {getIsError} from "../../reducer/data/selectors";
 import {connect} from "react-redux";
-import {getIsFormDisabled} from "../../reducer/app-state/selectors";
+import {getIsFormDisabled, getActiveMovieById} from "../../reducer/app-state/selectors";
 import {getAuthorizationStatus, getAuthorizationInfo} from "../../reducer/user/selectors";
 
 const AddReview = (props) => {
@@ -20,7 +20,7 @@ const AddReview = (props) => {
     onRatingChange,
     onReviewChange,
   } = props;
-
+  console.log(props);
   return (
     <section className="movie-card movie-card--full" style={{background: activeMovie.backgroundColor}}>
       <div className="movie-card__header">
@@ -34,7 +34,7 @@ const AddReview = (props) => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`${AppRoute.FILM}/${activeMovie.id}`} className="breadcrumbs__link">{activeMovie.title}</Link>              </li>
+                <Link to={`${AppRoute.MOVIE}/${activeMovie.id}`} className="breadcrumbs__link">{activeMovie.title}</Link>              </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
               </li>
@@ -106,11 +106,12 @@ AddReview.propTypes = {
   onReviewChange: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, props) => ({
   isError: getIsError(state),
   isFormDisabled: getIsFormDisabled(state),
   authorizationStatus: getAuthorizationStatus(state),
   authorizationInfo: getAuthorizationInfo(state),
+  activeMovie: getActiveMovieById(state, props.id)
 });
 
 export {AddReview};

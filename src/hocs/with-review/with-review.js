@@ -1,6 +1,9 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Review} from '../../constants';
+import {getActiveMovieById} from '../../reducer/app-state/selectors';
+import {connect} from 'react-redux';
+import history from '../../history';
 
 const withReview = (Component) => {
   class WithReview extends PureComponent {
@@ -41,6 +44,7 @@ const withReview = (Component) => {
 
       evt.preventDefault();
       onReviewSubmit(activeMovie, review);
+      history.goBack();
     }
 
     render() {
@@ -64,7 +68,11 @@ const withReview = (Component) => {
     onReviewSubmit: PropTypes.func.isRequired,
   };
 
-  return WithReview;
+  const mapStateToProps = (state, props) => ({
+    activeMovie: getActiveMovieById(state, props.id),
+  });
+
+  return connect(mapStateToProps)(WithReview);
 };
 
 export default withReview;

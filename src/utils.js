@@ -55,6 +55,10 @@ export const getRelatedMovies = (filteredMovies, activeMovie) => {
   );
 };
 
+export const getMovieById = (movies, id) => {
+  return movies.find((movie) => movie.id === id);
+};
+
 export const getRatingLevel = (rating) => {
   if (rating >= 0 && rating < 3) {
     return `Bad`;
