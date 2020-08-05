@@ -11,11 +11,19 @@ import {AppStateActionCreator} from "../../reducer/actions/app-state-action-crea
 
 const MovieCardButtons = ({activeMovie, authorizationStatus, onAddReviewClick, changeMovieIsFavorite, onPlayButtonClick}) => {
   const handleMovieListButtonClick = () => {
-
-    return authorizationStatus === AuthorizationStatus.AUTH
-      ? changeMovieIsFavorite(activeMovie)
-      : history.push(AppRoute.LOGIN);
+    return authorizationStatus === AuthorizationStatus.AUTH ?
+      changeMovieIsFavorite(activeMovie)
+      :
+      history.push(AppRoute.LOGIN);
   };
+
+  const handleAddReviewButtonClick = () => {
+    return authorizationStatus === AuthorizationStatus.AUTH ?
+      onAddReviewClick()
+      :
+      history.push(AppRoute.LOGIN);
+  };
+
 
   const addToMyList = (
     <button
@@ -59,16 +67,14 @@ const MovieCardButtons = ({activeMovie, authorizationStatus, onAddReviewClick, c
         <span>Play</span>
       </Link>
       {activeMovie.isFavorite ? removeFromMyList : addToMyList}
-      {authorizationStatus === AuthorizationStatus.AUTH &&
-        <Link
-          to={`${AppRoute.MOVIE}/:${activeMovie.id}/review`}
-          className="btn movie-card__button"
-          onClick={(evt) => {
-            evt.preventDefault();
-            onAddReviewClick();
-          }}
-        >Add review</Link>
-      }
+      <Link
+        to={`${AppRoute.MOVIE}/${activeMovie.id}/review`}
+        className="btn movie-card__button"
+        onClick={(evt) => {
+          evt.preventDefault();
+          handleAddReviewButtonClick();
+        }}
+      >Add review</Link>
     </div>
   );
 };

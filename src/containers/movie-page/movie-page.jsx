@@ -14,8 +14,8 @@ import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import MovieCardButtons from "../../components/movie-card-buttons/movie-card-buttons.jsx";
 import ErrorScreen from "../../components/error-screen/error-screen.jsx";
 import withReview from "../../hocs/with-review/with-review.js";
-import AddReview from "../../components/add-review/add-review.jsx";
 import {getIsReviewOpen} from "../../reducer/app-state/selectors.js";
+import AddReview from "../../components/add-review/add-review.jsx";
 
 const TabsWrapped = withActiveTab(Tabs);
 const AddReviewWrapped = withReview(AddReview);
@@ -42,7 +42,7 @@ const MoviePage = ({
     return (
       <AddReviewWrapped
         authorizationStatus={authorizationStatus}
-        id={id}
+        activeMovie={activeMovie}
         onReviewSubmit={onReviewSubmit}
       />
     );

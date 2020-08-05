@@ -7,11 +7,16 @@ import ShowMoreButton from "../../components/show-more-button/show-more-button.j
 import PageFooter from "../../components/page-footer/page-footer.jsx";
 import PageHeader from "../../components/page-header/page-header.jsx";
 import {getMovies, getGenresList} from "../../reducer/data/selectors.js";
-import {getActiveGenre, getShownMoviesCount, getActiveMovie} from "../../reducer/app-state/selectors.js";
+import {getActiveGenre, getShownMoviesCount, getActiveMovie, getIsReviewOpen} from "../../reducer/app-state/selectors.js";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator.js";
 import {getFilteredMovies} from "../../utils.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import MovieCardButtons from "../../components/movie-card-buttons/movie-card-buttons.jsx";
+import withReview from "../../hocs/with-review/with-review.js";
+import AddReview from "../../components/add-review/add-review.jsx";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
+
+const AddReviewWrapped = withReview(AddReview);
 
 const Main = (props) => {
   const {
@@ -26,10 +31,20 @@ const Main = (props) => {
     onPlayButtonClick,
     onShowMoreButtonClick,
     authorizationStatus,
+    isReviewOpen,
+    onReviewSubmit
   } = props;
 
   const filteredMovies = getFilteredMovies(movies, activeGenre, shownMoviesCount);
   const shownMovies = filteredMovies.slice(0, shownMoviesCount);
+
+  if (isReviewOpen) {
+    return <AddReviewWrapped
+      authorizationStatus={authorizationStatus}
+      activeMovie={promoMovie}
+      onReviewSubmit={onReviewSubmit}
+    />;
+  }
 
   return (
     <>
@@ -109,6 +124,8 @@ Main.propTypes = {
   onShowMoreButtonClick: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func,
   authorizationStatus: PropTypes.string.isRequired,
+  isReviewOpen: PropTypes.bool.isRequired,
+  onReviewSubmit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -119,6 +136,7 @@ const mapStateToProps = (state) => {
     shownMoviesCount: getShownMoviesCount(state),
     genresList: getGenresList(state),
     authorizationStatus: getAuthorizationStatus(state),
+    isReviewOpen: getIsReviewOpen(state),
   };
 };
 
@@ -128,7 +146,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onShowMoreButtonClick() {
     dispatch(AppStateActionCreator.showMoreMovies());
-  }
+  },
+  onReviewSubmit(movieId, review) {
+    dispatch(DataOperation.postReview(movieId, review));
+  },
 });
 
 export {Main};

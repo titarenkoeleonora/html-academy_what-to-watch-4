@@ -27,7 +27,7 @@ const withReview = (Component) => {
     _handleReviewChange(evt) {
       this.setState({
         comment: evt.target.value,
-        isSubmitDisabled: (evt.target.value.length < Review.MIN_LENGTH) || (evt.target.value.length > Review.MAX_LENGTH),
+        isSubmitDisabled: (evt.target.value.length < Review.MIN_LENGTH) || (evt.target.value.length > Review.MAX_LENGTH) ? true : false,
       });
     }
 
@@ -40,7 +40,7 @@ const withReview = (Component) => {
       };
 
       evt.preventDefault();
-      onReviewSubmit(activeMovie.id, review);
+      onReviewSubmit(activeMovie, review);
     }
 
     render() {
@@ -63,6 +63,8 @@ const withReview = (Component) => {
     activeMovie: PropTypes.object.isRequired,
     onReviewSubmit: PropTypes.func.isRequired,
   };
+
+  return WithReview;
 };
 
 export default withReview;

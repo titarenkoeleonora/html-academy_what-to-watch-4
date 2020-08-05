@@ -7,25 +7,30 @@ import {AppRoute, RATING} from "../../constants";
 import {getIsError} from "../../reducer/data/selectors";
 import {connect} from "react-redux";
 import {getIsFormDisabled} from "../../reducer/app-state/selectors";
+import {getAuthorizationStatus, getAuthorizationInfo} from "../../reducer/user/selectors";
 
 const AddReview = (props) => {
   const {activeMovie,
-    onReviewFormSubmit,
+    onSubmitClick,
     isFormDisabled,
-    isSubmitButtonDisabled,
+    isSubmitDisabled,
     isError,
+    authorizationStatus,
+    authorizationInfo,
+    onRatingChange,
+    onReviewChange,
   } = props;
 
   return (
     <section className="movie-card movie-card--full" style={{background: activeMovie.backgroundColor}}>
       <div className="movie-card__header">
         <div className="movie-card__bg">
-          <img src={activeMovie.background} alt={activeMovie.title} />
+          <img src={activeMovie.bgImage} alt={activeMovie.title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <PageHeader>
+        <PageHeader authorizationStatus={authorizationStatus} authorizationInfo={authorizationInfo}>
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
@@ -43,9 +48,9 @@ const AddReview = (props) => {
       </div>
 
       <div className="add-review">
-        <form action="#" className="add-review__form" onSubmit={onReviewFormSubmit} disabled={isFormDisabled}>
+        <form action="#" className="add-review__form" onSubmit={onSubmitClick} disabled={isFormDisabled}>
           <div className="rating">
-            <div className="rating__stars">
+            <div className="rating__stars" onChange={onRatingChange}>
               {new Array(RATING)
                 .fill().map((item, index) => {
                   const rating = index + 1;
@@ -61,10 +66,15 @@ const AddReview = (props) => {
           </div>
 
           <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
+            <textarea
+              className="add-review__textarea"
+              name="review-text" id="review-text"
+              placeholder="Review text"
+              onChange={onReviewChange}
+            ></textarea>
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit" disabled={isSubmitButtonDisabled}
-                style={{cursor: `${isSubmitButtonDisabled ? `default` : `pointer`}`}}
+              <button className="add-review__btn" type="submit" disabled={isSubmitDisabled}
+                style={{cursor: `${isSubmitDisabled ? `default` : `pointer`}`}}
               >Post</button>
             </div>
 
@@ -81,15 +91,26 @@ const AddReview = (props) => {
 
 AddReview.propTypes = {
   activeMovie: PropTypes.object.isRequired,
-  onReviewFormSubmit: PropTypes.func.isRequired,
-  isSubmitButtonDisabled: PropTypes.bool.isRequired,
-  isError: PropTypes.bool.isRequired,
+  onSubmitClick: PropTypes.func.isRequired,
+  isSubmitDisabled: PropTypes.bool,
+  isError: PropTypes.bool,
   isFormDisabled: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  authorizationInfo: PropTypes.exact({
+    id: PropTypes.number.isRequired,
+    email: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+  }),
+  onRatingChange: PropTypes.func.isRequired,
+  onReviewChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isError: getIsError(state),
   isFormDisabled: getIsFormDisabled(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  authorizationInfo: getAuthorizationInfo(state),
 });
 
 export {AddReview};

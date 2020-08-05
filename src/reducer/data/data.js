@@ -58,14 +58,15 @@ const Operation = {
       });
   },
 
-  postReview: (movieId, review) => (dispatch, getState, api) => {
-    return api.post(`comments/${movieId}`, {
+  postReview: (movie, review) => (dispatch, getState, api) => {
+    console.log(movie.id)
+    return api.post(`comments/${movie.id}`, {
       rating: review.rating,
       comment: review.comment,
     })
     .then(() => {
       dispatch(DataActionCreator.postReview(review));
-      dispatch(Operation.loadReviews(movieId));
+      dispatch(Operation.loadReviews(movie.id));
     }).
     then(() => {
       dispatch(AppStateActionCreator.addReview(false));
