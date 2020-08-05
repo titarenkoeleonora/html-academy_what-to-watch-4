@@ -90,7 +90,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(DataOperation.changeFavoriteStatus(movie));
   },
   onAddReviewClick() {
-    console.log(`dd`);
     dispatch(AppStateActionCreator.addReview(true));
   }
 });

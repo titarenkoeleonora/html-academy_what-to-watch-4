@@ -20,7 +20,6 @@ import {AppRoute} from "../../constants";
 import MyList from "../my-list/my-list";
 import withReview from "../../hocs/with-review/with-review";
 import AddReview from "../../components/add-review/add-review";
-import {PrivateRoute} from "../../components/private-route/private-route";
 
 const MovieVideoplayerWrapped = withFullScreenVideoplayer(MovieVideoplayer);
 const AddReviewWrapped = withReview(AddReview);
@@ -82,7 +81,7 @@ class App extends PureComponent {
               return history.goBack();
             }}
           />
-          <PrivateRoute exact
+          <Route exact
             path={AppRoute.MY_LIST}
             render={() => {
               return <MyList
@@ -90,7 +89,7 @@ class App extends PureComponent {
               />;
             }}
           />
-          <PrivateRoute exact
+          <Route exact
             path={`${AppRoute.MOVIE}/:id/review`}
             render={() => {
               return <AddReviewWrapped/>;

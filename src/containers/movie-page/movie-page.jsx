@@ -15,7 +15,7 @@ import MovieCardButtons from "../../components/movie-card-buttons/movie-card-but
 import ErrorScreen from "../../components/error-screen/error-screen.jsx";
 import withReview from "../../hocs/with-review/with-review.js";
 import AddReview from "../../components/add-review/add-review.jsx";
-import { getIsReviewOpen } from "../../reducer/app-state/selectors.js";
+import {getIsReviewOpen} from "../../reducer/app-state/selectors.js";
 
 const TabsWrapped = withActiveTab(Tabs);
 const AddReviewWrapped = withReview(AddReview);
@@ -123,6 +123,8 @@ MoviePage.propTypes = {
   onMovieCardClick: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func,
   authorizationStatus: PropTypes.string.isRequired,
+  isReviewOpen: PropTypes.bool.isRequired,
+  onReviewSubmit: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => ({
   movies: getMovies(state),
