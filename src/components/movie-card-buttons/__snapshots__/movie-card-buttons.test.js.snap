@@ -42,7 +42,7 @@ exports[`Correctly render 1`] = `
   </button>
   <a
     className="btn movie-card__button"
-    href="/films/:undefined/review"
+    href="/films/undefined/review"
     onClick={[Function]}
   >
     Add review

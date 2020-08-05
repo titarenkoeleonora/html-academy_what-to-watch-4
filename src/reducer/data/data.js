@@ -59,7 +59,6 @@ const Operation = {
   },
 
   postReview: (movie, review) => (dispatch, getState, api) => {
-    console.log(movie.id)
     return api.post(`comments/${movie.id}`, {
       rating: review.rating,
       comment: review.comment,

@@ -57,6 +57,7 @@ it(`Render App`, () => {
       activeGenre: `All genres`,
       activeMovie: testMovie,
       isMovieVideoplayerActive: false,
+      isReviewOpen: false,
     },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
