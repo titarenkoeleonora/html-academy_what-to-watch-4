@@ -51,6 +51,45 @@ it(`Should change activeMovie`, () => {
   });
 });
 
+it(`Should activate movie videoplayer`, () => {
+  expect(reducer(
+      {isMovieVideoplayerActive: false},
+      {
+        type: AppStateActionType.ACTIVATE_MOVIE_VIDEOPLAYER,
+        payload: true,
+      }
+  ))
+  .toEqual({
+    isMovieVideoplayerActive: true,
+  });
+});
+
+it(`Should add review`, () => {
+  expect(reducer(
+      {isReviewOpen: false},
+      {
+        type: AppStateActionType.ADD_REVIEW,
+        payload: true,
+      }
+  ))
+  .toEqual({
+    isReviewOpen: true,
+  });
+});
+
+it(`Should toggle form state`, () => {
+  expect(reducer(
+      {isFormDisabled: false},
+      {
+        type: AppStateActionType.TOGGLE_FORM_STATE,
+        payload: true,
+      }
+  ))
+  .toEqual({
+    isFormDisabled: true,
+  });
+});
+
 
 describe(`Action creators work correctly`, () => {
   it(`Action creators get active genre`, () => {
