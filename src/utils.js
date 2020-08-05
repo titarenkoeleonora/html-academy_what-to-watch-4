@@ -1,4 +1,4 @@
-import {MAX_RELATED_MOVIES_COUNT} from "./constants";
+import {MAX_RELATED_MOVIES_COUNT, MAX_SHOWN_MOVIES} from "./constants";
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);

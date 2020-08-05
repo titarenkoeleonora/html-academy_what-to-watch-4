@@ -73,6 +73,7 @@ const MovieCardButtons = ({activeMovie, authorizationStatus, onAddReviewClick, c
         onClick={(evt) => {
           evt.preventDefault();
           handleAddReviewButtonClick();
+          history.push(`${AppRoute.MOVIE}/${activeMovie.id}/review`);
         }}
       >Add review</Link>
     </div>

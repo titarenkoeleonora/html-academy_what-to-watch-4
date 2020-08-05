@@ -106,7 +106,6 @@ const Main = (props) => {
     </>
   );
 };
-
 Main.propTypes = {
   activeMovie: PropTypes.object,
   promoMovie: PropTypes.object.isRequired,
@@ -127,7 +126,6 @@ Main.propTypes = {
   isReviewOpen: PropTypes.bool.isRequired,
   onReviewSubmit: PropTypes.func.isRequired,
 };
-
 const mapStateToProps = (state) => {
   return {
     activeMovie: getActiveMovie(state),
@@ -139,7 +137,6 @@ const mapStateToProps = (state) => {
     isReviewOpen: getIsReviewOpen(state),
   };
 };
-
 const mapDispatchToProps = (dispatch) => ({
   onGenreTabClick(genre) {
     dispatch(AppStateActionCreator.getActiveGenre(genre));
@@ -151,6 +148,5 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(DataOperation.postReview(movieId, review));
   },
 });
-
 export {Main};
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

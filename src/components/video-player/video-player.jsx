@@ -27,15 +27,19 @@ export default class VideoPlayer extends PureComponent {
       video.poster = ``;
       video.muted = null;
     }
+    clearTimeout(this._playTimeout);
   }
 
   componentDidUpdate() {
     const video = this._videoRef.current;
 
     if (this.props.isPlaying) {
-      video.play();
+      this._playTimeout = setTimeout(() => {
+        video.play();
+      }, 1000);
     } else {
       video.load();
+      clearTimeout(this._playTimeout);
     }
   }
 
