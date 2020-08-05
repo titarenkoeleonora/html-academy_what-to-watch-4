@@ -28,6 +28,7 @@ it(`Correctly render`, () => {
             onPlayButtonClick={()=>{}}
             changeMovieIsFavorite={()=>{}}
             authorizationStatus={AuthorizationStatus.AUTH}
+            onAddReviewClick={()=>{}}
           />
         </Router>
     );

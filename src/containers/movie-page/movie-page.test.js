@@ -88,7 +88,10 @@ it(`Should MoviePage correctly render`, () => {
         name: ``,
         avatar: ``,
       }
-    }
+    },
+    [NameSpace.APP_STATE]: {
+      isReviewOpen: false,
+    },
   });
 
   store.dispatch = jest.fn();
