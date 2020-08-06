@@ -112,6 +112,7 @@ const mapStateToProps = (state, props) => ({
   isFormDisabled: getIsFormDisabled(state),
   authorizationStatus: getAuthorizationStatus(state),
   authorizationInfo: getAuthorizationInfo(state),
+  activeMovie: getActiveMovieById(state, props.id)
 });
 
 export {AddReview};
