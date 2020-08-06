@@ -31,7 +31,8 @@ class App extends PureComponent {
   }
 
   render() {
-    const {activeMovie,
+    const {
+      activeMovie,
       movies,
       login,
       isMovieVideoplayerActive,

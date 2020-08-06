@@ -21,6 +21,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         shownMoviesCount: state.shownMoviesCount + action.payload,
       });
+    case (AppStateActionType.RESET_SHOW_MORE_MOVIES):
+      return extend(state, {
+        shownMoviesCount: action.payload,
+      });
     case AppStateActionType.ACTIVE_MOVIE:
       return extend(state, {
         activeMovie: action.payload,

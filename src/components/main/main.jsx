@@ -7,7 +7,7 @@ import ShowMoreButton from "../../components/show-more-button/show-more-button.j
 import PageFooter from "../../components/page-footer/page-footer.jsx";
 import PageHeader from "../../components/page-header/page-header.jsx";
 import {getMovies, getGenresList} from "../../reducer/data/selectors.js";
-import {getActiveGenre, getShownMoviesCount, getActiveMovie, getIsReviewOpen, getActiveMovieById} from "../../reducer/app-state/selectors.js";
+import {getActiveGenre, getShownMoviesCount, getIsReviewOpen, getActiveMovieById} from "../../reducer/app-state/selectors.js";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator.js";
 import {getFilteredMovies} from "../../utils.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
@@ -139,6 +139,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => ({
   onGenreTabClick(genre) {
+    dispatch(AppStateActionCreator.resetShowMoreMovies());
     dispatch(AppStateActionCreator.getActiveGenre(genre));
   },
   onShowMoreButtonClick() {

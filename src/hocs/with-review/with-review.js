@@ -70,7 +70,7 @@ const withReview = (Component) => {
   };
 
   const mapStateToProps = (state, props) => ({
-    activeMovie: getActiveMovieById(state, props.id),
+    // activeMovie: getActiveMovieById(state, props.id),
   });
 
   return connect(mapStateToProps)(WithReview);

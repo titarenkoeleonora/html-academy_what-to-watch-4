@@ -21,7 +21,6 @@ const AddReview = (props) => {
     onReviewChange,
   } = props;
 
-  console.log(activeMovie);
   return (
     <section className="movie-card movie-card--full" style={{background: activeMovie.backgroundColor}}>
       <div className="movie-card__header">

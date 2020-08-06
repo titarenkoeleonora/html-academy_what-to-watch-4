@@ -1,4 +1,7 @@
 import {MAX_RELATED_MOVIES_COUNT} from "./constants";
+import moment from "moment";
+import momentDurationFormatSetup from 'moment-duration-format';
+momentDurationFormatSetup(moment);
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
@@ -81,4 +84,8 @@ export const getRatingLevel = (rating) => {
   }
 
   return null;
+};
+
+export const formatMovieDuration = (duration) => {
+  return moment.duration(duration, `minutes`).format(`h[h] m[m]`);
 };

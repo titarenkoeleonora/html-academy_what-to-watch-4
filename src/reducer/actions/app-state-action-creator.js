@@ -12,6 +12,11 @@ const AppStateActionCreator = {
     payload: MAX_SHOWN_MOVIES,
   }),
 
+  resetShowMoreMovies: () => ({
+    type: AppStateActionType.RESET_SHOW_MORE_MOVIES,
+    payload: MAX_SHOWN_MOVIES,
+  }),
+
   getActiveMovie: (activeMovie) => ({
     type: AppStateActionType.ACTIVE_MOVIE,
     payload: activeMovie,
