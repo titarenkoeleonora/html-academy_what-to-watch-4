@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import MovieVideoplayer from "../movie-videoplayer/movie-videoplayer";
 import withFullScreenVideoplayer from "../../hocs/with-full-screen-videoplayer/with-full-screen-videoplayer";
 import {getIsError, getPromoMovie, getMovies} from "../../reducer/data/selectors";
-import {getIsMovieVideoplayerActive, getActiveMovie} from "../../reducer/app-state/selectors";
+import {getIsMovieVideoplayerActive, getActiveMovie, getActiveMovieById} from "../../reducer/app-state/selectors";
 import ErrorScreen from "../error-screen/error-screen";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator";
 import {getAuthorizationStatus, getIsAuthorizing} from "../../reducer/user/selectors";
@@ -49,8 +49,8 @@ class App extends PureComponent {
         <Switch>
           <Route exact path={AppRoute.ROOT}
             render={() => {
-
               return <Main
+                activeMovie={activeMovie ? activeMovie : promoMovie}
                 promoMovie={promoMovie}
                 onPlayButtonClick={onPlayButtonClick}
                 onMovieCardClick={onMovieCardClick}
@@ -105,6 +105,7 @@ class App extends PureComponent {
               const id = Number(match.params.id);
               return <AddReviewWrapped
                 id={id}
+                activeMovie={activeMovie ? activeMovie : promoMovie}
                 onReviewSubmit={onReviewSubmit}
               />;
             }}
@@ -133,9 +134,9 @@ App.propTypes = {
   onReviewSubmit: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, props) => ({
   promoMovie: getPromoMovie(state),
-  activeMovie: getActiveMovie(state),
+  activeMovie: getActiveMovieById(state, props.id),
   isMovieVideoplayerActive: getIsMovieVideoplayerActive(state),
   isError: getIsError(state),
   authorizationStatus: getAuthorizationStatus(state),

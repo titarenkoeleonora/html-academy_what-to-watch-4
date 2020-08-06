@@ -10,6 +10,7 @@ const withReview = (Component) => {
     constructor(props) {
       super(props);
 
+      console.log(props);
       this.state = {
         rating: 5,
         comment: ``,
@@ -69,7 +70,7 @@ const withReview = (Component) => {
   };
 
   const mapStateToProps = (state, props) => ({
-    activeMovie: getActiveMovieById(state, props.id),
+    // activeMovie: getActiveMovieById(state, props.id),
   });
 
   return connect(mapStateToProps)(WithReview);

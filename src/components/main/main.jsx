@@ -7,7 +7,7 @@ import ShowMoreButton from "../../components/show-more-button/show-more-button.j
 import PageFooter from "../../components/page-footer/page-footer.jsx";
 import PageHeader from "../../components/page-header/page-header.jsx";
 import {getMovies, getGenresList} from "../../reducer/data/selectors.js";
-import {getActiveGenre, getShownMoviesCount, getActiveMovie, getIsReviewOpen} from "../../reducer/app-state/selectors.js";
+import {getActiveGenre, getShownMoviesCount, getActiveMovie, getIsReviewOpen, getActiveMovieById} from "../../reducer/app-state/selectors.js";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator.js";
 import {getFilteredMovies} from "../../utils.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
@@ -35,6 +35,7 @@ const Main = (props) => {
     onReviewSubmit
   } = props;
 
+  console.log(props);
   const filteredMovies = getFilteredMovies(movies, activeGenre, shownMoviesCount);
   const shownMovies = filteredMovies.slice(0, shownMoviesCount);
 
@@ -128,7 +129,6 @@ Main.propTypes = {
 };
 const mapStateToProps = (state) => {
   return {
-    activeMovie: getActiveMovie(state),
     activeGenre: getActiveGenre(state),
     movies: getMovies(state),
     shownMoviesCount: getShownMoviesCount(state),

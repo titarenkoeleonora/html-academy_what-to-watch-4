@@ -21,6 +21,7 @@ const AddReview = (props) => {
     onReviewChange,
   } = props;
 
+  console.log(activeMovie);
   return (
     <section className="movie-card movie-card--full" style={{background: activeMovie.backgroundColor}}>
       <div className="movie-card__header">
@@ -111,7 +112,6 @@ const mapStateToProps = (state, props) => ({
   isFormDisabled: getIsFormDisabled(state),
   authorizationStatus: getAuthorizationStatus(state),
   authorizationInfo: getAuthorizationInfo(state),
-  activeMovie: getActiveMovieById(state, props.id)
 });
 
 export {AddReview};
