@@ -38,6 +38,17 @@ it(`Reducer should show more movie cards by butoon click`, () => {
   });
 });
 
+it(`Reducer should reset shown movies count`, () => {
+  expect(reducer({
+    shownMoviesCount: 16,
+  }, {
+    type: AppStateActionType.RESET_SHOW_MORE_MOVIES,
+    payload: 8,
+  })).toEqual({
+    shownMoviesCount: 8,
+  });
+});
+
 it(`Should change activeMovie`, () => {
   expect(reducer(
       {activeMovie: null},
@@ -48,6 +59,45 @@ it(`Should change activeMovie`, () => {
   ))
   .toEqual({
     activeMovie: testMovie,
+  });
+});
+
+it(`Should activate movie videoplayer`, () => {
+  expect(reducer(
+      {isMovieVideoplayerActive: false},
+      {
+        type: AppStateActionType.ACTIVATE_MOVIE_VIDEOPLAYER,
+        payload: true,
+      }
+  ))
+  .toEqual({
+    isMovieVideoplayerActive: true,
+  });
+});
+
+it(`Should add review`, () => {
+  expect(reducer(
+      {isReviewOpen: false},
+      {
+        type: AppStateActionType.ADD_REVIEW,
+        payload: true,
+      }
+  ))
+  .toEqual({
+    isReviewOpen: true,
+  });
+});
+
+it(`Should toggle form state`, () => {
+  expect(reducer(
+      {isFormDisabled: false},
+      {
+        type: AppStateActionType.TOGGLE_FORM_STATE,
+        payload: true,
+      }
+  ))
+  .toEqual({
+    isFormDisabled: true,
   });
 });
 

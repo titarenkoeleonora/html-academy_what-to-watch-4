@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Review} from '../../constants';
+import history from '../../history';
 
 const withReview = (Component) => {
   class WithReview extends PureComponent {
@@ -27,7 +28,7 @@ const withReview = (Component) => {
     _handleReviewChange(evt) {
       this.setState({
         comment: evt.target.value,
-        isSubmitDisabled: (evt.target.value.length < Review.MIN_LENGTH) || (evt.target.value.length > Review.MAX_LENGTH),
+        isSubmitDisabled: (evt.target.value.length < Review.MIN_LENGTH) || (evt.target.value.length > Review.MAX_LENGTH) ? true : false,
       });
     }
 
@@ -40,7 +41,8 @@ const withReview = (Component) => {
       };
 
       evt.preventDefault();
-      onReviewSubmit(activeMovie.id, review);
+      onReviewSubmit(activeMovie, review);
+      history.goBack();
     }
 
     render() {
@@ -60,9 +62,11 @@ const withReview = (Component) => {
   }
 
   WithReview.propTypes = {
-    activeMovie: PropTypes.object.isRequired,
+    activeMovie: PropTypes.object,
     onReviewSubmit: PropTypes.func.isRequired,
   };
+
+  return WithReview;
 };
 
 export default withReview;

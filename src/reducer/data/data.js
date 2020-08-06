@@ -1,12 +1,12 @@
 import {createMovie} from "../../adapter/movies";
-import {emptyMovie} from "../../constants";
+import {EmptyMovie} from "../../constants";
 import {extend} from "../../utils";
 import {DataActionType} from "../actions/data-action-types";
 import {DataActionCreator} from "../actions/data-action-creator";
 import {AppStateActionCreator} from "../actions/app-state-action-creator";
 
 const initialState = {
-  promoMovie: emptyMovie,
+  promoMovie: EmptyMovie,
   movies: [],
   reviews: [],
   favoriteMovies: [],
@@ -58,14 +58,14 @@ const Operation = {
       });
   },
 
-  postReview: (movieId, review) => (dispatch, getState, api) => {
-    return api.post(`comments/${movieId}`, {
+  postReview: (id, review) => (dispatch, getState, api) => {
+    return api.post(`comments/${id}`, {
       rating: review.rating,
       comment: review.comment,
     })
     .then(() => {
       dispatch(DataActionCreator.postReview(review));
-      dispatch(Operation.loadReviews(movieId));
+      dispatch(Operation.loadReviews(id));
     }).
     then(() => {
       dispatch(AppStateActionCreator.addReview(false));
@@ -75,6 +75,7 @@ const Operation = {
       dispatch(DataActionCreator.catchError());
     });
   },
+
   changeFavoriteStatus: (movie) => (dispatch, getState, api) => {
     return api.post(`/favorite/${movie.id}/${movie.isFavorite ? 0 : 1}`)
     .then(() => {

@@ -57,6 +57,7 @@ it(`Main correctly render`, () => {
       activeGenre: `All genres`,
       activeMovie: testMovie,
       isMovieVideoplayerActive: false,
+      isReviewOpen: false,
     },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -83,6 +84,7 @@ it(`Main correctly render`, () => {
               onGenreTabClick={() => {}}
               onMovieCardClick={() => {}}
               onPlayButtonClick={() => {}}
+              isReviewOpen={() => {}}
             />
           </Provider>
         </Router>

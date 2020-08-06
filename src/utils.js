@@ -1,4 +1,8 @@
 import {MAX_RELATED_MOVIES_COUNT} from "./constants";
+import moment from "moment";
+import momentDurationFormatSetup from 'moment-duration-format';
+
+momentDurationFormatSetup(moment);
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
@@ -53,4 +57,36 @@ export const getRelatedMovies = (filteredMovies, activeMovie) => {
     .filter((movie) => movie.genre === activeMovie.genre)
     .slice(0, MAX_RELATED_MOVIES_COUNT)
   );
+};
+
+export const getMovieById = (movies, id) => {
+  return movies.find((movie) => movie.id === id);
+};
+
+export const getRatingLevel = (rating) => {
+  if (rating >= 0 && rating < 3) {
+    return `Bad`;
+  }
+
+  if (rating >= 3 && rating < 5) {
+    return `Normal`;
+  }
+
+  if (rating >= 5 && rating < 8) {
+    return `Good`;
+  }
+
+  if (rating >= 8 && rating < 10) {
+    return `Very good`;
+  }
+
+  if (rating === 10) {
+    return `Awesome`;
+  }
+
+  return null;
+};
+
+export const formatMovieDuration = (duration) => {
+  return moment.duration(duration, `minutes`).format(`h[h] m[m]`);
 };

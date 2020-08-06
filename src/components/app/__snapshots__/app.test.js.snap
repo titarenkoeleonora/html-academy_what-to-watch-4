@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Main correctly render 1`] = `
+exports[`Render App 1`] = `
 Array [
   <section
     className="movie-card"
@@ -140,6 +140,13 @@ Array [
                 My list
               </span>
             </button>
+            <a
+              className="btn movie-card__button"
+              href="/films/undefined/review"
+              onClick={[Function]}
+            >
+              Add review
+            </a>
           </div>
         </div>
       </div>
@@ -177,7 +184,9 @@ Array [
             className="catalog__genres-link"
             href="#"
             onClick={[Function]}
-          />
+          >
+            genre
+          </a>
         </li>
       </ul>
       <div

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import {getRatingLevel} from "../../utils";
 
 const MovieOverview = ({movie}) => {
   return (
@@ -7,7 +8,7 @@ const MovieOverview = ({movie}) => {
       <div className="movie-rating">
         <div className="movie-rating__score">{movie.rating}</div>
         <p className="movie-rating__meta">
-          <span className="movie-rating__level">{}</span>
+          <span className="movie-rating__level">{getRatingLevel(movie.rating)}</span>
           <span className="movie-rating__count">{movie.votes} ratings</span>
         </p>
       </div>
