@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import MovieVideoplayer from "../movie-videoplayer/movie-videoplayer";
 import withFullScreenVideoplayer from "../../hocs/with-full-screen-videoplayer/with-full-screen-videoplayer";
 import {getIsError, getPromoMovie, getMovies} from "../../reducer/data/selectors";
-import {getIsMovieVideoplayerActive, getActiveMovie, getActiveMovieById} from "../../reducer/app-state/selectors";
+import {getIsMovieVideoplayerActive, getActiveMovieById} from "../../reducer/app-state/selectors";
 import ErrorScreen from "../error-screen/error-screen";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator";
 import {getAuthorizationStatus, getIsAuthorizing} from "../../reducer/user/selectors";
@@ -63,6 +63,7 @@ class App extends PureComponent {
               const id = Number(match.params.id);
               return <MoviePage
                 id={id}
+                activeMovie={activeMovie}
                 movies={movies}
                 onPlayButtonClick={onPlayButtonClick}
               />;

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">68.75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/16</span>
+                <span class='fraction'>11/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.14% </span>
+                <span class="strong">66.67% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/7</span>
+                <span class='fraction'>6/9</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.33% </span>
+                <span class="strong">66.67% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/15</span>
+                <span class='fraction'>10/15</span>
             </div>
         
             
@@ -207,9 +207,7 @@
 <a name='L148'></a><a href='#L148'>148</a>
 <a name='L149'></a><a href='#L149'>149</a>
 <a name='L150'></a><a href='#L150'>150</a>
-<a name='L151'></a><a href='#L151'>151</a>
-<a name='L152'></a><a href='#L152'>152</a>
-<a name='L153'></a><a href='#L153'>153</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L151'></a><a href='#L151'>151</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -228,10 +226,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -253,10 +247,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -317,7 +307,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -351,18 +343,23 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
 import PropTypes from 'prop-types';
+&nbsp;
 import {connect} from "react-redux";
 import MoviesList from "../../components/movies-list/movies-list.jsx";
 import GenresList from "../../components/genres-list/genres-list.jsx";
@@ -370,16 +367,13 @@ import ShowMoreButton from "../../components/show-more-button/show-more-button.j
 import PageFooter from "../../components/page-footer/page-footer.jsx";
 import PageHeader from "../../components/page-header/page-header.jsx";
 import {getMovies, getGenresList} from "../../reducer/data/selectors.js";
-import {getActiveGenre, getShownMoviesCount, getActiveMovie, getIsReviewOpen} from "../../reducer/app-state/selectors.js";
+import {getActiveGenre, getShownMoviesCount, getIsReviewOpen} from "../../reducer/app-state/selectors.js";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator.js";
 import {getFilteredMovies} from "../../utils.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import MovieCardButtons from "../../components/movie-card-buttons/movie-card-buttons.jsx";
-import withReview from "../../hocs/with-review/with-review.js";
-import AddReview from "../../components/add-review/add-review.jsx";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
-&nbsp;
-const AddReviewWrapped = withReview(AddReview);
+import ErrorScreen from "../error-screen/error-screen.jsx";
 &nbsp;
 const Main = (props) =&gt; {
   const {
@@ -394,19 +388,13 @@ const Main = (props) =&gt; {
     onPlayButtonClick,
     onShowMoreButtonClick,
     authorizationStatus,
-    isReviewOpen,
-    onReviewSubmit
   } = props;
 &nbsp;
   const filteredMovies = getFilteredMovies(movies, activeGenre, shownMoviesCount);
   const shownMovies = filteredMovies.slice(0, shownMoviesCount);
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (isReviewOpen) {
-<span class="cstat-no" title="statement not covered" >    return &lt;AddReviewWrapped</span>
-      authorizationStatus={authorizationStatus}
-      activeMovie={promoMovie}
-      onReviewSubmit={onReviewSubmit}
-    /&gt;;
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (!activeMovie || !promoMovie) {
+<span class="cstat-no" title="statement not covered" >    return &lt;ErrorScreen/&gt;;</span>
   }
 &nbsp;
   return (
@@ -469,6 +457,7 @@ const Main = (props) =&gt; {
     &lt;/&gt;
   );
 };
+&nbsp;
 Main.propTypes = {
   activeMovie: PropTypes.object,
   promoMovie: PropTypes.object.isRequired,
@@ -489,9 +478,9 @@ Main.propTypes = {
   isReviewOpen: PropTypes.bool.isRequired,
   onReviewSubmit: PropTypes.func.isRequired,
 };
+&nbsp;
 const mapStateToProps = (state) =&gt; {
   return {
-    activeMovie: getActiveMovie(state),
     activeGenre: getActiveGenre(state),
     movies: getMovies(state),
     shownMoviesCount: getShownMoviesCount(state),
@@ -500,17 +489,22 @@ const mapStateToProps = (state) =&gt; {
     isReviewOpen: getIsReviewOpen(state),
   };
 };
+&nbsp;
 const mapDispatchToProps = (dispatch) =&gt; ({
 <span class="fstat-no" title="function not covered" >  on</span>GenreTabClick(genre) {
+<span class="cstat-no" title="statement not covered" >    dispatch(AppStateActionCreator.resetShowMoreMovies());</span>
 <span class="cstat-no" title="statement not covered" >    dispatch(AppStateActionCreator.getActiveGenre(genre));</span>
   },
+&nbsp;
 <span class="fstat-no" title="function not covered" >  on</span>ShowMoreButtonClick() {
 <span class="cstat-no" title="statement not covered" >    dispatch(AppStateActionCreator.showMoreMovies());</span>
   },
+&nbsp;
 <span class="fstat-no" title="function not covered" >  on</span>ReviewSubmit(movieId, review) {
 <span class="cstat-no" title="statement not covered" >    dispatch(DataOperation.postReview(movieId, review));</span>
   },
 });
+&nbsp;
 export {Main};
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
 &nbsp;</pre></td></tr></table></pre>
@@ -520,7 +514,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Main);
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Aug 06 2020 04:14:46 GMT+0300 (GMT+03:00)
+                at Thu Aug 06 2020 17:47:27 GMT+0300 (GMT+03:00)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

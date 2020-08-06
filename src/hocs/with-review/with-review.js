@@ -1,8 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Review} from '../../constants';
-import {getActiveMovieById} from '../../reducer/app-state/selectors';
-import {connect} from 'react-redux';
 import history from '../../history';
 
 const withReview = (Component) => {
@@ -10,7 +8,6 @@ const withReview = (Component) => {
     constructor(props) {
       super(props);
 
-      console.log(props);
       this.state = {
         rating: 5,
         comment: ``,
@@ -65,15 +62,11 @@ const withReview = (Component) => {
   }
 
   WithReview.propTypes = {
-    activeMovie: PropTypes.object.isRequired,
+    activeMovie: PropTypes.object,
     onReviewSubmit: PropTypes.func.isRequired,
   };
 
-  const mapStateToProps = (state, props) => ({
-    // activeMovie: getActiveMovieById(state, props.id),
-  });
-
-  return connect(mapStateToProps)(WithReview);
+  return WithReview;
 };
 
 export default withReview;

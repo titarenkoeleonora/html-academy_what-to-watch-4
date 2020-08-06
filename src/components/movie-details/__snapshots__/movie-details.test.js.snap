@@ -85,7 +85,7 @@ exports[`Correctly render 1`] = `
       <span
         className="movie-card__details-value"
       >
-        99
+        1h 39m
       </span>
     </p>
     <p

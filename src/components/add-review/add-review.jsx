@@ -8,9 +8,11 @@ import {getIsError} from "../../reducer/data/selectors";
 import {connect} from "react-redux";
 import {getIsFormDisabled, getActiveMovieById} from "../../reducer/app-state/selectors";
 import {getAuthorizationStatus, getAuthorizationInfo} from "../../reducer/user/selectors";
+import ErrorScreen from "../error-screen/error-screen";
 
 const AddReview = (props) => {
-  const {activeMovie,
+  const {
+    activeMovie,
     onSubmitClick,
     isFormDisabled,
     isSubmitDisabled,
@@ -20,6 +22,10 @@ const AddReview = (props) => {
     onRatingChange,
     onReviewChange,
   } = props;
+
+  if (!activeMovie) {
+    return <ErrorScreen/>;
+  }
 
   return (
     <section className="movie-card movie-card--full" style={{background: activeMovie.backgroundColor}}>
@@ -111,7 +117,7 @@ const mapStateToProps = (state, props) => ({
   isFormDisabled: getIsFormDisabled(state),
   authorizationStatus: getAuthorizationStatus(state),
   authorizationInfo: getAuthorizationInfo(state),
-  activeMovie: getActiveMovieById(state, props.id)
+  activeMovie: getActiveMovieById(state, props.id),
 });
 
 export {AddReview};

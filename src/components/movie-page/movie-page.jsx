@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
+
 import {connect} from "react-redux";
 import withActiveTab from "../../hocs/with-active-tab/with-active-tab.js";
 import Tabs from "../../components/tabs/tabs.jsx";
@@ -12,13 +13,10 @@ import {AppStateActionCreator} from "../../reducer/actions/app-state-action-crea
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import MovieCardButtons from "../../components/movie-card-buttons/movie-card-buttons.jsx";
 import ErrorScreen from "../../components/error-screen/error-screen.jsx";
-import withReview from "../../hocs/with-review/with-review.js";
 import {getIsReviewOpen, getActiveMovieById} from "../../reducer/app-state/selectors.js";
-import AddReview from "../../components/add-review/add-review.jsx";
 import {MAX_RELATED_MOVIES_COUNT} from "../../constants.js";
 
 const TabsWrapped = withActiveTab(Tabs);
-const AddReviewWrapped = withReview(AddReview);
 
 
 class MoviePage extends PureComponent {
@@ -45,27 +43,15 @@ class MoviePage extends PureComponent {
 
   render() {
     const {
-      id,
       activeMovie,
       onMovieCardClick,
       onPlayButtonClick,
       reviews,
       authorizationStatus,
-      isReviewOpen,
-      onReviewSubmit} = this.props;
+    } = this.props;
 
     if (!activeMovie) {
       return <ErrorScreen/>;
-    }
-
-    if (isReviewOpen) {
-      return (
-        <AddReviewWrapped
-          authorizationStatus={authorizationStatus}
-          id={id}
-          onReviewSubmit={onReviewSubmit}
-        />
-      );
     }
 
     return (

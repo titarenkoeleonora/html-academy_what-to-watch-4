@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+
 import {connect} from "react-redux";
 import MoviesList from "../../components/movies-list/movies-list.jsx";
 import GenresList from "../../components/genres-list/genres-list.jsx";
@@ -7,16 +8,13 @@ import ShowMoreButton from "../../components/show-more-button/show-more-button.j
 import PageFooter from "../../components/page-footer/page-footer.jsx";
 import PageHeader from "../../components/page-header/page-header.jsx";
 import {getMovies, getGenresList} from "../../reducer/data/selectors.js";
-import {getActiveGenre, getShownMoviesCount, getIsReviewOpen, getActiveMovieById} from "../../reducer/app-state/selectors.js";
+import {getActiveGenre, getShownMoviesCount, getIsReviewOpen} from "../../reducer/app-state/selectors.js";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator.js";
 import {getFilteredMovies} from "../../utils.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import MovieCardButtons from "../../components/movie-card-buttons/movie-card-buttons.jsx";
-import withReview from "../../hocs/with-review/with-review.js";
-import AddReview from "../../components/add-review/add-review.jsx";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
-
-const AddReviewWrapped = withReview(AddReview);
+import ErrorScreen from "../error-screen/error-screen.jsx";
 
 const Main = (props) => {
   const {
@@ -31,20 +29,13 @@ const Main = (props) => {
     onPlayButtonClick,
     onShowMoreButtonClick,
     authorizationStatus,
-    isReviewOpen,
-    onReviewSubmit
   } = props;
 
-  console.log(props);
   const filteredMovies = getFilteredMovies(movies, activeGenre, shownMoviesCount);
   const shownMovies = filteredMovies.slice(0, shownMoviesCount);
 
-  if (isReviewOpen) {
-    return <AddReviewWrapped
-      authorizationStatus={authorizationStatus}
-      activeMovie={promoMovie}
-      onReviewSubmit={onReviewSubmit}
-    />;
+  if (!activeMovie || !promoMovie) {
+    return <ErrorScreen/>;
   }
 
   return (
@@ -107,6 +98,7 @@ const Main = (props) => {
     </>
   );
 };
+
 Main.propTypes = {
   activeMovie: PropTypes.object,
   promoMovie: PropTypes.object.isRequired,
@@ -127,6 +119,7 @@ Main.propTypes = {
   isReviewOpen: PropTypes.bool.isRequired,
   onReviewSubmit: PropTypes.func.isRequired,
 };
+
 const mapStateToProps = (state) => {
   return {
     activeGenre: getActiveGenre(state),
@@ -137,17 +130,21 @@ const mapStateToProps = (state) => {
     isReviewOpen: getIsReviewOpen(state),
   };
 };
+
 const mapDispatchToProps = (dispatch) => ({
   onGenreTabClick(genre) {
     dispatch(AppStateActionCreator.resetShowMoreMovies());
     dispatch(AppStateActionCreator.getActiveGenre(genre));
   },
+
   onShowMoreButtonClick() {
     dispatch(AppStateActionCreator.showMoreMovies());
   },
+
   onReviewSubmit(movieId, review) {
     dispatch(DataOperation.postReview(movieId, review));
   },
 });
+
 export {Main};
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
