@@ -27,6 +27,7 @@ const testMovies = [
     director: `Wes Andreson`,
     starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Tom Wilkinson`, `Owen Wilkinson`, `Adrien Brody`, `Ralph Fiennes`, `Jeff Goldblum`],
     runTime: 39,
+    isFavorite: true,
   },
   {
     id: 1,
@@ -41,20 +42,7 @@ const testMovies = [
     director: `David Yates`,
     starring: [`Eddie Redmayne`, `Katherine Waterston`, `Dan Fogler`, `Alison Sudol`, `Ezra Miller`, `Zoë Kravitz`, `Callum Turner`, `Claudia Kim`, `William Nadylam`, `Kevin Guthrie`, `Jude Law`, `Johnny Depp`],
     runTime: `2h 14m`,
-  },
-  {
-    id: 2,
-    title: `Bohemian Rhapsod`,
-    genre: `Drama`,
-    date: 2019,
-    poster: `img/bohemian-rhapsody.jpg`,
-    bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
-    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    rating: 9.5,
-    votes: 650,
-    director: `Bryan Singer`,
-    starring: [`Rami Malek`, `Lucy Boynton`, `Gwilym Lee`, `Ben Hardy`, `Joe Mazzello`, `Aidan Gillen`, `Allen Leech`],
-    runTime: 14,
+    isFavorite: true,
   }
 ];
 
@@ -65,15 +53,13 @@ const testReviews = [
     date: `December 24, 2016`,
     rating: 8.9,
     comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years`,
-  },
-  {
-    id: 2,
-    user: {},
-    date: `November 18, 2015`,
-    rating: 8.0,
-    comment: `Anderson's films are too precious for some, but for those of us willing to lose ourselves in them, they're a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.`,
-  },
+  }
 ];
+
+const testPostReview = {
+  comment: ``,
+  rating: 5,
+};
 
 const api = createAPI(() => {});
 
@@ -114,6 +100,18 @@ describe(`Data Reducer`, () => {
       payload: testReviews,
     })).toEqual({
       reviews: testReviews,
+      isError: null,
+    });
+  });
+
+  it(`Reducer should update favorite movies by load`, () => {
+    expect(reducer({
+      favoriteMovies: [],
+    }, {
+      type: DataActionType.LOAD_FAVORITE_MOVIES,
+      payload: testMovies,
+    })).toEqual({
+      favoriteMovies: testMovies,
       isError: null,
     });
   });
@@ -176,4 +174,60 @@ describe(`Operations work correctly`, () => {
             });
           });
   });
+
+  it(`Should make a correct API call to /favorite`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const moviesLoad = Operation.loadFavoriteMovies(1);
+
+    apiMock
+      .onGet(`/favorite`)
+      .reply(200, [{fake: true}]);
+
+    return moviesLoad(dispatch, () => {}, api)
+          .then(() => {
+            expect(dispatch).toHaveBeenCalledTimes(1);
+            expect(dispatch).toHaveBeenCalledWith({
+              type: DataActionType.LOAD_FAVORITE_MOVIES,
+              payload: [createMovie({fake: true})],
+            });
+          });
+  });
 });
+
+it(`Should send review to /comments/1`, () => {
+  const apiMock = new MockAdapter(api);
+  const dispatch = jest.fn();
+  const postReview = Operation.postReview(1, testPostReview);
+
+  apiMock
+    .onPost(`/comments/1`)
+    .reply(200, [{fake: true}]);
+
+  return postReview(dispatch, () => {}, api)
+        .then(() => {
+          expect(dispatch).toHaveBeenCalledWith({
+            type: DataActionType.POST_REVIEW,
+            payload: testPostReview,
+          });
+        });
+});
+
+// it(`Should send favorite movie status`, () => {
+//   const apiMock = new MockAdapter(api);
+//   const dispatch = jest.fn();
+
+//   const checkMovieIsFavorite = Operation.changeFavoriteStatus(1, true);
+
+//   apiMock
+//     .onPost(`/favorite/1/1`)
+//     .reply(200, [{fake: true}]);
+
+//   return checkMovieIsFavorite(dispatch, () => {}, api)
+//         .then(() => {
+//           expect(dispatch).toHaveBeenCalledWith({
+//             type: DataActionType.LOAD_FAVORITE_MOVIES,
+//             payload: testMovies,
+//           });
+//         });
+// });
