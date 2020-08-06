@@ -213,21 +213,18 @@ it(`Should send review to /comments/1`, () => {
         });
 });
 
-// it(`Should send favorite movie status`, () => {
-//   const apiMock = new MockAdapter(api);
-//   const dispatch = jest.fn();
+it(`Should send favorite movie status`, () => {
+  const apiMock = new MockAdapter(api);
+  const dispatch = jest.fn();
 
-//   const checkMovieIsFavorite = Operation.changeFavoriteStatus(1, true);
+  const checkMovieIsFavorite = Operation.changeFavoriteStatus(1);
 
-//   apiMock
-//     .onPost(`/favorite/1/1`)
-//     .reply(200, [{fake: true}]);
+  apiMock
+    .onPost(`/favorite/1/1`)
+    .reply(200, [{fake: true}]);
 
-//   return checkMovieIsFavorite(dispatch, () => {}, api)
-//         .then(() => {
-//           expect(dispatch).toHaveBeenCalledWith({
-//             type: DataActionType.LOAD_FAVORITE_MOVIES,
-//             payload: testMovies,
-//           });
-//         });
-// });
+  return checkMovieIsFavorite(dispatch, () => {}, api)
+        .then(() => {
+          expect(dispatch).toHaveBeenCalledTimes(1);
+        });
+});

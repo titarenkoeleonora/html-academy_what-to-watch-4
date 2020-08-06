@@ -1,6 +1,7 @@
 import {MAX_RELATED_MOVIES_COUNT} from "./constants";
 import moment from "moment";
 import momentDurationFormatSetup from 'moment-duration-format';
+
 momentDurationFormatSetup(moment);
 
 export const extend = (a, b) => {

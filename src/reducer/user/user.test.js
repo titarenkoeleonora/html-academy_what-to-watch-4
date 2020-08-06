@@ -75,6 +75,17 @@ it(`Reducer should get user data`, () => {
   });
 });
 
+it(`Reducer should get authorizing status`, () => {
+  expect(reducer({
+    isAuthorizing: true,
+  }, {
+    type: UserActionType.IS_AUTHORIZING,
+    payload: true,
+  })).toEqual({
+    isAuthorizing: true,
+  });
+});
+
 describe(`Action creators work correctly`, () => {
   it(`Action creator for require authorization returns correct action`, () => {
     expect(UserActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)).toEqual({

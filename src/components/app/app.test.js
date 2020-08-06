@@ -62,12 +62,6 @@ it(`Render App`, () => {
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
       isAuthorizing: false,
-      authorizationInfo: {
-        id: 0,
-        email: ``,
-        name: ``,
-        avatar: ``,
-      }
     }
   });
 
@@ -75,12 +69,23 @@ it(`Render App`, () => {
     .create(
         <Provider store={store}>
           <App
-            movie={testMovie}
+            promoMovie={testMovie}
             activeMovie={testMovie}
             movies={testMovies}
+            login={() => {}}
+            isMovieVideoplayerActive={false}
+            authorizationStatus={AuthorizationStatus.NO_AUTH}
+            onPlayButtonClick={() => {}}
+            onExitButtonClick={() => {}}
+            onMovieCardClick={() => {}}
+            onReviewSubmit={() => {}}
           />
         </Provider>
-    ).toJSON();
+        , {
+          createNodeMock: () => {
+            return {};
+          }
+        }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

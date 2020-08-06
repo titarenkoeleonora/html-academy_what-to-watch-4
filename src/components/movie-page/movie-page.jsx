@@ -113,7 +113,7 @@ class MoviePage extends PureComponent {
 
 MoviePage.propTypes = {
   id: PropTypes.number.isRequired,
-  activeMovie: PropTypes.object.isRequired,
+  activeMovie: PropTypes.object,
   movies: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,

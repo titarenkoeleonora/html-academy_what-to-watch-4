@@ -1,12 +1,12 @@
 import {createMovie} from "../../adapter/movies";
-import {emptyMovie} from "../../constants";
+import {EmptyMovie} from "../../constants";
 import {extend} from "../../utils";
 import {DataActionType} from "../actions/data-action-types";
 import {DataActionCreator} from "../actions/data-action-creator";
 import {AppStateActionCreator} from "../actions/app-state-action-creator";
 
 const initialState = {
-  promoMovie: emptyMovie,
+  promoMovie: EmptyMovie,
   movies: [],
   reviews: [],
   favoriteMovies: [],

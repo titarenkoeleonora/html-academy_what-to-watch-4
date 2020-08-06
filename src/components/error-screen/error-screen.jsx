@@ -1,6 +1,8 @@
 import React from "react";
 
 const ErrorScreen = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <>
       <div className="user-page">
@@ -30,7 +32,7 @@ const ErrorScreen = () => {
           </div>
 
           <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
+            <p>© {currentYear} What to watch Ltd.</p>
           </div>
         </footer>
       </div>

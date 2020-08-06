@@ -1,4 +1,4 @@
-export const emptyMovie = {
+export const EmptyMovie = {
   id: 0,
   title: `Is loading...`,
   poster: ``,
