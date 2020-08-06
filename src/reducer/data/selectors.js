@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
-import {getActiveGenre} from '../app-state/selectors';
 import NameSpace from '../name-space';
+import {getActiveGenre} from '../app-state/selectors';
 
 export const getPromoMovie = (state) => state[NameSpace.DATA].promoMovie;
 
