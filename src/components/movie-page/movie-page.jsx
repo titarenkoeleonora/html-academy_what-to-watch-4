@@ -54,7 +54,6 @@ class MoviePage extends PureComponent {
       isReviewOpen,
       onReviewSubmit} = this.props;
 
-      console.log(this.props);
     if (!activeMovie) {
       return <ErrorScreen/>;
     }
@@ -124,15 +123,11 @@ class MoviePage extends PureComponent {
           </>
     );
   }
-
-  // const activeMovie = movies.find((movie) => movie.id === id);
-  // const relatedMovies = getRelatedMovies(movies, activeMovie);
-
-
 }
 
 MoviePage.propTypes = {
   id: PropTypes.number.isRequired,
+  activeMovie: PropTypes.object.isRequired,
   movies: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
@@ -153,6 +148,7 @@ MoviePage.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   isReviewOpen: PropTypes.bool.isRequired,
   onReviewSubmit: PropTypes.func.isRequired,
+  loadReviews: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => ({
