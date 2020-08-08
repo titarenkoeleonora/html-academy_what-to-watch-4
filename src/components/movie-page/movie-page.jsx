@@ -27,9 +27,9 @@ class MoviePage extends PureComponent {
   }
 
   componentDidMount() {
-    const {id, loadReviews} = this.props;
+    const {id, onLoadReviews} = this.props;
 
-    loadReviews(id);
+    onLoadReviews(id);
   }
 
   _getRelatedMovies() {
@@ -113,13 +113,44 @@ class MoviePage extends PureComponent {
 
 MoviePage.propTypes = {
   id: PropTypes.number.isRequired,
-  activeMovie: PropTypes.object,
-  movies: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        poster: PropTypes.string.isRequired,
-      }).isRequired
-  ).isRequired,
+  activeMovie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    bgImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    runTime: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    date: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+  }),
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    bgImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    runTime: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    date: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+  })).isRequired,
   reviews: PropTypes.arrayOf(
       PropTypes.shape({
         user: PropTypes.object.isRequired,
@@ -134,7 +165,7 @@ MoviePage.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   isReviewOpen: PropTypes.bool.isRequired,
   onReviewSubmit: PropTypes.func.isRequired,
-  loadReviews: PropTypes.func.isRequired,
+  onLoadReviews: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => ({
@@ -153,7 +184,7 @@ const mapDispatchToProps = (dispatch) => ({
   onReviewSubmit(movieId, review) {
     dispatch(DataOperation.postReview(movieId, review));
   },
-  loadReviews(id) {
+  onLoadReviews(id) {
     dispatch(DataOperation.loadReviews(id));
   }
 });

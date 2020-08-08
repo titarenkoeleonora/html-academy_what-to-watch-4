@@ -9,13 +9,13 @@ Array [
       className="movie-card__bg"
       style={
         Object {
-          "background": undefined,
+          "background": "",
         }
       }
     >
       <img
         alt="Movie title"
-        src="bgImage"
+        src=""
       />
     </div>
     <h1
@@ -75,7 +75,7 @@ Array [
           <img
             alt="Movie title"
             height="327"
-            src="image"
+            src=""
             width="218"
           />
         </div>
@@ -106,7 +106,7 @@ Array [
           >
             <a
               className="btn btn--play movie-card__button"
-              href="/player/undefined"
+              href="/player/0"
               onClick={[Function]}
             >
               <svg
@@ -128,12 +128,12 @@ Array [
               type="button"
             >
               <svg
-                height="20"
-                viewBox="0 0 19 20"
-                width="19"
+                height="14"
+                viewBox="0 0 18 14"
+                width="18"
               >
                 <use
-                  xlinkHref="#add"
+                  xlinkHref="#in-list"
                 />
               </svg>
               <span>
@@ -142,7 +142,7 @@ Array [
             </button>
             <a
               className="btn movie-card__button"
-              href="/films/undefined/review"
+              href="/films/0/review"
               onClick={[Function]}
             >
               Add review
@@ -184,7 +184,9 @@ Array [
             className="catalog__genres-link"
             href="#"
             onClick={[Function]}
-          />
+          >
+            Genre
+          </a>
         </li>
       </ul>
       <div
@@ -201,6 +203,8 @@ Array [
           >
             <video
               height="175"
+              poster=""
+              src=""
               width="280"
             />
           </div>
@@ -213,7 +217,7 @@ Array [
               href="/films/0"
               onClick={[Function]}
             >
-              movie title
+              Movie title
             </a>
           </h3>
         </article>
@@ -228,6 +232,8 @@ Array [
           >
             <video
               height="175"
+              poster=""
+              src=""
               width="280"
             />
           </div>
@@ -240,7 +246,7 @@ Array [
               href="/films/1"
               onClick={[Function]}
             >
-              movie title
+              Movie title
             </a>
           </h3>
         </article>
@@ -255,6 +261,8 @@ Array [
           >
             <video
               height="175"
+              poster=""
+              src=""
               width="280"
             />
           </div>
@@ -267,7 +275,7 @@ Array [
               href="/films/2"
               onClick={[Function]}
             >
-              movie title
+              Movie title
             </a>
           </h3>
         </article>

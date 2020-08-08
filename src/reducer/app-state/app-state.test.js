@@ -1,15 +1,26 @@
 import {reducer, initialState} from "./app-state.js";
-import {MAX_SHOWN_MOVIES} from "../../constants.js";
+import {MAX_SHOWN_MOVIES, ALL_GENRES_GENRE} from "../../constants.js";
 import {AppStateActionType} from "../actions/app-state-action-types.js";
 import {AppStateActionCreator} from "../actions/app-state-action-creator.js";
 
 const testMovie = {
-  title: `The Grand Budapest Hotel`,
-  genre: `Drama`,
-  date: 2014,
-  poster: `img/the-grand-budapest-hotel-poster.jpg`,
-  bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
-  src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  id: 0,
+  title: `Movie title`,
+  poster: ``,
+  previewImage: ``,
+  bgImage: ``,
+  backgroundColor: ``,
+  src: ``,
+  previewVideoLink: ``,
+  description: ``,
+  rating: 8.2,
+  votes: 240,
+  director: `Wes Andreson`,
+  starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Tom Wilkinson`, `Owen Wilkinson`, `Adrien Brody`, `Ralph Fiennes`, `Jeff Goldblum`],
+  runTime: 99,
+  genre: `Genre`,
+  date: 2020,
+  isFavorite: true,
 };
 
 it(`Returns initial state at application start`, ()=>{
@@ -18,12 +29,12 @@ it(`Returns initial state at application start`, ()=>{
 
 it(`Change genre`, ()=>{
   expect(reducer({
-    activeGenre: `All genres`,
+    activeGenre: ALL_GENRES_GENRE,
   }, {
     type: AppStateActionType.ACTIVE_GENRE,
-    payload: `All genres`,
+    payload: ALL_GENRES_GENRE,
   })).toEqual({
-    activeGenre: `All genres`,
+    activeGenre: ALL_GENRES_GENRE,
   });
 });
 

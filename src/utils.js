@@ -1,4 +1,4 @@
-import {MAX_RELATED_MOVIES_COUNT} from "./constants";
+import {MAX_RELATED_MOVIES_COUNT, ALL_GENRES_GENRE} from "./constants";
 import moment from "moment";
 import momentDurationFormatSetup from 'moment-duration-format';
 
@@ -21,7 +21,7 @@ export const getTimeElapsed = (duration) => {
 };
 
 export const getFilteredMovies = (movies, activeGenre) => {
-  if (activeGenre === `All genres`) {
+  if (activeGenre === ALL_GENRES_GENRE) {
     return movies;
   } else {
     return movies.filter((movie) => movie.genre === activeGenre);
@@ -41,6 +41,8 @@ export const validateEmail = (evt) => {
     evt.target.setCustomValidity(`Email must be in the format email@mail.com`);
     return;
   }
+
+  evt.target.setCustomValidity(``);
 };
 
 export const validatePassword = (evt) => {
@@ -50,6 +52,8 @@ export const validatePassword = (evt) => {
     evt.target.setCustomValidity(`Password is required`);
     return;
   }
+
+  evt.target.setCustomValidity(``);
 };
 
 export const getRelatedMovies = (filteredMovies, activeMovie) => {

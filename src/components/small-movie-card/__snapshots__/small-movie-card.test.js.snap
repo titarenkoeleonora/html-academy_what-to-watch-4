@@ -12,6 +12,8 @@ exports[`Small movie card correctly render 1`] = `
   >
     <video
       height="175"
+      poster=""
+      src=""
       width="280"
     />
   </div>
@@ -24,7 +26,7 @@ exports[`Small movie card correctly render 1`] = `
       href="/films/0"
       onClick={[Function]}
     >
-      movie title
+      Movie title
     </a>
   </h3>
 </article>

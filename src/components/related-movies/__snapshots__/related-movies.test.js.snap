@@ -15,6 +15,8 @@ exports[`RelatedMovies should render correctly 1`] = `
     >
       <video
         height="175"
+        poster=""
+        src=""
         width="280"
       />
     </div>
@@ -27,7 +29,7 @@ exports[`RelatedMovies should render correctly 1`] = `
         href="/films/0"
         onClick={[Function]}
       >
-        movie title
+        Movie title
       </a>
     </h3>
   </article>
@@ -42,6 +44,8 @@ exports[`RelatedMovies should render correctly 1`] = `
     >
       <video
         height="175"
+        poster=""
+        src=""
         width="280"
       />
     </div>
@@ -54,7 +58,7 @@ exports[`RelatedMovies should render correctly 1`] = `
         href="/films/1"
         onClick={[Function]}
       >
-        movie title
+        Movie title
       </a>
     </h3>
   </article>
@@ -69,6 +73,8 @@ exports[`RelatedMovies should render correctly 1`] = `
     >
       <video
         height="175"
+        poster=""
+        src=""
         width="280"
       />
     </div>
@@ -81,7 +87,7 @@ exports[`RelatedMovies should render correctly 1`] = `
         href="/films/2"
         onClick={[Function]}
       >
-        movie title
+        Movie title
       </a>
     </h3>
   </article>

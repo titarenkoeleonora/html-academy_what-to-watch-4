@@ -8,7 +8,7 @@ Array [
     <div
       className="movie-rating__score"
     >
-      8.9
+      8.2
     </div>
     <p
       className="movie-rating__meta"
@@ -29,7 +29,9 @@ Array [
   <div
     className="movie-card__text"
   >
-    <p />
+    <p>
+      
+    </p>
     <p
       className="movie-card__director"
     >

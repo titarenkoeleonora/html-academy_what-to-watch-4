@@ -8,7 +8,7 @@ it(`Correctly ErrorScreen render`, () => {
         <MyList
           authorizationStatus={`AUTH`}
           onMovieCardClick={() => {}}
-          loadFavoriteMovies={() => {}}
+          onLoadFavoriteMovies={() => {}}
         />
     );
 

@@ -3,45 +3,84 @@ import {initialState, reducer, Operation} from './data';
 import {createAPI} from '../../api';
 import {createMovie} from '../../adapter/movies';
 import {DataActionType} from '../actions/data-action-types';
+import {SubmitStatus} from '../../constants';
 
 const testMovie = {
-  title: `The Grand Budapest Hotel`,
-  genre: `Drama`,
-  date: 2014,
-  poster: `img/the-grand-budapest-hotel-poster.jpg`,
-  bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
-  src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  id: 0,
+  title: `Movie title`,
+  poster: ``,
+  previewImage: ``,
+  bgImage: ``,
+  backgroundColor: ``,
+  src: ``,
+  previewVideoLink: ``,
+  description: ``,
+  rating: 8.2,
+  votes: 240,
+  director: `Wes Andreson`,
+  starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Tom Wilkinson`, `Owen Wilkinson`, `Adrien Brody`, `Ralph Fiennes`, `Jeff Goldblum`],
+  runTime: 99,
+  genre: `Genre`,
+  date: 2020,
+  isFavorite: true,
 };
 
 const testMovies = [
   {
     id: 0,
-    title: `The Grand Budapest Hotel`,
-    genre: `Drama`,
-    date: 2014,
-    poster: `img/the-grand-budapest-hotel-poster.jpg`,
-    bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
-    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    rating: 8.9,
+    title: `Movie title`,
+    poster: ``,
+    previewImage: ``,
+    bgImage: ``,
+    backgroundColor: ``,
+    src: ``,
+    previewVideoLink: ``,
+    description: ``,
+    rating: 8.2,
     votes: 240,
     director: `Wes Andreson`,
     starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Tom Wilkinson`, `Owen Wilkinson`, `Adrien Brody`, `Ralph Fiennes`, `Jeff Goldblum`],
-    runTime: 39,
+    runTime: 99,
+    genre: `Genre`,
+    date: 2020,
     isFavorite: true,
   },
   {
     id: 1,
-    title: `Fantastic Beasts: The Crimes of Grindelwald`,
-    genre: `Fantasy`,
-    date: 2018,
-    poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    bgImage: `img/bg-the-grand-budapest-hotel.jpg`,
-    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    rating: 9.9,
-    votes: 440,
-    director: `David Yates`,
-    starring: [`Eddie Redmayne`, `Katherine Waterston`, `Dan Fogler`, `Alison Sudol`, `Ezra Miller`, `Zoë Kravitz`, `Callum Turner`, `Claudia Kim`, `William Nadylam`, `Kevin Guthrie`, `Jude Law`, `Johnny Depp`],
-    runTime: `2h 14m`,
+    title: `Movie title`,
+    poster: ``,
+    previewImage: ``,
+    bgImage: ``,
+    backgroundColor: ``,
+    src: ``,
+    previewVideoLink: ``,
+    description: ``,
+    rating: 8.2,
+    votes: 240,
+    director: `Wes Andreson`,
+    starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Tom Wilkinson`, `Owen Wilkinson`, `Adrien Brody`, `Ralph Fiennes`, `Jeff Goldblum`],
+    runTime: 99,
+    genre: `Genre`,
+    date: 2020,
+    isFavorite: true,
+  },
+  {
+    id: 2,
+    title: `Movie title`,
+    poster: ``,
+    previewImage: ``,
+    bgImage: ``,
+    backgroundColor: ``,
+    src: ``,
+    previewVideoLink: ``,
+    description: ``,
+    rating: 8.2,
+    votes: 240,
+    director: `Wes Andreson`,
+    starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Tom Wilkinson`, `Owen Wilkinson`, `Adrien Brody`, `Ralph Fiennes`, `Jeff Goldblum`],
+    runTime: 99,
+    genre: `Genre`,
+    date: 2020,
     isFavorite: true,
   }
 ];
@@ -76,7 +115,7 @@ describe(`Data Reducer`, () => {
       payload: testMovie,
     })).toEqual({
       promoMovie: testMovie,
-      isError: null,
+      isError: false,
     });
   });
 
@@ -88,7 +127,7 @@ describe(`Data Reducer`, () => {
       payload: testMovies,
     })).toEqual({
       movies: testMovies,
-      isError: null,
+      isError: false,
     });
   });
 
@@ -100,7 +139,7 @@ describe(`Data Reducer`, () => {
       payload: testReviews,
     })).toEqual({
       reviews: testReviews,
-      isError: null,
+      isError: false,
     });
   });
 
@@ -112,7 +151,30 @@ describe(`Data Reducer`, () => {
       payload: testMovies,
     })).toEqual({
       favoriteMovies: testMovies,
-      isError: null,
+      isError: false,
+    });
+  });
+
+  it(`Reducer should catch error on load fail`, () => {
+    expect(reducer({
+      isError: false,
+    }, {
+      type: DataActionType.CATCH_ERROR,
+      payload: true,
+    })).toEqual({
+      isError: true,
+    });
+  });
+
+  it(`Reducer should return correct submit status`, () => {
+    expect(reducer({
+      submitStatus: SubmitStatus.DEFAULT,
+    }, {
+      type: DataActionType.GET_SUBMIT_STATUS,
+      payload: SubmitStatus.SUCCESS,
+    })).toEqual({
+      submitStatus: SubmitStatus.SUCCESS,
+      isError: false,
     });
   });
 });

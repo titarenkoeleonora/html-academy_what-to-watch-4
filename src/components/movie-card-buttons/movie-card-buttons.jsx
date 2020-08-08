@@ -9,10 +9,10 @@ import {connect} from "react-redux";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {AppStateActionCreator} from "../../reducer/actions/app-state-action-creator";
 
-const MovieCardButtons = ({activeMovie, authorizationStatus, onAddReviewClick, changeMovieIsFavorite, onPlayButtonClick}) => {
+const MovieCardButtons = ({activeMovie, authorizationStatus, onAddReviewClick, onChangeMovieIsFavorite, onPlayButtonClick}) => {
   const handleMovieListButtonClick = () => {
     return authorizationStatus === AuthorizationStatus.AUTH ?
-      changeMovieIsFavorite(activeMovie)
+      onChangeMovieIsFavorite(activeMovie)
       :
       history.push(AppRoute.LOGIN);
   };
@@ -81,10 +81,28 @@ const MovieCardButtons = ({activeMovie, authorizationStatus, onAddReviewClick, c
 };
 
 MovieCardButtons.propTypes = {
-  activeMovie: PropTypes.object,
+  activeMovie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    bgImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    runTime: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    date: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+  }),
   onPlayButtonClick: PropTypes.func,
   authorizationStatus: PropTypes.string.isRequired,
-  changeMovieIsFavorite: PropTypes.func.isRequired,
+  onChangeMovieIsFavorite: PropTypes.func.isRequired,
   onAddReviewClick: PropTypes.func.isRequired,
 };
 
@@ -93,7 +111,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeMovieIsFavorite(movie) {
+  onChangeMovieIsFavorite(movie) {
     dispatch(DataOperation.changeFavoriteStatus(movie));
   },
   onAddReviewClick() {

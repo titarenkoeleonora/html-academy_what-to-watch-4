@@ -34,6 +34,13 @@ const DataActionCreator = {
     };
   },
 
+  getSubmitStatus: (submitStatus) => {
+    return {
+      type: DataActionType.GET_SUBMIT_STATUS,
+      payload: submitStatus,
+    };
+  },
+
   catchError: () => {
     return {
       type: DataActionType.CATCH_ERROR,

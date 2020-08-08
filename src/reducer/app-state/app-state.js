@@ -1,9 +1,9 @@
-import {MAX_SHOWN_MOVIES} from "../../constants";
+import {MAX_SHOWN_MOVIES, ALL_GENRES_GENRE} from "../../constants";
 import {extend} from "../../utils";
 import {AppStateActionType} from "../actions/app-state-action-types";
 
 const initialState = {
-  activeGenre: `All genres`,
+  activeGenre: ALL_GENRES_GENRE,
   activeMovie: null,
   shownMoviesCount: MAX_SHOWN_MOVIES,
   isMovieVideoplayerActive: false,

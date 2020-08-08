@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Review} from '../../constants';
-import history from '../../history';
 
 const withReview = (Component) => {
   class WithReview extends PureComponent {
@@ -42,7 +41,6 @@ const withReview = (Component) => {
 
       evt.preventDefault();
       onReviewSubmit(activeMovie, review);
-      history.goBack();
     }
 
     render() {
@@ -62,11 +60,30 @@ const withReview = (Component) => {
   }
 
   WithReview.propTypes = {
-    activeMovie: PropTypes.object,
+    activeMovie: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      poster: PropTypes.string.isRequired,
+      previewImage: PropTypes.string.isRequired,
+      bgImage: PropTypes.string.isRequired,
+      backgroundColor: PropTypes.string.isRequired,
+      src: PropTypes.string.isRequired,
+      previewVideoLink: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+      votes: PropTypes.number.isRequired,
+      director: PropTypes.string.isRequired,
+      starring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+      runTime: PropTypes.number.isRequired,
+      genre: PropTypes.string.isRequired,
+      date: PropTypes.number.isRequired,
+      isFavorite: PropTypes.bool.isRequired,
+    }),
     onReviewSubmit: PropTypes.func.isRequired,
   };
 
   return WithReview;
+
 };
 
 export default withReview;

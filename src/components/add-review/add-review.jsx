@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 
 import {PageHeader} from "../page-header/page-header";
 import {Link} from "react-router-dom";
-import {AppRoute, RATING} from "../../constants";
-import {getIsError} from "../../reducer/data/selectors";
+import {AppRoute, RATING, SubmitStatus} from "../../constants";
 import {connect} from "react-redux";
 import {getIsFormDisabled, getActiveMovieById} from "../../reducer/app-state/selectors";
 import {getAuthorizationStatus, getAuthorizationInfo} from "../../reducer/user/selectors";
 import ErrorScreen from "../error-screen/error-screen";
+import {getSubmitStatus} from "../../reducer/data/selectors";
+import history from "../../history";
 
 const AddReview = (props) => {
   const {
@@ -16,12 +17,24 @@ const AddReview = (props) => {
     onSubmitClick,
     isFormDisabled,
     isSubmitDisabled,
-    isError,
+    submitStatus,
     authorizationStatus,
     authorizationInfo,
     onRatingChange,
     onReviewChange,
   } = props;
+
+  const getError = () => {
+    if (submitStatus === SubmitStatus.SUCCESS) {
+      return history.goBack();
+    }
+
+    if (submitStatus === SubmitStatus.ERROR) {
+      return <p style={{color: `tomato`, textAlign: `center`}}>Your review has not been sent. Please try again later.</p>;
+    }
+
+    return null;
+  };
 
   if (!activeMovie) {
     return <ErrorScreen/>;
@@ -40,7 +53,8 @@ const AddReview = (props) => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`${AppRoute.MOVIE}/${activeMovie.id}`} className="breadcrumbs__link">{activeMovie.title}</Link>              </li>
+                <Link to={`${AppRoute.MOVIE}/${activeMovie.id}`} className="breadcrumbs__link">{activeMovie.title}</Link>
+              </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
               </li>
@@ -85,21 +99,17 @@ const AddReview = (props) => {
             </div>
 
           </div>
+          {getError()}
         </form>
-
-        {isError &&
-           <p style={{color: `tomato`, textAlign: `center`}}>Your review has not been sent. Please try again later.</p>}
       </div>
 
     </section>
   );
 };
-
 AddReview.propTypes = {
   activeMovie: PropTypes.object.isRequired,
   onSubmitClick: PropTypes.func.isRequired,
   isSubmitDisabled: PropTypes.bool,
-  isError: PropTypes.bool,
   isFormDisabled: PropTypes.bool.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   authorizationInfo: PropTypes.exact({
@@ -110,14 +120,15 @@ AddReview.propTypes = {
   }),
   onRatingChange: PropTypes.func.isRequired,
   onReviewChange: PropTypes.func.isRequired,
+  submitStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state, props) => ({
-  isError: getIsError(state),
   isFormDisabled: getIsFormDisabled(state),
   authorizationStatus: getAuthorizationStatus(state),
   authorizationInfo: getAuthorizationInfo(state),
   activeMovie: getActiveMovieById(state, props.id),
+  submitStatus: getSubmitStatus(state),
 });
 
 export {AddReview};

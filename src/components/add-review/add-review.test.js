@@ -4,19 +4,31 @@ import configureStore from 'redux-mock-store';
 import {Provider} from 'react-redux';
 import {Router} from 'react-router-dom';
 import history from '../../history';
-import {AddReview} from './add-review';
+import AddReview from './add-review';
 import NameSpace from "../../reducer/name-space";
 import {AuthorizationStatus} from "../../reducer/user/user";
+import {SubmitStatus} from "../../constants";
 
 const mockStore = configureStore([]);
 
 const testMovie = {
+  id: 0,
   title: `Movie title`,
+  poster: ``,
+  previewImage: ``,
+  bgImage: ``,
+  backgroundColor: ``,
+  src: ``,
+  previewVideoLink: ``,
+  description: ``,
+  rating: 8.2,
+  votes: 240,
+  director: `Wes Andreson`,
+  starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Tom Wilkinson`, `Owen Wilkinson`, `Adrien Brody`, `Ralph Fiennes`, `Jeff Goldblum`],
+  runTime: 99,
   genre: `Genre`,
   date: 2020,
-  poster: `image`,
-  bgImage: `bgImage`,
-  src: ``,
+  isFavorite: true,
 };
 
 const testUserData = {
@@ -30,6 +42,11 @@ it(`AddReview page should render with submit button active`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
       activeMovie: testMovie,
+      movies: [],
+      reviews: [],
+      favoriteMovies: [],
+      isError: false,
+      submitStatus: SubmitStatus.DEFAULT,
     },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -56,6 +73,7 @@ it(`AddReview page should render with submit button active`, () => {
               onReviewChange={() => {}}
               onRatingChange={() => {}}
               isFormDisabled={false}
+              submitStatus={SubmitStatus.DEFAULT}
             />
           </Router>
         </Provider>, {

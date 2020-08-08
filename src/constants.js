@@ -15,7 +15,7 @@ export const EmptyMovie = {
   runTime: 0,
   genre: ``,
   date: 0,
-  isFavorite: ``,
+  isFavorite: false,
 };
 
 export const MovieTabs = {
@@ -23,6 +23,8 @@ export const MovieTabs = {
   DETAILS: `Details`,
   REVIEWS: `Reviews`,
 };
+
+export const ALL_GENRES_GENRE = `All genres`;
 
 export const MAX_SHOWN_MOVIES = 8;
 
@@ -58,4 +60,10 @@ export const Score = {
   NORMAL: 5,
   VERY_GOOD: 8,
   AWESOME: 10
+};
+
+export const SubmitStatus = {
+  DEFAULT: `Default`,
+  SUCCESS: `Success`,
+  ERROR: `Error`,
 };

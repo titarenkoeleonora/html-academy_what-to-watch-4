@@ -3,8 +3,8 @@
 exports[`Video player correctly render 1`] = `
 <video
   height="175"
-  poster="poster"
-  src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+  poster=""
+  src=""
   width="280"
 />
 `;

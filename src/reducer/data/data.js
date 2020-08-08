@@ -1,5 +1,5 @@
 import {createMovie} from "../../adapter/movies";
-import {EmptyMovie} from "../../constants";
+import {EmptyMovie, SubmitStatus} from "../../constants";
 import {extend} from "../../utils";
 import {DataActionType} from "../actions/data-action-types";
 import {DataActionCreator} from "../actions/data-action-creator";
@@ -11,6 +11,7 @@ const initialState = {
   reviews: [],
   favoriteMovies: [],
   isError: false,
+  submitStatus: SubmitStatus.DEFAULT,
 };
 
 const Operation = {
@@ -66,13 +67,16 @@ const Operation = {
     .then(() => {
       dispatch(DataActionCreator.postReview(review));
       dispatch(Operation.loadReviews(id));
+      dispatch(DataActionCreator.getSubmitStatus(SubmitStatus.SUCCESS));
     }).
     then(() => {
       dispatch(AppStateActionCreator.addReview(false));
       dispatch(AppStateActionCreator.toggleFormState(false));
+      dispatch(DataActionCreator.getSubmitStatus(SubmitStatus.DEFAULT));
     })
     .catch(() => {
       dispatch(DataActionCreator.catchError());
+      dispatch(DataActionCreator.getSubmitStatus(SubmitStatus.ERROR));
     });
   },
 
@@ -94,22 +98,27 @@ const reducer = (state = initialState, action) => {
     case DataActionType.LOAD_PROMO_MOVIE:
       return extend(state, {
         promoMovie: action.payload,
-        isError: null,
+        isError: false,
       });
     case DataActionType.LOAD_MOVIES:
       return extend(state, {
         movies: action.payload,
-        isError: null,
+        isError: false,
       });
     case DataActionType.LOAD_REVIEWS:
       return extend(state, {
         reviews: action.payload,
-        isError: null,
+        isError: false,
       });
     case DataActionType.LOAD_FAVORITE_MOVIES:
       return extend(state, {
         favoriteMovies: action.payload,
-        isError: null,
+        isError: false,
+      });
+    case DataActionType.GET_SUBMIT_STATUS:
+      return extend(state, {
+        submitStatus: action.payload,
+        isError: false,
       });
     case DataActionType.CATCH_ERROR:
       return extend(state, {

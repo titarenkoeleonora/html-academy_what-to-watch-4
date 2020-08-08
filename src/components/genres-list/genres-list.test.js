@@ -4,60 +4,61 @@ import GenresList from "./genres-list";
 
 const testMovies = [
   {
-    id: `0`,
-    title: `movie title`,
-    poster: `image`,
+    id: 0,
+    title: `Movie title`,
+    poster: ``,
+    previewImage: ``,
+    bgImage: ``,
+    backgroundColor: ``,
     src: ``,
-    genre: `genre`
+    previewVideoLink: ``,
+    description: ``,
+    rating: 8.2,
+    votes: 240,
+    director: `Wes Andreson`,
+    starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Tom Wilkinson`, `Owen Wilkinson`, `Adrien Brody`, `Ralph Fiennes`, `Jeff Goldblum`],
+    runTime: 99,
+    genre: `Genre`,
+    date: 2020,
+    isFavorite: true,
   },
   {
-    id: `1`,
-    title: `movie title`,
-    poster: `image`,
+    id: 1,
+    title: `Movie title`,
+    poster: ``,
+    previewImage: ``,
+    bgImage: ``,
+    backgroundColor: ``,
     src: ``,
-    genre: `genre`
+    previewVideoLink: ``,
+    description: ``,
+    rating: 8.2,
+    votes: 240,
+    director: `Wes Andreson`,
+    starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Tom Wilkinson`, `Owen Wilkinson`, `Adrien Brody`, `Ralph Fiennes`, `Jeff Goldblum`],
+    runTime: 99,
+    genre: `Genre`,
+    date: 2020,
+    isFavorite: true,
   },
   {
-    id: `2`,
-    title: `movie title`,
-    poster: `image`,
+    id: 2,
+    title: `Movie title`,
+    poster: ``,
+    previewImage: ``,
+    bgImage: ``,
+    backgroundColor: ``,
     src: ``,
-    genre: `genre`
-  },
-  {
-    id: `3`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-    genre: `genre`
-  },
-  {
-    id: `4`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-    genre: `genre`
-  },
-  {
-    id: `5`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-    genre: `genre`
-  },
-  {
-    id: `6`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-    genre: `genre`
-  },
-  {
-    id: `7`,
-    title: `movie title`,
-    poster: `image`,
-    src: ``,
-    genre: `genre`
+    previewVideoLink: ``,
+    description: ``,
+    rating: 8.2,
+    votes: 240,
+    director: `Wes Andreson`,
+    starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Tom Wilkinson`, `Owen Wilkinson`, `Adrien Brody`, `Ralph Fiennes`, `Jeff Goldblum`],
+    runTime: 99,
+    genre: `Genre`,
+    date: 2020,
+    isFavorite: true,
   }
 ];
 

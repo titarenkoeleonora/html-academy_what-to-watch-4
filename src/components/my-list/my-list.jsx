@@ -15,8 +15,8 @@ class MyList extends PureComponent {
   }
 
   componentDidMount() {
-    const {loadFavoriteMovies} = this.props;
-    loadFavoriteMovies();
+    const {onLoadFavoriteMovies} = this.props;
+    onLoadFavoriteMovies();
   }
 
   render() {
@@ -49,9 +49,27 @@ class MyList extends PureComponent {
 }
 
 MyList.propTypes = {
-  favoriteMovies: PropTypes.array,
+  favoriteMovies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    bgImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    runTime: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    date: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+  })),
   onMovieCardClick: PropTypes.func.isRequired,
-  loadFavoriteMovies: PropTypes.func.isRequired,
+  onLoadFavoriteMovies: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   authorizationInfo: PropTypes.exact({
     id: PropTypes.number.isRequired,
@@ -68,7 +86,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadFavoriteMovies() {
+  onLoadFavoriteMovies() {
     dispatch(DataOperation.loadFavoriteMovies());
   },
 });

@@ -26,7 +26,25 @@ const MovieOverview = ({movie}) => {
 };
 
 MovieOverview.propTypes = {
-  movie: PropTypes.object.isRequired,
+  movie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    bgImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    runTime: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    date: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+  }).isRequired,
 };
 
 export default MovieOverview;

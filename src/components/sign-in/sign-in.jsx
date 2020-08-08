@@ -11,10 +11,10 @@ export default class SignIn extends PureComponent {
     this.loginRef = createRef();
     this.passwordRef = createRef();
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
-  handleSubmit(evt) {
+  _handleSubmit(evt) {
     const {onSubmit} = this.props;
 
     evt.preventDefault();
@@ -35,7 +35,7 @@ export default class SignIn extends PureComponent {
         </PageHeader>
 
         <div className="sign-in user-page__content">
-          <form action="#" className="sign-in__form" onSubmit={this.handleSubmit}>
+          <form action="#" className="sign-in__form" onSubmit={this._handleSubmit}>
             <div className="sign-in__fields">
               <div className="sign-in__field">
                 <input className="sign-in__input" type="email" placeholder="Email address" name="user-email"
