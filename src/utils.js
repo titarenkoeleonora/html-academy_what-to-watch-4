@@ -94,3 +94,5 @@ export const getRatingLevel = (rating) => {
 export const formatMovieDuration = (duration) => {
   return moment.duration(duration, `minutes`).format(`h[h] m[m]`);
 };
+
+export const formatDate = (date, formatRule) => moment(date).format(formatRule);

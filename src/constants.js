@@ -67,3 +67,8 @@ export const SubmitStatus = {
   SUCCESS: `Success`,
   ERROR: `Error`,
 };
+
+export const FormatRule = {
+  DATE: `MMMM DD, YYYY`,
+  DATE_HIDE: `YYYY-MM-DD`,
+};

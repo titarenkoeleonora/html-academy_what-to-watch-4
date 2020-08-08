@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import moment from "moment";
+import {formatDate} from "../../utils";
+import {FormatRule} from "../../constants";
 
 const createReviewMarkup = (review) => (
   <div key={review.id} className="review">
@@ -9,7 +10,7 @@ const createReviewMarkup = (review) => (
 
       <footer className="review__details">
         <cite className="review__author">{review.user.name}</cite>
-        <time className="review__date" dateTime={review.date}>{moment(review.date).format(`MMMM DD, YYYY`)}</time>
+        <time className="review__date" dateTime={formatDate(review.date, FormatRule.DATE_HIDE)}>{formatDate(review.date, FormatRule.DATE)}</time>
       </footer>
     </blockquote>
 

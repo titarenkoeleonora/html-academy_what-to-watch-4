@@ -1,6 +1,5 @@
 import {createSelector} from 'reselect';
 import NameSpace from '../name-space';
-import {getActiveGenre} from '../app-state/selectors';
 import {ALL_GENRES_GENRE} from '../../constants';
 
 export const getPromoMovie = (state) => state[NameSpace.DATA].promoMovie;
@@ -21,16 +20,3 @@ export const getGenresList = createSelector(
       return [ALL_GENRES_GENRE, ...new Set(movies.map((movie) => movie.genre))];
     }
 );
-
-export const getFilteredMovies = createSelector(
-    getMovies,
-    getActiveGenre,
-    (movies, activeGenre) => {
-      if (activeGenre === ALL_GENRES_GENRE) {
-        return movies;
-      } else {
-        return movies.filter((movie) => movie.genre === activeGenre);
-      }
-    }
-);
-

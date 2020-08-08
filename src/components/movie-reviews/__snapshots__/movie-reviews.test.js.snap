@@ -26,7 +26,7 @@ exports[`Correctlt render 1`] = `
           />
           <time
             className="review__date"
-            dateTime="December 24, 2016"
+            dateTime="2016-12-24"
           >
             December 24, 2016
           </time>
@@ -61,7 +61,7 @@ exports[`Correctlt render 1`] = `
           />
           <time
             className="review__date"
-            dateTime="November 18, 2015"
+            dateTime="2015-11-18"
           >
             November 18, 2015
           </time>

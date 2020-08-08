@@ -12,7 +12,7 @@ import {SubmitStatus} from "../../constants";
 const mockStore = configureStore([]);
 
 const testMovie = {
-  id: 0,
+  id: 1,
   title: `Movie title`,
   poster: ``,
   previewImage: ``,
@@ -41,7 +41,6 @@ const testUserData = {
 it(`AddReview page should render with submit button active`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
-      activeMovie: testMovie,
       movies: [],
       reviews: [],
       favoriteMovies: [],
@@ -57,8 +56,13 @@ it(`AddReview page should render with submit button active`, () => {
         name: ``,
         avatar: ``,
       }
-    }
+    },
+    [NameSpace.APP_STATE]: {
+      activeMovie: null,
+      isFormDisabled: false,
+    },
   });
+
 
   const tree = renderer
     .create(
